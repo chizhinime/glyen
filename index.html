@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glyen - Building. Solving. Repairing.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0A192F',
+                        teal: '#5EE6D0',
+                        lightTeal: '#A8F2E6',
+                        gray: '#8892B0',
+                        lightGray: '#CCD6F6',
+                        white: '#E6F1FF',
+                        darkBg: '#050C1C',
+                        sectionBg: '#0F1E3A',
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Open Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .skill-bar {
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-navy font-body text-lightGray">
+    <!-- Navigation -->
+    <header class="container mx-auto px-4">
+        <nav class="flex justify-between items-center py-6 bg-navy sticky top-0 z-50">
+            <a href="#" class="logo font-heading font-bold text-2xl text-teal" onclick="showPage('home')">Glyen</a>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#" class="text-lightGray hover:text-teal font-medium transition" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" class="text-lightGray hover:text-teal font-medium transition" onclick="showPage('services')">Services</a></li>
+                <li><a href="#" class="text-lightGray hover:text-teal font-medium transition" onclick="showPage('portfolio')">Portfolio</a></li>
+                <li><a href="#" class="text-lightGray hover:text-teal font-medium transition" onclick="showPage('about')">About</a></li>
+                <li><a href="#" class="text-lightGray hover:text-teal font-medium transition" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+            <button class="md:hidden text-teal text-xl" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-navy py-4">
+            <ul class="flex flex-col space-y-4 text-center">
+                <li><a href="#" class="block py-2 text-lightGray hover:text-teal font-medium transition" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" class="block py-2 text-lightGray hover:text-teal font-medium transition" onclick="showPage('services')">Services</a></li>
+                <li><a href="#" class="block py-2 text-lightGray hover:text-teal font-medium transition" onclick="showPage('portfolio')">Portfolio</a></li>
+                <li><a href="#" class="block py-2 text-lightGray hover:text-teal font-medium transition" onclick="showPage('about')">About</a></li>
+                <li><a href="#" class="block py-2 text-lightGray hover:text-teal font-medium transition" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page-section fade-in">
+        <!-- Hero Section -->
+        <div class="min-h-screen flex items-center py-16 bg-gradient-to-br from-navy to-[#152740]">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl">
+                    <h1 class="font-heading font-bold text-4xl md:text-5xl text-white mb-6">Building. Solving. Repairing.</h1>
+                    <p class="text-teal text-xl md:text-2xl mb-8">Modern tech solutions for your business and personal needs</p>
+                    <p class="text-gray text-lg mb-8">I provide expert web development, Excel automation, and computer repair services to help you overcome technical challenges and achieve your goals.</p>
+                    <a href="#" class="btn bg-teal text-navy font-heading font-semibold py-3 px-8 rounded transition hover:bg-lightTeal hover:-translate-y-1 inline-block" onclick="showPage('contact')">Work With Me</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <section class="py-16 bg-sectionBg">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="font-heading font-bold text-3xl md:text-4xl text-teal mb-4">Services</h2>
+                    <p class="text-gray text-lg md:text-xl">Comprehensive tech solutions tailored to your needs</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-navy p-8 rounded-lg text-center transition hover:-translate-y-2">
+                        <div class="text-teal text-4xl mb-4">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-4">Web Development</h3>
+                        <p class="text-gray">Modern, responsive websites and web applications built with the latest technologies to establish your online presence.</p>
+                    </div>
+                    
+                    <div class="bg-navy p-8 rounded-lg text-center transition hover:-translate-y-2">
+                        <div class="text-teal text-4xl mb-4">
+                            <i class="fas fa-file-excel"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-4">Excel Solutions</h3>
+                        <p class="text-gray">Automation, custom templates, and data analysis to streamline your workflows and make better business decisions.</p>
+                    </div>
+                    
+                    <div class="bg-navy p-8 rounded-lg text-center transition hover:-translate-y-2">
+                        <div class="text-teal text-4xl mb-4">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-4">Computer Repair</h3>
+                        <p class="text-gray">Hardware upgrades, virus removal, and software troubleshooting to keep your systems running smoothly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Glyen -->
+        <section class="py-16">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="font-heading font-bold text-3xl md:text-4xl text-teal mb-4">Why Choose Glyen</h2>
+                    <p class="text-gray text-lg md:text-xl">Quality service with a personal touch</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center p-6">
+                        <div class="text-teal text-3xl mb-4">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-2">Fast Delivery</h3>
+                        <p class="text-gray">Efficient solutions without compromising quality</p>
+                    </div>
+                    
+                    <div class="text-center p-6">
+                        <div class="text-teal text-3xl mb-4">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-2">Professional Support</h3>
+                        <p class="text-gray">Dedicated assistance throughout your project</p>
+                    </div>
+                    
+                    <div class="text-center p-6">
+                        <div class="text-teal text-3xl mb-4">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-xl text-white mb-2">Innovation</h3>
+                        <p class="text-gray">Creative approaches to solve complex problems</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="#" class="btn bg-teal text-navy font-heading font-semibold py-3 px-8 rounded transition hover:bg-lightTeal hover:-translate-y-1 inline-block" onclick="showPage('contact')">Let's Get Started</a>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Services Page -->
+    <section id="services" class="page-section hidden fade-in">
+        <div class="container mx-auto px-4 py-16">
+            <div class="text-center mb-12">
+                <h2 class="font-heading font-bold text-3xl md:text-4xl text-teal mb-4">Detailed Services</h2>
+                <p class="text-gray text-lg md:text-xl">Comprehensive tech solutions for all your needs</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-sectionBg p-8 rounded-lg text-center transition hover:-translate-y-2">
+                    <div class="text-teal text-4xl mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl text-white mb-4">Web Development</h3>
+                    <p class="text-gray mb-4">Custom websites and web applications built with modern technologies like React, Vue.js, and Node.js. Responsive design that works on all devices.</p>
+                    <p class="text-teal font-medium">Starting at ₦50,000</p>
+                </div>
+                
+                <div class="bg-sectionBg p-8 rounded-lg text-center transition hover:-translate-y-2">
+                    <div class="text-teal text-4xl mb-4">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl text-white mb-4">Excel Solutions</h3>
+                    <p class="text-gray mb-4">Advanced Excel macros, automated dashboards, custom templates, and data analysis to transform how you work with spreadsheets.</p>
+                    <p class="text-teal font-medium">Starting at ₦15,000</p>
+                </div>
+                
+                <div class="bg-sectionBg p-8 rounded-lg text-center transition hover:-translate-y-2">
+                    <div class="text-teal text-4xl mb-4">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl text-white mb-4">Computer Repair</h3>
+                    <p class="text-gray mb-4">Hardware upgrades, virus removal, software installation, and troubleshooting for desktops and laptops of all brands.</p>
+                    <p class="text-teal font-medium">Starting at ₦10,000</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="btn bg-teal text-navy font-heading font-semibold py-3 px-8 rounded transition hover:bg-lightTeal hover:-translate-y-1 inline-block" onclick="showPage('contact')">Get a Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Page -->
+    <section id="portfolio" class="page-section hidden fade-in">
+        <div class="container mx-auto px-4 py-16">
+            <div class="text-center mb-12">
+                <h2 class="font-heading font-bold text-3xl md:text-4xl text-teal mb-4">Portfolio</h2>
+                <p class="text-gray text-lg md:text-xl">Check out some of my recent work</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-sectionBg rounded-lg overflow-hidden transition hover:-translate-y-2">
+                    <div class="h-48 bg-teal flex items-center justify-center text-navy text-5xl">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-bold text-xl text-white mb-2">E-commerce Website</h3>
+                        <p class="text-gray mb-4">Fully responsive online store with product filtering, cart functionality, and secure checkout.</p>
+                        <a href="#" class="text-teal font-medium hover:underline">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="bg-sectionBg rounded-lg overflow-hidden transition hover:-translate-y-2">
+                    <div class="h-48 bg-teal flex items-center justify-center text-navy text-5xl">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-bold text-xl text-white mb-2">Sales Dashboard</h3>
+                        <p class="text-gray mb-4">Interactive Excel dashboard for tracking sales performance with automated data processing.</p>
+                        <a href="#" class="text-teal font-medium hover:underline">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="bg-sectionBg rounded-lg overflow-hidden transition hover:-translate-y-2">
+                    <div class="h-48 bg-teal flex items-center justify-center text-navy text-5xl">
+                        <i class="fas fa-laptop-medical"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-bold text-xl text-white mb-2">PC Performance Optimization</h3>
+                        <p class="text-gray mb-4">Complete system overhaul for a client experiencing slow performance and frequent crashes.</p>
+                        <a href="#" class="text-teal font-medium hover:underline">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="bg-sectionBg rounded-lg overflow-hidden transition hover:-translate-y-2">
+                    <div class="h-48 bg-teal flex items-center justify-center text-navy text-5xl">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-bold text-xl text-white mb-2">Responsive Business Website</h3>
+                        <p class="text-gray mb-4">Modern website for a local business with booking system and service catalog.</p>
+                        <a href="#" class="text-teal font-medium hover:underline">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="bg-sectionBg rounded-lg overflow-hidden transition hover:-translate-y-2">
+                    <div class="h-48 bg-teal flex items-center justify-center text-navy text-5xl">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-bold text-xl text-white mb-2">Inventory Management System</h3>
+                        <p class="text-gray mb-4">Custom Excel solution with barcode scanning and automated restocking alerts.</p>
+                        <a href="#" class="text-teal font-medium hover:underline">View Project</a>
+                    </div>
+                </div>
+                
+                <div class="bg-sectionBg rounded-lg overflow-hidden transition hover:-translate-y-2">
+                    <div class="h-48 bg-teal flex items-center justify-center text-navy text-5xl">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-heading font-bold text-xl text-white mb-2">Network Setup</h3>
+                        <p class="text-gray mb-4">Small business network installation with wireless access points and centralized storage.</p>
+                        <a href="#" class="text-teal font-medium hover:underline">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page-section hidden fade-in">
+        <div class="container mx-auto px-4 py-16">
+            <div class="text-center mb-12">
+                <h2 class="font-heading font-bold text-3xl md:text-4xl text-teal mb-4">About Me</h2>
+                <p class="text-gray text-lg md:text-xl">Get to know the person behind Glyen</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="font-heading font-bold text-3xl text-teal mb-6">Hello, I'm Glyen</h2>
+                    <p class="text-gray mb-4">I'm a passionate technology specialist with background in computer science. My journey in tech started years ago when I built my first computer, and since then I've been fascinated with how technology can solve real-world problems.</p>
+                    
+                    <p class="text-gray mb-4">I specialize in frontend development, AI applications, computer repair, and IT support. What drives me is helping people and businesses leverage technology to achieve their goals more efficiently.</p>
+                    
+                    <p class="text-gray mb-4">When I'm not coding or fixing computers, you can find me volunteering at STEM events or sharing tech knowledge with aspiring developers. I recently participated in a STEM festival where I taught teenagers how to build their first websites.</p>
+                    
+                    <p class="text-gray">My mission is simple: to help people solve problems with technology. Whether it's through building a website, automating spreadsheets, or repairing hardware, I'm committed to providing solutions that make a difference.</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-heading font-bold text-2xl text-white mb-6">My Skills</h3>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-lightGray">Web Development</span>
+                            <span class="text-lightGray">95%</span>
+                        </div>
+                        <div class="h-2 bg-sectionBg rounded-full">
+                            <div class="h-full bg-teal rounded-full skill-bar" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="text-lightGray">Excel Automation</span>
+                            <span class="text-lightGray">90%</span>
+                        </div>
+                        <div class="h-2 bg-sectionBg rounded-full">
+                            <div class="h-full bg-teal rounded-full skill-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div clas
