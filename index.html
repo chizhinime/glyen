@@ -8,25 +8,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563eb',     // Professional blue
-                        secondary: '#1e40af',   // Darker blue
-                        accent: '#f97316',      // Professional orange
-                        light: '#f8fafc',       // Light background
-                        dark: '#1e293b',        // Dark text
-                        success: '#10b981',     // Green for success
-                        neutral: '#64748b'      // Neutral gray
+                        dark: {
+                            100: '#1e293b',
+                            200: '#172033',
+                            300: '#0f172a',
+                            400: '#0a0f1d',
+                            500: '#050a15',
+                        },
+                        primary: '#3b82f6',
+                        secondary: '#2563eb',
+                        accent: '#f97316',
+                        light: '#f8fafc',
+                        success: '#10b981',
+                        neutral: '#64748b'
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'bounce-slow': 'bounce 3s infinite',
-                        'spin-slow': 'spin 8s linear infinite',
                     }
                 }
             }
@@ -36,36 +37,27 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
         }
-        .hero-pattern {
-            background: linear-gradient(120deg, #2563eb 0%, #1e40af 100%);
-            position: relative;
-            overflow: hidden;
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
         }
-        .hero-pattern::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10.5%);
-            background-size: 20px 20px;
-            animation: background-move 30s linear infinite;
-            transform: rotate(30deg);
-            z-index: 1;
+        .page.active {
+            display: block;
         }
-        @keyframes background-move {
-            0% { transform: rotate(30deg) translate(0, 0); }
-            100% { transform: rotate(30deg) translate(-20px, -20px); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         .card-hover {
             transition: all 0.3s ease;
         }
         .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
         }
         .nav-link {
             position: relative;
@@ -77,11 +69,40 @@
             height: 2px;
             bottom: -5px;
             left: 0;
-            background-color: #2563eb;
+            background-color: #3b82f6;
             transition: width 0.3s ease;
         }
-        .nav-link:hover::after {
+        .nav-link:hover::after, .nav-link.active::after {
             width: 100%;
+        }
+        .gradient-bg {
+            background: linear-gradient(120deg, #1e293b 0%, #0f172a 100%);
+        }
+        .hero-pattern {
+            background: linear-gradient(120deg, #1e40af 0%, #0f172a 100%);
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .typing-animation {
+            overflow: hidden;
+            border-right: 3px solid #3b82f6;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #3b82f6; }
         }
         .section-title {
             position: relative;
@@ -93,7 +114,7 @@
             position: absolute;
             width: 60px;
             height: 3px;
-            background: #2563eb;
+            background: #3b82f6;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
@@ -104,6 +125,8 @@
             width: 100%;
             z-index: 1000;
             transition: all 0.3s ease;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
         }
         .progress-bar {
             position: fixed;
@@ -111,162 +134,54 @@
             left: 0;
             width: 0%;
             height: 4px;
-            background: linear-gradient(90deg, #2563eb 0%, #f97316 100%);
+            background: linear-gradient(90deg, #3b82f6 0%, #f97316 100%);
             z-index: 1001;
             transition: width 0.2s ease;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
         }
         .tab-content {
             display: none;
         }
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.5s ease;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.1;
-            z-index: 0;
+        .pulse {
+            animation: pulse 2s infinite;
         }
-        .shape-1 {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(45deg, #2563eb, #10b981);
-            top: 10%;
-            left: 5%;
-            animation: float 15s ease-in-out infinite, pulse-slow 8s infinite;
-        }
-        .shape-2 {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(45deg, #f97316, #ec4899);
-            bottom: 10%;
-            right: 5%;
-            animation: float 12s ease-in-out infinite reverse, pulse-slow 6s infinite;
-        }
-        .shape-3 {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(45deg, #8b5cf6, #06b6d4);
-            top: 50%;
-            right: 15%;
-            animation: float 18s ease-in-out infinite, pulse-slow 10s infinite;
-        }
-        .parallax-element {
-            transform: translateY(0);
-            transition: transform 0.3s ease-out;
-        }
-        .moving-gradient {
-            background: linear-gradient(270deg, #2563eb, #1e40af, #f97316, #10b981);
-            background-size: 800% 800%;
-            animation: gradient-move 12s ease infinite;
-        }
-        @keyframes gradient-move {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .typing-animation {
-            overflow: hidden;
-            border-right: 3px solid #2563eb;
-            white-space: nowrap;
-            margin: 0 auto;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #2563eb; }
-        }
-        .hover-3d {
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            transform-style: preserve-3d;
-        }
-        .hover-3d:hover {
-            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-        .text-scramble {
-            position: relative;
-        }
-        .text-scramble::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: scramble-shine 3s infinite;
-            transform: translateX(-100%);
-        }
-        @keyframes scramble-shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        .icon-spin {
-            animation: spin-slow 8s linear infinite;
-        }
-        .bounce-in {
-            animation: bounce 1s;
-        }
-        .wave {
-            animation: wave 2s infinite;
-            transform-origin: 70% 70%;
-            display: inline-block;
-        }
-        @keyframes wave {
-            0% { transform: rotate(0deg); }
-            10% { transform: rotate(14deg); }
-            20% { transform: rotate(-8deg); }
-            30% { transform: rotate(14deg); }
-            40% { transform: rotate(-4deg); }
-            50% { transform: rotate(10deg); }
-            60% { transform: rotate(0deg); }
-            100% { transform: rotate(0deg); }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-dark">
+<body class="bg-dark-300">
     <!-- Progress Bar -->
     <div class="progress-bar" id="progress-bar"></div>
 
     <!-- Navigation -->
-    <nav class="sticky-nav bg-white shadow-md" id="navbar">
+    <nav class="sticky-nav shadow-lg border-b border-dark-400" id="navbar">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <span class="text-primary text-2xl font-bold hover-3d inline-block">Glyen</span>
+                    <span class="text-primary text-2xl font-bold cursor-pointer" onclick="showPage('home')">Glyen</span>
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex space-x-10">
-                    <a href="#home" class="nav-link text-gray-700 hover:text-primary font-medium">Home</a>
-                    <a href="#services" class="nav-link text-gray-700 hover:text-primary font-medium">Services</a>
-                    <a href="#products" class="nav-link text-gray-700 hover:text-primary font-medium">Products</a>
-                    <a href="#portfolio" class="nav-link text-gray-700 hover:text-primary font-medium">Portfolio</a>
-                    <a href="#about" class="nav-link text-gray-700 hover:text-primary font-medium">About</a>
-                    <a href="#contact" class="nav-link text-gray-700 hover:text-primary font-medium">Contact</a>
+                    <a onclick="showPage('home')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Home</a>
+                    <a onclick="showPage('services')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Services</a>
+                    <a onclick="showPage('products')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Products</a>
+                    <a onclick="showPage('portfolio')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Portfolio</a>
+                    <a onclick="showPage('about')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">About</a>
+                    <a onclick="showPage('contact')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Contact</a>
                 </div>
                 
                 <!-- Mobile Menu Button -->
                 <div class="lg:hidden">
-                    <button id="menu-btn" class="text-gray-700 focus:outline-none">
+                    <button id="menu-btn" class="text-gray-300 focus:outline-none">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -274,572 +189,570 @@
             
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden lg:hidden pb-4">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-primary">Home</a>
-                <a href="#services" class="block py-2 text-gray-700 hover:text-primary">Services</a>
-                <a href="#products" class="block py-2 text-gray-700 hover:text-primary">Products</a>
-                <a href="#portfolio" class="block py-2 text-gray-700 hover:text-primary">Portfolio</a>
-                <a href="#about" class="block py-2 text-gray-700 hover:text-primary">About</a>
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-primary">Contact</a>
+                <a onclick="showPage('home')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Home</a>
+                <a onclick="showPage('services')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Services</a>
+                <a onclick="showPage('products')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Products</a>
+                <a onclick="showPage('portfolio')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Portfolio</a>
+                <a onclick="showPage('about')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">About</a>
+                <a onclick="showPage('contact')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-pattern pt-32 pb-20 px-4 text-white relative">
-        <!-- Floating shapes -->
-        <div class="floating-shape shape-1"></div>
-        <div class="floating-shape shape-2"></div>
-        <div class="floating-shape shape-3"></div>
-        
-        <div class="container mx-auto max-w-4xl text-center relative z-10">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-float">We Build Websites That Grow With You</h1>
-            <p class="text-xl opacity-90 mb-10 typing-animation max-w-2xl mx-auto">Professional web development services and coding resources to help your business thrive online.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#services" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition duration-300 hover-3d">Our Services</a>
-                <a href="#products" class="bg-secondary text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-opacity-90 transition duration-300 hover-3d">Our Products</a>
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero-pattern pt-32 pb-20 px-4 text-white">
+            <div class="container mx-auto max-w-4xl text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">We Build Websites That Grow With You</h1>
+                <p class="text-xl opacity-90 mb-10 typing-animation max-w-2xl mx-auto">Professional web development services and coding resources to help your business thrive online.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a onclick="showPage('services')" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-secondary transition duration-300 cursor-pointer">Our Services</a>
+                    <a onclick="showPage('products')" class="bg-dark-200 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-dark-100 transition duration-300 cursor-pointer">Our Products</a>
+                </div>
+                <div class="mt-12 floating">
+                    <a onclick="showPage('services')" class="text-white text-3xl cursor-pointer">
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
             </div>
-            <div class="mt-12 animate-float">
-                <a href="#services" class="text-white wave text-3xl">
-                    <i class="fas fa-chevron-down"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Features Section -->
-    <section class="py-16 bg-white relative overflow-hidden">
-        <div class="floating-shape shape-1" style="top: 20%; left: -5%; width: 200px; height: 200px;"></div>
-        <div class="floating-shape shape-2" style="bottom: 20%; right: -5%; width: 150px; height: 150px;"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">What We Offer</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100 hover-3d">
-                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 icon-spin">
-                        <i class="fas fa-code text-primary text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Web Development</h3>
-                    <p class="text-neutral">Custom websites built with modern technologies to help your business stand out.</p>
-                </div>
-                
-                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100 hover-3d">
-                    <div class="bg-accent bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-slow">
-                        <i class="fas fa-book text-accent text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Coding Journal</h3>
-                    <p class="text-neutral">Comprehensive journal to track your coding progress and improve your skills.</p>
-                </div>
-                
-                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100 hover-3d">
-                    <div class="bg-success bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
-                        <i class="fas fa-certificate text-success text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Certificates</h3>
-                    <p class="text-neutral">Get recognized for your achievements with our coding challenge certificates.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-50 relative overflow-hidden">
-        <div class="floating-shape shape-3" style="top: 10%; right: -5%; width: 180px; height: 180px;"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center mb-4 section-title">Our Services</h2>
-            <p class="text-center text-neutral mb-12 max-w-2xl mx-auto">Affordable websites built for your needs. Choose a package or request a custom quote.</p>
-            
-            <!-- Service Tabs -->
-            <div class="flex flex-wrap justify-center mb-12 border-b border-gray-200">
-                <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="web-dev">Web Development</button>
-                <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="excel">Excel Solutions</button>
-                <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="repair">Computer Repair</button>
-            </div>
-            
-            <!-- Web Development Tab -->
-            <div id="web-dev" class="tab-content active">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                    <!-- Starter Package -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100 hover-3d">
-                        <div class="bg-primary text-white py-4 text-center">
-                            <h3 class="text-xl font-semibold">Starter</h3>
+        <!-- Features Section -->
+        <section class="py-16 bg-dark-200">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 section-title">What We Offer</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-dark-100 p-6 rounded-lg text-center card-hover border border-dark-400 glow">
+                        <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-code text-primary text-2xl"></i>
                         </div>
-                        <div class="p-6">
-                            <div class="text-center mb-6">
-                                <span class="text-3xl font-bold">₦50,000</span>
-                                <span class="text-neutral">/one-time</span>
-                            </div>
-                            <ul class="mb-6 space-y-3">
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>1-3 pages</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Responsive design</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Basic SEO</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Contact form</span>
-                                </li>
-                            </ul>
-                            <button class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Started</button>
-                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Web Development</h3>
+                        <p class="text-neutral">Custom websites built with modern technologies to help your business stand out.</p>
                     </div>
                     
-                    <!-- Business Package -->
-                    <div class="bg-white rounded-lg shadow-xl overflow-hidden card-hover transform scale-105 border border-gray-100 hover-3d">
-                        <div class="bg-secondary text-white py-4 text-center">
-                            <h3 class="text-xl font-semibold">Business</h3>
+                    <div class="bg-dark-100 p-6 rounded-lg text-center card-hover border border-dark-400 glow">
+                        <div class="bg-accent bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-book text-accent text-2xl"></i>
                         </div>
-                        <div class="p-6">
-                            <div class="text-center mb-6">
-                                <span class="text-3xl font-bold">₦120,000</span>
-                                <span class="text-neutral">/one-time</span>
-                            </div>
-                            <ul class="mb-6 space-y-3">
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>5-7 pages</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Custom design</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Advanced SEO</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Content management</span>
-                                </li>
-                            </ul>
-                            <button class="w-full bg-secondary text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
-                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Coding Journal</h3>
+                        <p class="text-neutral">Comprehensive journal to track your coding progress and improve your skills.</p>
                     </div>
                     
-                    <!-- E-commerce Package -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100 hover-3d">
-                        <div class="bg-accent text-white py-4 text-center">
-                            <h3 class="text-xl font-semibold">E-commerce</h3>
+                    <div class="bg-dark-100 p-6 rounded-lg text-center card-hover border border-dark-400 glow">
+                        <div class="bg-success bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-certificate text-success text-2xl"></i>
                         </div>
-                        <div class="p-6">
-                            <div class="text-center mb-6">
-                                <span class="text-3xl font-bold">₦250,000</span>
-                                <span class="text-neutral">/one-time</span>
-                            </div>
-                            <ul class="mb-6 space-y-3">
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Online store</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Product management</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Payment integration</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <i class="fas fa-check text-success mr-2"></i>
-                                    <span>Inventory system</span>
-                                </li>
-                            </ul>
-                            <button class="w-full bg-accent text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
-                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Certificates</h3>
+                        <p class="text-neutral">Get recognized for your achievements with our coding challenge certificates.</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Excel Solutions Tab -->
-            <div id="excel" class="tab-content">
-                <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-gray-100 hover-3d">
-                    <h3 class="text-2xl font-semibold text-center mb-6">Excel Solutions</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-lg font-semibold mb-4 text-primary">Automation & Macros</h4>
-                            <ul class="space-y-3">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Custom spreadsheet automation</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Data processing macros</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Workflow optimization</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-semibold mb-4 text-primary">Dashboards & Reports</h4>
-                            <ul class="space-y-3">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Interactive business dashboards</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Automated reporting systems</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Data visualization</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="text-center mt-8">
-                        <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Excel Help</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Computer Repair Tab -->
-            <div id="repair" class="tab-content">
-                <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-gray-100 hover-3d">
-                    <h3 class="text-2xl font-semibold text-center mb-6">Computer Repair Services</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-lg font-semibold mb-4 text-primary">Hardware Services</h4>
-                            <ul class="space-y-3">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Hardware upgrades</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Component replacement</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Performance optimization</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-semibold mb-4 text-primary">Software Services</h4>
-                            <ul class="space-y-3">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Virus removal</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>OS installation</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                    <span>Software troubleshooting</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="text-center mt-8">
-                        <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Schedule Repair</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Quote Request Form -->
-            <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto border border-gray-100 mt-12 hover-3d">
-                <h3 class="text-2xl font-semibold text-center mb-6">Request a Quote</h3>
-                <form id="quote-form">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="name" class="block text-gray-700 mb-2">Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
-                        </div>
-                        <div>
-                            <label for="email" class="block text-gray-700 mb-2">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
-                        </div>
-                        <div>
-                            <label for="service-type" class="block text-gray-700 mb-2">Service Type</label>
-                            <select id="service-type" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
-                                <option value="">Select a service</option>
-                                <option value="web">Web Development</option>
-                                <option value="excel">Excel Solutions</option>
-                                <option value="repair">Computer Repair</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="budget" class="block text-gray-700 mb-2">Budget (₦)</label>
-                            <input type="number" id="budget" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="message" class="block text-gray-700 mb-2">Message</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
-                        </div>
-                    </div>
-                    <div class="text-center mt-6">
-                        <button type="submit" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Submit Request</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Products Section -->
-    <section id="products" class="py-16 bg-white relative overflow-hidden">
-        <div class="floating-shape shape-1" style="top: 30%; left: -5%; width: 150px; height: 150px;"></div>
-        <div class="floating-shape shape-2" style="bottom: 20%; right: -5%; width: 120px; height: 120px;"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Products</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                <!-- Coding Journal -->
-                <div class="bg-light p-8 rounded-lg card-hover border border-gray-100 hover-3d">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-book-open text-5xl text-primary mb-4 animate-float"></i>
-                        <h3 class="text-2xl font-semibold">Glyen Coding Journal</h3>
-                    </div>
-                    <p class="text-neutral mb-6">Track your coding progress, set goals, and improve your skills with our comprehensive coding journal. Perfect for beginners and experienced developers alike.</p>
-                    <div class="text-center">
-                        <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Buy Now (₦5,000)</button>
-                    </div>
-                </div>
-                
-                <!-- Coding Challenge -->
-                <div class="bg-light p-8 rounded-lg card-hover border border-gray-100 hover-3d">
-                    <div class="text-center mb-6">
-                        <i class="fas fa-laptop-code text-5xl text-accent mb-4 animate-bounce-slow"></i>
-                        <h3 class="text-2xl font-semibold">Coding Challenge</h3>
-                    </div>
-                    <p class="text-neutral mb-6">Join our monthly coding challenges to test your skills, build your portfolio, and earn certificates. Open to all skill levels.</p>
-                    <ul class="mb-6 space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-success mr-2"></i>
-                            <span>Create a GitHub repository</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-success mr-2"></i>
-                            <span>Push your code</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-success mr-2"></i>
-                            <span>Submit via Google Form</span>
-                        </li>
-                    </ul>
-                    <div class="text-center">
-                        <button class="bg-accent text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Join Challenge</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-16 bg-gray-50 relative overflow-hidden">
-        <div class="floating-shape shape-3" style="top: 20%; right: -5%; width: 180px; height: 180px;"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Portfolio</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Portfolio Item 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover hover-3d">
-                    <div class="h-48 bg-primary flex items-center justify-center moving-gradient">
-                        <i class="fas fa-laptop-code text-white text-5xl"></i>
+        <!-- Stats Section -->
+        <section class="py-16 bg-dark-300">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6">
+                        <div class="text-4xl font-bold text-primary mb-2">50+</div>
+                        <div class="text-xl font-semibold">Projects Completed</div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">E-commerce Website</h3>
-                        <p class="text-neutral mb-4">A fully responsive online store with product filtering and secure checkout.</p>
-                        <a href="#" class="text-primary font-medium hover:underline">View Project</a>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover hover-3d">
-                    <div class="h-48 bg-accent flex items-center justify-center moving-gradient">
-                        <i class="fas fa-chart-line text-white text-5xl"></i>
+                        <div class="text-4xl font-bold text-accent mb-2">30+</div>
+                        <div class="text-xl font-semibold">Happy Clients</div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Business Dashboard</h3>
-                        <p class="text-neutral mb-4">An interactive Excel dashboard for sales tracking and data visualization.</p>
-                        <a href="#" class="text-primary font-medium hover:underline">View Project</a>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 3 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover hover-3d">
-                    <div class="h-48 bg-success flex items-center justify-center moving-gradient">
-                        <i class="fas fa-cogs text-white text-5xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">PC Optimization</h3>
-                        <p class="text-neutral mb-4">Complete system overhaul for improved performance and reliability.</p>
-                        <a href="#" class="text-primary font-medium hover:underline">View Project</a>
+                        <div class="text-4xl font-bold text-success mb-2">5+</div>
+                        <div class="text-xl font-semibold">Years Experience</div>
                     </div>
                 </div>
             </div>
-            
-            <div class="text-center mt-12">
-                <a href="#" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">View Full Portfolio</a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-white relative overflow-hidden">
-        <div class="floating-shape shape-1" style="top: 20%; left: -5%; width: 200px; height: 200px;"></div>
-        <div class="floating-shape shape-2" style="bottom: 20%; right: -5%; width: 150px; height: 150px;"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">About Glyen</h2>
-            
-            <div class="flex flex-col md:flex-row items-center gap-12 max-w-4xl mx-auto">
-                <div class="md:w-1/2">
-                    <div class="bg-primary bg-opacity-10 p-6 rounded-lg hover-3d">
-                        <h3 class="text-2xl font-semibold mb-4 text-primary">Our Story</h3>
-                        <p class="text-neutral mb-4">Glyen was founded with a simple mission: to help businesses and individuals leverage technology to solve problems and achieve their goals.</p>
-                        <p class="text-neutral">With expertise in web development, Excel automation, and computer repair, we provide comprehensive tech solutions tailored to your specific needs.</p>
+    <!-- Services Page -->
+    <div id="services" class="page">
+        <section class="pt-32 pb-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-4 section-title">Our Services</h2>
+                <p class="text-center text-neutral mb-12 max-w-2xl mx-auto">Affordable websites built for your needs. Choose a package or request a custom quote.</p>
+                
+                <!-- Service Tabs -->
+                <div class="flex flex-wrap justify-center mb-12 border-b border-dark-400">
+                    <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="web-dev">Web Development</button>
+                    <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="excel">Excel Solutions</button>
+                    <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="repair">Computer Repair</button>
+                </div>
+                
+                <!-- Web Development Tab -->
+                <div id="web-dev" class="tab-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                        <!-- Starter Package -->
+                        <div class="bg-dark-200 rounded-lg shadow-lg overflow-hidden card-hover border border-dark-400 glow">
+                            <div class="bg-primary text-white py-4 text-center">
+                                <h3 class="text-xl font-semibold">Starter</h3>
+                            </div>
+                            <div class="p-6">
+                                <div class="text-center mb-6">
+                                    <span class="text-3xl font-bold">₦50,000</span>
+                                    <span class="text-neutral">/one-time</span>
+                                </div>
+                                <ul class="mb-6 space-y-3">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>1-3 pages</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Responsive design</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Basic SEO</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Contact form</span>
+                                    </li>
+                                </ul>
+                                <button class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Started</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Business Package -->
+                        <div class="bg-dark-200 rounded-lg shadow-xl overflow-hidden card-hover transform scale-105 border border-dark-400 glow">
+                            <div class="bg-secondary text-white py-4 text-center">
+                                <h3 class="text-xl font-semibold">Business</h3>
+                            </div>
+                            <div class="p-6">
+                                <div class="text-center mb-6">
+                                    <span class="text-3xl font-bold">₦120,000</span>
+                                    <span class="text-neutral">/one-time</span>
+                                </div>
+                                <ul class="mb-6 space-y-3">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>5-7 pages</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Custom design</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Advanced SEO</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Content management</span>
+                                    </li>
+                                </ul>
+                                <button class="w-full bg-secondary text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
+                            </div>
+                        </div>
+                        
+                        <!-- E-commerce Package -->
+                        <div class="bg-dark-200 rounded-lg shadow-lg overflow-hidden card-hover border border-dark-400 glow">
+                            <div class="bg-accent text-white py-4 text-center">
+                                <h3 class="text-xl font-semibold">E-commerce</h3>
+                            </div>
+                            <div class="p-6">
+                                <div class="text-center mb-6">
+                                    <span class="text-3xl font-bold">₦250,000</span>
+                                    <span class="text-neutral">/one-time</span>
+                                </div>
+                                <ul class="mb-6 space-y-3">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Online store</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Product management</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Payment integration</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-success mr-2"></i>
+                                        <span>Inventory system</span>
+                                    </li>
+                                </ul>
+                                <button class="w-full bg-accent text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="md:w-1/2">
-                    <div class="bg-gray-100 p-6 rounded-lg hover-3d">
-                        <h3 class="text-2xl font-semibold mb-4 text-dark">Why Choose Us</h3>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
-                                <span>Professional and reliable service</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
-                                <span>Fast turnaround times</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
-                                <span>Competitive pricing</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
-                                <span>Ongoing support</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50 relative overflow-hidden">
-        <div class="floating-shape shape-3" style="top: 10%; right: -5%; width: 180px; height: 180px;"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <h2 class="text-3xl font-bold text-center mb-12 section-title">Contact Us</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                <div>
-                    <h3 class="text-2xl font-semibold mb-6">Get In Touch</h3>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4 icon-spin">
-                                <i class="fas fa-map-marker-alt text-primary"></i>
+                <!-- Excel Solutions Tab -->
+                <div id="excel" class="tab-content">
+                    <div class="bg-dark-200 rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-dark-400 glow">
+                        <h3 class="text-2xl font-semibold text-center mb-6">Excel Solutions</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4 text-primary">Automation & Macros</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Custom spreadsheet automation</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Data processing macros</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Workflow optimization</span>
+                                    </li>
+                                </ul>
                             </div>
                             <div>
-                                <h4 class="font-semibold mb-1">Location</h4>
-                                <p class="text-neutral">Lagos, Nigeria</p>
+                                <h4 class="text-lg font-semibold mb-4 text-primary">Dashboards & Reports</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Interactive business dashboards</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Automated reporting systems</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Data visualization</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4 animate-pulse-slow">
-                                <i class="fas fa-envelope text-primary"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Email</h4>
-                                <p class="text-neutral">glyen.official@example.com</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4 animate-bounce-slow">
-                                <i class="fas fa-phone text-primary"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Phone</h4>
-                                <p class="text-neutral">+234 800 000 0000</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8">
-                        <h4 class="font-semibold mb-4">Follow Us</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition animate-float" style="animation-delay: 0s;">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition animate-float" style="animation-delay: 0.2s;">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition animate-float" style="animation-delay: 0.4s;">
-                                <i class="fab fa-github"></i>
-                            </a>
+                        <div class="text-center mt-8">
+                            <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Excel Help</button>
                         </div>
                     </div>
                 </div>
                 
-                <div>
-                    <h3 class="text-2xl font-semibold mb-6">Send a Message</h3>
-                    
-                    <form id="contact-form">
-                        <div class="mb-4">
-                            <label for="contact-name" class="block text-gray-700 mb-2">Name</label>
-                            <input type="text" id="contact-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                <!-- Computer Repair Tab -->
+                <div id="repair" class="tab-content">
+                    <div class="bg-dark-200 rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-dark-400 glow">
+                        <h3 class="text-2xl font-semibold text-center mb-6">Computer Repair Services</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4 text-primary">Hardware Services</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Hardware upgrades</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Component replacement</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Performance optimization</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold mb-4 text-primary">Software Services</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Virus removal</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>OS installation</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                        <span>Software troubleshooting</span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        
-                        <div class="mb-4">
-                            <label for="contact-email" class="block text-gray-700 mb-2">Email</label>
-                            <input type="email" id="contact-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                        <div class="text-center mt-8">
+                            <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Schedule Repair</button>
                         </div>
-                        
-                        <div class="mb-4">
-                            <label for="contact-subject" class="block text-gray-700 mb-2">Subject</label>
-                            <input type="text" id="contact-subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                    </div>
+                </div>
+                
+                <!-- Quote Request Form -->
+                <div class="bg-dark-200 rounded-lg shadow-lg p-8 max-w-2xl mx-auto border border-dark-400 mt-12 glow">
+                    <h3 class="text-2xl font-semibold text-center mb-6">Request a Quote</h3>
+                    <form id="quote-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-300 mb-2">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-300 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
+                            </div>
+                            <div>
+                                <label for="service-type" class="block text-gray-300 mb-2">Service Type</label>
+                                <select id="service-type" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
+                                    <option value="">Select a service</option>
+                                    <option value="web">Web Development</option>
+                                    <option value="excel">Excel Solutions</option>
+                                    <option value="repair">Computer Repair</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="budget" class="block text-gray-300 mb-2">Budget (₦)</label>
+                                <input type="number" id="budget" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label for="message" class="block text-gray-300 mb-2">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required></textarea>
+                            </div>
                         </div>
-                        
-                        <div class="mb-4">
-                            <label for="contact-message" class="block text-gray-700 mb-2">Message</label>
-                            <textarea id="contact-message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
+                        <div class="text-center mt-6">
+                            <button type="submit" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Submit Request</button>
                         </div>
-                        
-                        <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300 w-full">Send Message</button>
                     </form>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <!-- Newsletter Section -->
-    <section class="py-16 bg-primary text-white relative overflow-hidden">
-        <div class="floating-shape shape-1" style="top: 20%; left: -5%; width: 200px; height: 200px; opacity: 0.2;"></div>
-        <div class="floating-shape shape-2" style="bottom: 20%; right: -5%; width: 150px; height: 150px; opacity: 0.2;"></div>
-        
-        <div class="container mx-auto px-4 text-center relative z-10">
-            <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
-            <p class="max-w-2xl mx-auto mb-8">Subscribe to our newsletter to receive updates on new services, coding challenges, and special offers.</p>
-            <form id="newsletter-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-2">
-                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white" required>
-                <button type="submit" class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">Subscribe</button>
-            </form>
-        </div>
-    </section>
+    <!-- Products Page -->
+    <div id="products" class="page">
+        <section class="pt-32 pb-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Products</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                    <!-- Coding Journal -->
+                    <div class="bg-dark-200 p-8 rounded-lg card-hover border border-dark-400 glow">
+                        <div class="text-center mb-6">
+                            <i class="fas fa-book-open text-5xl text-primary mb-4 floating"></i>
+                            <h3 class="text-2xl font-semibold">Glyen Coding Journal</h3>
+                        </div>
+                        <p class="text-neutral mb-6">Track your coding progress, set goals, and improve your skills with our comprehensive coding journal. Perfect for beginners and experienced developers alike.</p>
+                        <div class="text-center">
+                            <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Buy Now (₦5,000)</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Coding Challenge -->
+                    <div class="bg-dark-200 p-8 rounded-lg card-hover border border-dark-400 glow">
+                        <div class="text-center mb-6">
+                            <i class="fas fa-laptop-code text-5xl text-accent mb-4 floating"></i>
+                            <h3 class="text-2xl font-semibold">Coding Challenge</h3>
+                        </div>
+                        <p class="text-neutral mb-6">Join our monthly coding challenges to test your skills, build your portfolio, and earn certificates. Open to all skill levels.</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-success mr-2"></i>
+                                <span>Create a GitHub repository</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-success mr-2"></i>
+                                <span>Push your code</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-success mr-2"></i>
+                                <span>Submit via Google Form</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <button class="bg-accent text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Join Challenge</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Portfolio Page -->
+    <div id="portfolio" class="page">
+        <section class="pt-32 pb-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Portfolio</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Portfolio Item 1 -->
+                    <div class="bg-dark-200 rounded-lg overflow-hidden shadow-md card-hover border border-dark-400 glow">
+                        <div class="h-48 bg-primary flex items-center justify-center">
+                            <i class="fas fa-laptop-code text-white text-5xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">E-commerce Website</h3>
+                            <p class="text-neutral mb-4">A fully responsive online store with product filtering and secure checkout.</p>
+                            <a class="text-primary font-medium hover:underline cursor-pointer">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 2 -->
+                    <div class="bg-dark-200 rounded-lg overflow-hidden shadow-md card-hover border border-dark-400 glow">
+                        <div class="h-48 bg-accent flex items-center justify-center">
+                            <i class="fas fa-chart-line text-white text-5xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">Business Dashboard</h3>
+                            <p class="text-neutral mb-4">An interactive Excel dashboard for sales tracking and data visualization.</p>
+                            <a class="text-primary font-medium hover:underline cursor-pointer">View Project</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Portfolio Item 3 -->
+                    <div class="bg-dark-200 rounded-lg overflow-hidden shadow-md card-hover border border-dark-400 glow">
+                        <div class="h-48 bg-success flex items-center justify-center">
+                            <i class="fas fa-cogs text-white text-5xl"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">PC Optimization</h3>
+                            <p class="text-neutral mb-4">Complete system overhaul for improved performance and reliability.</p>
+                            <a class="text-primary font-medium hover:underline cursor-pointer">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300 cursor-pointer">View Full Portfolio</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <section class="pt-32 pb-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12 section-title">About Glyen</h2>
+                
+                <div class="flex flex-col md:flex-row items-center gap-12 max-w-4xl mx-auto">
+                    <div class="md:w-1/2">
+                        <div class="bg-dark-200 p-6 rounded-lg border border-dark-400 glow">
+                            <h3 class="text-2xl font-semibold mb-4 text-primary">Our Story</h3>
+                            <p class="text-neutral mb-4">Glyen was founded with a simple mission: to help businesses and individuals leverage technology to solve problems and achieve their goals.</p>
+                            <p class="text-neutral">With expertise in web development, Excel automation, and computer repair, we provide comprehensive tech solutions tailored to your specific needs.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2">
+                        <div class="bg-dark-200 p-6 rounded-lg border border-dark-400 glow">
+                            <h3 class="text-2xl font-semibold mb-4 text-white">Why Choose Us</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
+                                    <span>Professional and reliable service</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
+                                    <span>Fast turnaround times</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
+                                    <span>Competitive pricing</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
+                                    <span>Ongoing support</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section class="pt-32 pb-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12 section-title">Contact Us</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6">Get In Touch</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Location</h4>
+                                    <p class="text-neutral">Lagos, Nigeria</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Email</h4>
+                                    <p class="text-neutral">glyen.official@example.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Phone</h4>
+                                    <p class="text-neutral">+234 800 000 0000</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-semibold mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition cursor-pointer">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition cursor-pointer">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition cursor-pointer">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6">Send a Message</h3>
+                        
+                        <form id="contact-form">
+                            <div class="mb-4">
+                                <label for="contact-name" class="block text-gray-300 mb-2">Name</label>
+                                <input type="text" id="contact-name" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="contact-email" class="block text-gray-300 mb-2">Email</label>
+                                <input type="email" id="contact-email" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="contact-subject" class="block text-gray-300 mb-2">Subject</label>
+                                <input type="text" id="contact-subject" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="contact-message" class="block text-gray-300 mb-2">Message</label>
+                                <textarea id="contact-message" rows="4" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300 w-full">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-12">
+    <footer class="bg-dark-400 text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
@@ -850,53 +763,75 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
-                        <li><a href="#products" class="text-gray-400 hover:text-white transition duration-300">Products</a></li>
-                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition duration-300">Portfolio</a></li>
+                        <li><a onclick="showPage('home')" class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Home</a></li>
+                        <li><a onclick="showPage('services')" class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Services</a></li>
+                        <li><a onclick="showPage('products')" class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Products</a></li>
+                        <li><a onclick="showPage('portfolio')" class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Portfolio</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Resources</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Documentation</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Support</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Blog</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Documentation</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Support</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Legal</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Refund Policy</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Privacy Policy</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Terms of Service</a></li>
+                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Refund Policy</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <div class="border-t border-dark-300 mt-8 pt-8 text-center text-gray-400">
                 <p>&copy; 2023 Glyen. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <!-- Success Modal -->
-    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-white rounded-lg p-8 max-w-md mx-4">
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
+        <div class="bg-dark-200 rounded-lg p-8 max-w-md mx-4 border border-dark-400">
             <div class="text-center">
                 <div class="w-16 h-16 bg-success rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-check text-white text-2xl"></i>
                 </div>
                 <h3 class="text-2xl font-semibold mb-2">Success!</h3>
-                <p class="text-gray-600 mb-6">Your message has been sent successfully. We'll get back to you soon.</p>
+                <p class="text-gray-400 mb-6">Your message has been sent successfully. We'll get back to you soon.</p>
                 <button id="close-modal" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">OK</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
         // Mobile menu toggle
         document.getElementById('menu-btn').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
@@ -904,11 +839,6 @@
 
         // Form submission handlers
         document.getElementById('quote-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('success-modal').classList.remove('hidden');
-        });
-
-        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
             e.preventDefault();
             document.getElementById('success-modal').classList.remove('hidden');
         });
@@ -959,35 +889,10 @@
             }
         });
 
-        // Parallax effect for elements with class 'parallax-element'
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.parallax-element');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // Initialize animations when elements come into view
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-float');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements with the 'animate-on-scroll' class
-        document.querySelectorAll('.animate-on-scroll').forEach(element => {
-            observer.observe(element);
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show home page by default
+            showPage('home');
         });
     </script>
 </body>
