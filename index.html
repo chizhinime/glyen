@@ -21,6 +21,12 @@
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'spin-slow': 'spin 8s linear infinite',
                     }
                 }
             }
@@ -34,6 +40,25 @@
         }
         .hero-pattern {
             background: linear-gradient(120deg, #2563eb 0%, #1e40af 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-pattern::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10.5%);
+            background-size: 20px 20px;
+            animation: background-move 30s linear infinite;
+            transform: rotate(30deg);
+            z-index: 1;
+        }
+        @keyframes background-move {
+            0% { transform: rotate(30deg) translate(0, 0); }
+            100% { transform: rotate(30deg) translate(-20px, -20px); }
         }
         .card-hover {
             transition: all 0.3s ease;
@@ -90,13 +115,13 @@
             z-index: 1001;
             transition: width 0.2s ease;
         }
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
         }
         .tab-content {
             display: none;
@@ -109,6 +134,112 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #2563eb, #10b981);
+            top: 10%;
+            left: 5%;
+            animation: float 15s ease-in-out infinite, pulse-slow 8s infinite;
+        }
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #f97316, #ec4899);
+            bottom: 10%;
+            right: 5%;
+            animation: float 12s ease-in-out infinite reverse, pulse-slow 6s infinite;
+        }
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #8b5cf6, #06b6d4);
+            top: 50%;
+            right: 15%;
+            animation: float 18s ease-in-out infinite, pulse-slow 10s infinite;
+        }
+        .parallax-element {
+            transform: translateY(0);
+            transition: transform 0.3s ease-out;
+        }
+        .moving-gradient {
+            background: linear-gradient(270deg, #2563eb, #1e40af, #f97316, #10b981);
+            background-size: 800% 800%;
+            animation: gradient-move 12s ease infinite;
+        }
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .typing-animation {
+            overflow: hidden;
+            border-right: 3px solid #2563eb;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #2563eb; }
+        }
+        .hover-3d {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        .hover-3d:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .text-scramble {
+            position: relative;
+        }
+        .text-scramble::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: scramble-shine 3s infinite;
+            transform: translateX(-100%);
+        }
+        @keyframes scramble-shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .icon-spin {
+            animation: spin-slow 8s linear infinite;
+        }
+        .bounce-in {
+            animation: bounce 1s;
+        }
+        .wave {
+            animation: wave 2s infinite;
+            transform-origin: 70% 70%;
+            display: inline-block;
+        }
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            30% { transform: rotate(14deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-dark">
@@ -120,7 +251,7 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <span class="text-primary text-2xl font-bold">Glyen</span>
+                    <span class="text-primary text-2xl font-bold hover-3d inline-block">Glyen</span>
                 </div>
                 
                 <!-- Desktop Menu -->
@@ -154,45 +285,53 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-pattern pt-32 pb-20 px-4 text-white">
-        <div class="container mx-auto max-w-4xl text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6">We Build Websites That Grow With You</h1>
-            <p class="text-xl opacity-90 mb-10">Professional web development services and coding resources to help your business thrive online.</p>
+    <section id="home" class="hero-pattern pt-32 pb-20 px-4 text-white relative">
+        <!-- Floating shapes -->
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        
+        <div class="container mx-auto max-w-4xl text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-float">We Build Websites That Grow With You</h1>
+            <p class="text-xl opacity-90 mb-10 typing-animation max-w-2xl mx-auto">Professional web development services and coding resources to help your business thrive online.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#services" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition duration-300">Our Services</a>
-                <a href="#products" class="bg-secondary text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-opacity-90 transition duration-300">Our Products</a>
+                <a href="#services" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition duration-300 hover-3d">Our Services</a>
+                <a href="#products" class="bg-secondary text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-opacity-90 transition duration-300 hover-3d">Our Products</a>
             </div>
             <div class="mt-12 animate-float">
-                <a href="#services" class="text-white">
-                    <i class="fas fa-chevron-down text-2xl"></i>
+                <a href="#services" class="text-white wave text-3xl">
+                    <i class="fas fa-chevron-down"></i>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
+    <section class="py-16 bg-white relative overflow-hidden">
+        <div class="floating-shape shape-1" style="top: 20%; left: -5%; width: 200px; height: 200px;"></div>
+        <div class="floating-shape shape-2" style="bottom: 20%; right: -5%; width: 150px; height: 150px;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">What We Offer</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100">
-                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100 hover-3d">
+                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 icon-spin">
                         <i class="fas fa-code text-primary text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Web Development</h3>
                     <p class="text-neutral">Custom websites built with modern technologies to help your business stand out.</p>
                 </div>
                 
-                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100">
-                    <div class="bg-accent bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100 hover-3d">
+                    <div class="bg-accent bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce-slow">
                         <i class="fas fa-book text-accent text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Coding Journal</h3>
                     <p class="text-neutral">Comprehensive journal to track your coding progress and improve your skills.</p>
                 </div>
                 
-                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100">
-                    <div class="bg-success bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100 hover-3d">
+                    <div class="bg-success bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
                         <i class="fas fa-certificate text-success text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Certificates</h3>
@@ -203,8 +342,10 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
+    <section id="services" class="py-16 bg-gray-50 relative overflow-hidden">
+        <div class="floating-shape shape-3" style="top: 10%; right: -5%; width: 180px; height: 180px;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <h2 class="text-3xl font-bold text-center mb-4 section-title">Our Services</h2>
             <p class="text-center text-neutral mb-12 max-w-2xl mx-auto">Affordable websites built for your needs. Choose a package or request a custom quote.</p>
             
@@ -219,7 +360,7 @@
             <div id="web-dev" class="tab-content active">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                     <!-- Starter Package -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100 hover-3d">
                         <div class="bg-primary text-white py-4 text-center">
                             <h3 class="text-xl font-semibold">Starter</h3>
                         </div>
@@ -251,7 +392,7 @@
                     </div>
                     
                     <!-- Business Package -->
-                    <div class="bg-white rounded-lg shadow-xl overflow-hidden card-hover transform scale-105 border border-gray-100">
+                    <div class="bg-white rounded-lg shadow-xl overflow-hidden card-hover transform scale-105 border border-gray-100 hover-3d">
                         <div class="bg-secondary text-white py-4 text-center">
                             <h3 class="text-xl font-semibold">Business</h3>
                         </div>
@@ -283,7 +424,7 @@
                     </div>
                     
                     <!-- E-commerce Package -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100 hover-3d">
                         <div class="bg-accent text-white py-4 text-center">
                             <h3 class="text-xl font-semibold">E-commerce</h3>
                         </div>
@@ -318,7 +459,7 @@
             
             <!-- Excel Solutions Tab -->
             <div id="excel" class="tab-content">
-                <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-gray-100">
+                <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-gray-100 hover-3d">
                     <h3 class="text-2xl font-semibold text-center mb-6">Excel Solutions</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
@@ -364,7 +505,7 @@
             
             <!-- Computer Repair Tab -->
             <div id="repair" class="tab-content">
-                <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-gray-100">
+                <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-gray-100 hover-3d">
                     <h3 class="text-2xl font-semibold text-center mb-6">Computer Repair Services</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
@@ -409,7 +550,7 @@
             </div>
             
             <!-- Quote Request Form -->
-            <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto border border-gray-100 mt-12">
+            <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto border border-gray-100 mt-12 hover-3d">
                 <h3 class="text-2xl font-semibold text-center mb-6">Request a Quote</h3>
                 <form id="quote-form">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -448,15 +589,18 @@
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
+    <section id="products" class="py-16 bg-white relative overflow-hidden">
+        <div class="floating-shape shape-1" style="top: 30%; left: -5%; width: 150px; height: 150px;"></div>
+        <div class="floating-shape shape-2" style="bottom: 20%; right: -5%; width: 120px; height: 120px;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Products</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
                 <!-- Coding Journal -->
-                <div class="bg-light p-8 rounded-lg card-hover border border-gray-100">
+                <div class="bg-light p-8 rounded-lg card-hover border border-gray-100 hover-3d">
                     <div class="text-center mb-6">
-                        <i class="fas fa-book-open text-5xl text-primary mb-4"></i>
+                        <i class="fas fa-book-open text-5xl text-primary mb-4 animate-float"></i>
                         <h3 class="text-2xl font-semibold">Glyen Coding Journal</h3>
                     </div>
                     <p class="text-neutral mb-6">Track your coding progress, set goals, and improve your skills with our comprehensive coding journal. Perfect for beginners and experienced developers alike.</p>
@@ -466,9 +610,9 @@
                 </div>
                 
                 <!-- Coding Challenge -->
-                <div class="bg-light p-8 rounded-lg card-hover border border-gray-100">
+                <div class="bg-light p-8 rounded-lg card-hover border border-gray-100 hover-3d">
                     <div class="text-center mb-6">
-                        <i class="fas fa-laptop-code text-5xl text-accent mb-4"></i>
+                        <i class="fas fa-laptop-code text-5xl text-accent mb-4 animate-bounce-slow"></i>
                         <h3 class="text-2xl font-semibold">Coding Challenge</h3>
                     </div>
                     <p class="text-neutral mb-6">Join our monthly coding challenges to test your skills, build your portfolio, and earn certificates. Open to all skill levels.</p>
@@ -495,14 +639,16 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
+    <section id="portfolio" class="py-16 bg-gray-50 relative overflow-hidden">
+        <div class="floating-shape shape-3" style="top: 20%; right: -5%; width: 180px; height: 180px;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Portfolio</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Portfolio Item 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover">
-                    <div class="h-48 bg-primary flex items-center justify-center">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover hover-3d">
+                    <div class="h-48 bg-primary flex items-center justify-center moving-gradient">
                         <i class="fas fa-laptop-code text-white text-5xl"></i>
                     </div>
                     <div class="p-6">
@@ -513,8 +659,8 @@
                 </div>
                 
                 <!-- Portfolio Item 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover">
-                    <div class="h-48 bg-accent flex items-center justify-center">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover hover-3d">
+                    <div class="h-48 bg-accent flex items-center justify-center moving-gradient">
                         <i class="fas fa-chart-line text-white text-5xl"></i>
                     </div>
                     <div class="p-6">
@@ -525,8 +671,8 @@
                 </div>
                 
                 <!-- Portfolio Item 3 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover">
-                    <div class="h-48 bg-success flex items-center justify-center">
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover hover-3d">
+                    <div class="h-48 bg-success flex items-center justify-center moving-gradient">
                         <i class="fas fa-cogs text-white text-5xl"></i>
                     </div>
                     <div class="p-6">
@@ -544,13 +690,16 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
+    <section id="about" class="py-16 bg-white relative overflow-hidden">
+        <div class="floating-shape shape-1" style="top: 20%; left: -5%; width: 200px; height: 200px;"></div>
+        <div class="floating-shape shape-2" style="bottom: 20%; right: -5%; width: 150px; height: 150px;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">About Glyen</h2>
             
             <div class="flex flex-col md:flex-row items-center gap-12 max-w-4xl mx-auto">
                 <div class="md:w-1/2">
-                    <div class="bg-primary bg-opacity-10 p-6 rounded-lg">
+                    <div class="bg-primary bg-opacity-10 p-6 rounded-lg hover-3d">
                         <h3 class="text-2xl font-semibold mb-4 text-primary">Our Story</h3>
                         <p class="text-neutral mb-4">Glyen was founded with a simple mission: to help businesses and individuals leverage technology to solve problems and achieve their goals.</p>
                         <p class="text-neutral">With expertise in web development, Excel automation, and computer repair, we provide comprehensive tech solutions tailored to your specific needs.</p>
@@ -558,7 +707,7 @@
                 </div>
                 
                 <div class="md:w-1/2">
-                    <div class="bg-gray-100 p-6 rounded-lg">
+                    <div class="bg-gray-100 p-6 rounded-lg hover-3d">
                         <h3 class="text-2xl font-semibold mb-4 text-dark">Why Choose Us</h3>
                         <ul class="space-y-3">
                             <li class="flex items-start">
@@ -585,8 +734,10 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
+    <section id="contact" class="py-16 bg-gray-50 relative overflow-hidden">
+        <div class="floating-shape shape-3" style="top: 10%; right: -5%; width: 180px; height: 180px;"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">Contact Us</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
@@ -595,7 +746,7 @@
                     
                     <div class="space-y-6">
                         <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4 icon-spin">
                                 <i class="fas fa-map-marker-alt text-primary"></i>
                             </div>
                             <div>
@@ -605,7 +756,7 @@
                         </div>
                         
                         <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4 animate-pulse-slow">
                                 <i class="fas fa-envelope text-primary"></i>
                             </div>
                             <div>
@@ -615,7 +766,7 @@
                         </div>
                         
                         <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4 animate-bounce-slow">
                                 <i class="fas fa-phone text-primary"></i>
                             </div>
                             <div>
@@ -628,13 +779,13 @@
                     <div class="mt-8">
                         <h4 class="font-semibold mb-4">Follow Us</h4>
                         <div class="flex space-x-4">
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition">
+                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition animate-float" style="animation-delay: 0s;">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition">
+                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition animate-float" style="animation-delay: 0.2s;">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition">
+                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition animate-float" style="animation-delay: 0.4s;">
                                 <i class="fab fa-github"></i>
                             </a>
                         </div>
@@ -673,8 +824,11 @@
     </section>
 
     <!-- Newsletter Section -->
-    <section class="py-16 bg-primary text-white">
-        <div class="container mx-auto px-4 text-center">
+    <section class="py-16 bg-primary text-white relative overflow-hidden">
+        <div class="floating-shape shape-1" style="top: 20%; left: -5%; width: 200px; height: 200px; opacity: 0.2;"></div>
+        <div class="floating-shape shape-2" style="bottom: 20%; right: -5%; width: 150px; height: 150px; opacity: 0.2;"></div>
+        
+        <div class="container mx-auto px-4 text-center relative z-10">
             <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
             <p class="max-w-2xl mx-auto mb-8">Subscribe to our newsletter to receive updates on new services, coding challenges, and special offers.</p>
             <form id="newsletter-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-2">
@@ -803,6 +957,37 @@
             } else {
                 navbar.classList.remove('shadow-lg');
             }
+        });
+
+        // Parallax effect for elements with class 'parallax-element'
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-element');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Initialize animations when elements come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-float');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with the 'animate-on-scroll' class
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            observer.observe(element);
         });
     </script>
 </body>
