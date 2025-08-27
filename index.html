@@ -11,34 +11,71 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#4361ee',
-                        secondary: '#3a0ca3',
-                        accent: '#f72585',
-                        light: '#f8f9fa',
-                        dark: '#212529',
-                        success: '#4cc9f0',
+                        primary: '#2563eb',     // Professional blue
+                        secondary: '#1e40af',   // Darker blue
+                        accent: '#f97316',      // Professional orange
+                        light: '#f8fafc',       // Light background
+                        dark: '#1e293b',        // Dark text
+                        success: '#10b981',     // Green for success
+                        neutral: '#64748b'      // Neutral gray
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
         .hero-pattern {
-            background-color: #4361ee;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background: linear-gradient(120deg, #2563eb 0%, #1e40af 100%);
         }
         .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
         }
         .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #2563eb;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: #2563eb;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 text-dark">
     <!-- Navigation -->
-    <nav class="bg-white shadow-md fixed w-full z-10">
+    <nav class="bg-white shadow-md fixed w-full z-50">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
@@ -46,17 +83,17 @@
                 </div>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-10">
-                    <a href="#home" class="text-gray-700 hover:text-primary font-medium">Home</a>
-                    <a href="#services" class="text-gray-700 hover:text-primary font-medium">Services</a>
-                    <a href="#products" class="text-gray-700 hover:text-primary font-medium">Products</a>
-                    <a href="#portfolio" class="text-gray-700 hover:text-primary font-medium">Portfolio</a>
-                    <a href="#about" class="text-gray-700 hover:text-primary font-medium">About</a>
-                    <a href="#contact" class="text-gray-700 hover:text-primary font-medium">Contact</a>
+                <div class="hidden lg:flex space-x-10">
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Home</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Services</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Products</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Portfolio</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">About</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Contact</a>
                 </div>
                 
                 <!-- Mobile Menu Button -->
-                <div class="md:hidden">
+                <div class="lg:hidden">
                     <button id="menu-btn" class="text-gray-700 focus:outline-none">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
@@ -64,25 +101,25 @@
             </div>
             
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-primary">Home</a>
-                <a href="#services" class="block py-2 text-gray-700 hover:text-primary">Services</a>
-                <a href="#products" class="block py-2 text-gray-700 hover:text-primary">Products</a>
-                <a href="#portfolio" class="block py-2 text-gray-700 hover:text-primary">Portfolio</a>
-                <a href="#about" class="block py-2 text-gray-700 hover:text-primary">About</a>
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-primary">Contact</a>
+            <div id="mobile-menu" class="hidden lg:hidden pb-4">
+                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Home</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Services</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Products</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Portfolio</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-primary">About</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-pattern pt-32 pb-20 px-4">
+    <section class="hero-pattern pt-32 pb-20 px-4 text-white">
         <div class="container mx-auto max-w-4xl text-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">We Build Websites That Grow With You</h1>
-            <p class="text-xl text-white opacity-90 mb-10">Professional web development services and coding resources to help your business thrive online.</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">We Build Websites That Grow With You</h1>
+            <p class="text-xl opacity-90 mb-10">Professional web development services and coding resources to help your business thrive online.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#services" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition duration-300">Hire Us</a>
-                <a href="#products" class="bg-secondary text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-opacity-90 transition duration-300">Get the Journal</a>
+                <a href="#" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition duration-300">Hire Us</a>
+                <a href="#" class="bg-secondary text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-opacity-90 transition duration-300">Get the Journal</a>
             </div>
         </div>
     </section>
@@ -90,98 +127,98 @@
     <!-- Features Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">What We Offer</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 section-title">What We Offer</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-light p-6 rounded-lg text-center card-hover">
-                    <div class="bg-primary w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-code text-white text-2xl"></i>
+                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100">
+                    <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-code text-primary text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Web Development</h3>
-                    <p class="text-gray-600">Custom websites built with modern technologies to help your business stand out.</p>
+                    <p class="text-neutral">Custom websites built with modern technologies to help your business stand out.</p>
                 </div>
                 
-                <div class="bg-light p-6 rounded-lg text-center card-hover">
-                    <div class="bg-accent w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-book text-white text-2xl"></i>
+                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100">
+                    <div class="bg-accent bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-book text-accent text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Coding Journal</h3>
-                    <p class="text-gray-600">Comprehensive journal to track your coding progress and improve your skills.</p>
+                    <p class="text-neutral">Comprehensive journal to track your coding progress and improve your skills.</p>
                 </div>
                 
-                <div class="bg-light p-6 rounded-lg text-center card-hover">
-                    <div class="bg-success w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-certificate text-white text-2xl"></i>
+                <div class="bg-light p-6 rounded-lg text-center card-hover border border-gray-100">
+                    <div class="bg-success bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-certificate text-success text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Certificates</h3>
-                    <p class="text-gray-600">Get recognized for your achievements with our coding challenge certificates.</p>
+                    <p class="text-neutral">Get recognized for your achievements with our coding challenge certificates.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-50">
+    <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Our Services</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Affordable websites built for your needs. Choose a package or request a custom quote.</p>
+            <h2 class="text-3xl font-bold text-center mb-4 section-title">Our Services</h2>
+            <p class="text-center text-neutral mb-12 max-w-2xl mx-auto">Affordable websites built for your needs. Choose a package or request a custom quote.</p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 <!-- Starter Package -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100">
                     <div class="bg-primary text-white py-4 text-center">
                         <h3 class="text-xl font-semibold">Starter</h3>
                     </div>
                     <div class="p-6">
                         <div class="text-center mb-6">
-                            <span class="text-3xl font-bold text-gray-800">₦50,000</span>
-                            <span class="text-gray-600">/one-time</span>
+                            <span class="text-3xl font-bold">₦50,000</span>
+                            <span class="text-neutral">/one-time</span>
                         </div>
-                        <ul class="mb-6">
-                            <li class="flex items-center mb-2">
+                        <ul class="mb-6 space-y-3">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>1-3 pages</span>
                             </li>
-                            <li class="flex items-center mb-2">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Responsive design</span>
                             </li>
-                            <li class="flex items-center mb-2">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Basic SEO</span>
                             </li>
-                            <li class="flex items-center mb-2">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Contact form</span>
                             </li>
                         </ul>
-                        <button class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
+                        <button class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Started</button>
                     </div>
                 </div>
                 
                 <!-- Business Package -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover transform scale-105">
+                <div class="bg-white rounded-lg shadow-xl overflow-hidden card-hover transform scale-105 border border-gray-100">
                     <div class="bg-secondary text-white py-4 text-center">
                         <h3 class="text-xl font-semibold">Business</h3>
                     </div>
                     <div class="p-6">
                         <div class="text-center mb-6">
-                            <span class="text-3xl font-bold text-gray-800">₦120,000</span>
-                            <span class="text-gray-600">/one-time</span>
+                            <span class="text-3xl font-bold">₦120,000</span>
+                            <span class="text-neutral">/one-time</span>
                         </div>
-                        <ul class="mb-6">
-                            <li class="flex items-center mb-2">
+                        <ul class="mb-6 space-y-3">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>5-7 pages</span>
                             </li>
-                            <li class="flex items-center mb-2">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Custom design</span>
                             </li>
-                            <li class="flex items-center mb-2">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Advanced SEO</span>
                             </li>
-                            <li class="flex items-center mb-2">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Content management</span>
                             </li>
@@ -191,29 +228,29 @@
                 </div>
                 
                 <!-- E-commerce Package -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100">
                     <div class="bg-accent text-white py-4 text-center">
                         <h3 class="text-xl font-semibold">E-commerce</h3>
                     </div>
                     <div class="p-6">
                         <div class="text-center mb-6">
-                            <span class="text-3xl font-bold text-gray-800">₦250,000</span>
-                            <span class="text-gray-600">/one-time</span>
+                            <span class="text-3xl font-bold">₦250,000</span>
+                            <span class="text-neutral">/one-time</span>
                         </div>
-                        <ul class="mb-6">
-                            <li class="flex items-center mb-2">
+                        <ul class="mb-6 space-y-3">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Online store</span>
                             </li>
-                            <li class="flex items-center mb-2">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Product management</span>
                             </li>
-                            <li class="flex items-center mb-2">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Payment integration</span>
                             </li>
-                            <li class="flex items-center mb-2">
+                            <li class="flex items-center">
                                 <i class="fas fa-check text-success mr-2"></i>
                                 <span>Inventory system</span>
                             </li>
@@ -224,21 +261,21 @@
             </div>
             
             <!-- Quote Request Form -->
-            <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
+            <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto border border-gray-100">
                 <h3 class="text-2xl font-semibold text-center mb-6">Request a Quote</h3>
                 <form id="quote-form">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="name" class="block text-gray-700 mb-2">Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
                         </div>
                         <div>
                             <label for="email" class="block text-gray-700 mb-2">Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
                         </div>
                         <div>
                             <label for="website-type" class="block text-gray-700 mb-2">Website Type</label>
-                            <select id="website-type" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                            <select id="website-type" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
                                 <option value="">Select a type</option>
                                 <option value="Starter">Starter (1-3 pages)</option>
                                 <option value="Business">Business (5-7 pages)</option>
@@ -248,15 +285,15 @@
                         </div>
                         <div>
                             <label for="budget" class="block text-gray-700 mb-2">Budget (₦)</label>
-                            <input type="number" id="budget" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                            <input type="number" id="budget" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
                         </div>
                         <div class="md:col-span-2">
                             <label for="message" class="block text-gray-700 mb-2">Message</label>
-                            <textarea id="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required></textarea>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
                         </div>
                     </div>
                     <div class="text-center mt-6">
-                        <button type="submit" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Submit Request</button>
+                        <button type="submit" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Submit Request</button>
                     </div>
                 </form>
             </div>
@@ -264,30 +301,30 @@
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="py-16 bg-white">
+    <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Our Products</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Products</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
                 <!-- Coding Journal -->
-                <div class="bg-light p-8 rounded-lg card-hover">
+                <div class="bg-light p-8 rounded-lg card-hover border border-gray-100">
                     <div class="text-center mb-6">
-                        <i class="fas fa-book-open text-5xl text-accent mb-4"></i>
+                        <i class="fas fa-book-open text-5xl text-primary mb-4"></i>
                         <h3 class="text-2xl font-semibold">Glyen Coding Journal</h3>
                     </div>
-                    <p class="text-gray-600 mb-6">Track your coding progress, set goals, and improve your skills with our comprehensive coding journal. Perfect for beginners and experienced developers alike.</p>
+                    <p class="text-neutral mb-6">Track your coding progress, set goals, and improve your skills with our comprehensive coding journal. Perfect for beginners and experienced developers alike.</p>
                     <div class="text-center">
-                        <button class="bg-accent text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Buy Now (₦5,000)</button>
+                        <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Buy Now (₦5,000)</button>
                     </div>
                 </div>
                 
                 <!-- Coding Challenge -->
-                <div class="bg-light p-8 rounded-lg card-hover">
+                <div class="bg-light p-8 rounded-lg card-hover border border-gray-100">
                     <div class="text-center mb-6">
-                        <i class="fas fa-laptop-code text-5xl text-success mb-4"></i>
+                        <i class="fas fa-laptop-code text-5xl text-accent mb-4"></i>
                         <h3 class="text-2xl font-semibold">Coding Challenge</h3>
                     </div>
-                    <p class="text-gray-600 mb-6">Join our monthly coding challenges to test your skills, build your portfolio, and earn certificates. Open to all skill levels.</p>
+                    <p class="text-neutral mb-6">Join our monthly coding challenges to test your skills, build your portfolio, and earn certificates. Open to all skill levels.</p>
                     <ul class="mb-6 space-y-2">
                         <li class="flex items-center">
                             <i class="fas fa-check-circle text-success mr-2"></i>
@@ -303,166 +340,8 @@
                         </li>
                     </ul>
                     <div class="text-center">
-                        <button class="bg-success text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Join Challenge</button>
+                        <button class="bg-accent text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Join Challenge</button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Our Portfolio</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Check out some of our recent projects and see the quality of our work.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Portfolio Item 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-lg card-hover">
-                    <div class="h-48 bg-primary flex items-center justify-center">
-                        <i class="fas fa-briefcase text-white text-5xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Business Website</h3>
-                        <p class="text-gray-600">A responsive business website with custom design and contact forms.</p>
-                    </div>
-                </div>
-                
-                <!-- Portfolio Item 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-lg card-hover">
-                    <div class="h-48 bg-secondary flex items-center justify-center">
-                        <i class="fas fa-shopping-cart text-white text-5xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">E-commerce Store</h3>
-                        <p class="text-gray-600">Online store with product management and payment integration.</p>
-                    </div>
-                </div>
-                
-                 <!-- Portfolio Item 3 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-lg card-hover">
-                    <div class="h-48 bg-accent flex items-center justify-center">
-                        <i class="fas fa-blog text-white text-5xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2">Blog Platform</h3>
-                        <p class="text-gray-600">Content management system for a professional blogging platform.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">About Glyen</h2>
-                <p class="text-gray-600 mb-6">Glyen was founded with a simple mission: to help businesses and individuals thrive in the digital world through quality web development and coding education.</p>
-                <p class="text-gray-600 mb-6">Our team of experienced developers and designers are passionate about creating solutions that not only look great but also deliver real results for our clients.</p>
-                <div class="bg-primary bg-opacity-10 p-6 rounded-lg border-l-4 border-primary">
-                    <p class="text-gray-800 italic">"Code. Build. Grow. These three words represent our philosophy at Glyen. We believe in the power of technology to transform businesses and lives."</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Contact Us</h2>
-            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Have questions or want to discuss a project? Get in touch with us.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                <!-- Contact Information -->
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Get in Touch</h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
-                                <i class="fas fa-map-marker-alt text-primary"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Address</h4>
-                                <p class="text-gray-600">123 Tech Street, Digital City</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
-                                <i class="fas fa-envelope text-primary"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Email</h4>
-                                <p class="text-gray-600">info@glyen.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-primary bg-opacity-10 p-3 rounded-full mr-4">
-                                <i class="fas fa-phone text-primary"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold">Phone</h4>
-                                <p class="text-gray-600">+234 123 456 7890</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8">
-                        <h3 class="text-xl font-semibold mb-4">Follow Us</h3>
-                        <div class="flex space-x-4">
-                            <a href="#" class="bg-primary bg-opacity-10 p-3 rounded-full text-primary hover:bg-opacity-20 transition duration-300">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="bg-primary bg-opacity-10 p-3 rounded-full text-primary hover:bg-opacity-20 transition duration-300">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="bg-primary bg-opacity-10 p-3 rounded-full text-primary hover:bg-opacity-20 transition duration-300">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="bg-primary bg-opacity-10 p-3 rounded-full text-primary hover:bg-opacity-20 transition duration-300">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="bg-primary bg-opacity-10 p-3 rounded-full text-primary hover:bg-opacity-20 transition duration-300">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Contact Form -->
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Send a Message</h3>
-                    <form id="contact-form">
-                        <div class="space-y-4">
-                            <div>
-                                <label for="contact-name" class="block text-gray-700 mb-2">Name</label>
-                                <input type="text" id="contact-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
-                            </div>
-                            <div>
-                                <label for="contact-email" class="block text-gray-700 mb-2">Email</label>
-                                <input type="email" id="contact-email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
-                            </div>
-                            <div>
-                                <label for="service-needed" class="block text-gray-700 mb-2">Service Needed</label>
-                                <select id="service-needed" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
-                                    <option value="">Select a service</option>
-                                    <option value="Starter">Starter Website</option>
-                                    <option value="Business">Business Website</option>
-                                    <option value="E-commerce">E-commerce Store</option>
-                                    <option value="Journal">Coding Journal</option>
-                                    <option value="Challenge">Coding Challenge</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="contact-message" class="block text-gray-700 mb-2">Message</label>
-                                <textarea id="contact-message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required></textarea>
-                            </div>
-                        </div>
-                        <div class="mt-6">
-                            <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Send Message</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -475,119 +354,4 @@
             <p class="max-w-2xl mx-auto mb-8">Subscribe to our newsletter to receive updates on new services, coding challenges, and special offers.</p>
             <form id="newsletter-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-2">
                 <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white" required>
-                <button type="submit" class="bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Subscribe</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Glyen</h3>
-                    <p class="text-gray-400">Building digital solutions for businesses and developers.</p>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
-                        <li><a href="#products" class="text-gray-400 hover:text-white transition duration-300">Products</a></li>
-                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition duration-300">Portfolio</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Documentation</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Support</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Refund Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2023 Glyen. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Success Modal -->
-    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-white rounded-lg p-8 max-w-md mx-4">
-            <div class="text-center">
-                <div class="w-16 h-16 bg-success rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-check text-white text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-semibold mb-2">Success!</h3>
-                <p class="text-gray-600 mb-6">Your message has been sent successfully. We'll get back to you soon.</p>
-                <button id="close-modal" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">OK</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Mobile menu toggle
-        document.getElementById('menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        // Form submission handlers
-        document.getElementById('quote-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Here you would normally send the data to Google Sheets
-            document.getElementById('success-modal').classList.remove('hidden');
-        });
-
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Here you would normally send the data to Google Sheets
-            document.getElementById('success-modal').classList.remove('hidden');
-        });
-
-        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Here you would normally send the data to Google Sheets
-            document.getElementById('success-modal').classList.remove('hidden');
-        });
-
-        // Close modal
-        document.getElementById('close-modal').addEventListener('click', function() {
-            document.getElementById('success-modal').classList.add('hidden');
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    document.getElementById('mobile-menu').classList.add('hidden');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                <button type="submit" class="bg-white 
