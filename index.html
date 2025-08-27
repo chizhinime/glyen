@@ -30,6 +30,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
         .hero-pattern {
             background: linear-gradient(120deg, #2563eb 0%, #1e40af 100%);
@@ -60,6 +61,7 @@
         .section-title {
             position: relative;
             display: inline-block;
+            padding-bottom: 1rem;
         }
         .section-title::after {
             content: '';
@@ -67,15 +69,54 @@
             width: 60px;
             height: 3px;
             background: #2563eb;
-            bottom: -10px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
+        }
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb 0%, #f97316 100%);
+            z-index: 1001;
+            transition: width 0.2s ease;
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body class="bg-gray-50 text-dark">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progress-bar"></div>
+
     <!-- Navigation -->
-    <nav class="bg-white shadow-md fixed w-full z-50">
+    <nav class="sticky-nav bg-white shadow-md" id="navbar">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
@@ -84,12 +125,12 @@
                 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex space-x-10">
-                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Home</a>
-                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Services</a>
-                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Products</a>
-                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Portfolio</a>
-                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">About</a>
-                    <a href="#" class="nav-link text-gray-700 hover:text-primary font-medium">Contact</a>
+                    <a href="#home" class="nav-link text-gray-700 hover:text-primary font-medium">Home</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-primary font-medium">Services</a>
+                    <a href="#products" class="nav-link text-gray-700 hover:text-primary font-medium">Products</a>
+                    <a href="#portfolio" class="nav-link text-gray-700 hover:text-primary font-medium">Portfolio</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-primary font-medium">About</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-primary font-medium">Contact</a>
                 </div>
                 
                 <!-- Mobile Menu Button -->
@@ -102,24 +143,29 @@
             
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden lg:hidden pb-4">
-                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Home</a>
-                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Services</a>
-                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Products</a>
-                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Portfolio</a>
-                <a href="#" class="block py-2 text-gray-700 hover:text-primary">About</a>
-                <a href="#" class="block py-2 text-gray-700 hover:text-primary">Contact</a>
+                <a href="#home" class="block py-2 text-gray-700 hover:text-primary">Home</a>
+                <a href="#services" class="block py-2 text-gray-700 hover:text-primary">Services</a>
+                <a href="#products" class="block py-2 text-gray-700 hover:text-primary">Products</a>
+                <a href="#portfolio" class="block py-2 text-gray-700 hover:text-primary">Portfolio</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-primary">About</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-primary">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-pattern pt-32 pb-20 px-4 text-white">
+    <section id="home" class="hero-pattern pt-32 pb-20 px-4 text-white">
         <div class="container mx-auto max-w-4xl text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-6">We Build Websites That Grow With You</h1>
             <p class="text-xl opacity-90 mb-10">Professional web development services and coding resources to help your business thrive online.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition duration-300">Hire Us</a>
-                <a href="#" class="bg-secondary text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-opacity-90 transition duration-300">Get the Journal</a>
+                <a href="#services" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition duration-300">Our Services</a>
+                <a href="#products" class="bg-secondary text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-opacity-90 transition duration-300">Our Products</a>
+            </div>
+            <div class="mt-12 animate-float">
+                <a href="#services" class="text-white">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -157,111 +203,213 @@
     </section>
 
     <!-- Services Section -->
-    <section class="py-16 bg-gray-50">
+    <section id="services" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-4 section-title">Our Services</h2>
             <p class="text-center text-neutral mb-12 max-w-2xl mx-auto">Affordable websites built for your needs. Choose a package or request a custom quote.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <!-- Starter Package -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100">
-                    <div class="bg-primary text-white py-4 text-center">
-                        <h3 class="text-xl font-semibold">Starter</h3>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-center mb-6">
-                            <span class="text-3xl font-bold">₦50,000</span>
-                            <span class="text-neutral">/one-time</span>
+            <!-- Service Tabs -->
+            <div class="flex flex-wrap justify-center mb-12 border-b border-gray-200">
+                <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="web-dev">Web Development</button>
+                <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="excel">Excel Solutions</button>
+                <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="repair">Computer Repair</button>
+            </div>
+            
+            <!-- Web Development Tab -->
+            <div id="web-dev" class="tab-content active">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <!-- Starter Package -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100">
+                        <div class="bg-primary text-white py-4 text-center">
+                            <h3 class="text-xl font-semibold">Starter</h3>
                         </div>
-                        <ul class="mb-6 space-y-3">
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>1-3 pages</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Responsive design</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Basic SEO</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Contact form</span>
-                            </li>
-                        </ul>
-                        <button class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Started</button>
+                        <div class="p-6">
+                            <div class="text-center mb-6">
+                                <span class="text-3xl font-bold">₦50,000</span>
+                                <span class="text-neutral">/one-time</span>
+                            </div>
+                            <ul class="mb-6 space-y-3">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>1-3 pages</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Responsive design</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Basic SEO</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Contact form</span>
+                                </li>
+                            </ul>
+                            <button class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Started</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Business Package -->
+                    <div class="bg-white rounded-lg shadow-xl overflow-hidden card-hover transform scale-105 border border-gray-100">
+                        <div class="bg-secondary text-white py-4 text-center">
+                            <h3 class="text-xl font-semibold">Business</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-center mb-6">
+                                <span class="text-3xl font-bold">₦120,000</span>
+                                <span class="text-neutral">/one-time</span>
+                            </div>
+                            <ul class="mb-6 space-y-3">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>5-7 pages</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Custom design</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Advanced SEO</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Content management</span>
+                                </li>
+                            </ul>
+                            <button class="w-full bg-secondary text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
+                        </div>
+                    </div>
+                    
+                    <!-- E-commerce Package -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100">
+                        <div class="bg-accent text-white py-4 text-center">
+                            <h3 class="text-xl font-semibold">E-commerce</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-center mb-6">
+                                <span class="text-3xl font-bold">₦250,000</span>
+                                <span class="text-neutral">/one-time</span>
+                            </div>
+                            <ul class="mb-6 space-y-3">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Online store</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Product management</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Payment integration</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-success mr-2"></i>
+                                    <span>Inventory system</span>
+                                </li>
+                            </ul>
+                            <button class="w-full bg-accent text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Business Package -->
-                <div class="bg-white rounded-lg shadow-xl overflow-hidden card-hover transform scale-105 border border-gray-100">
-                    <div class="bg-secondary text-white py-4 text-center">
-                        <h3 class="text-xl font-semibold">Business</h3>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-center mb-6">
-                            <span class="text-3xl font-bold">₦120,000</span>
-                            <span class="text-neutral">/one-time</span>
+            </div>
+            
+            <!-- Excel Solutions Tab -->
+            <div id="excel" class="tab-content">
+                <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-gray-100">
+                    <h3 class="text-2xl font-semibold text-center mb-6">Excel Solutions</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-primary">Automation & Macros</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Custom spreadsheet automation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Data processing macros</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Workflow optimization</span>
+                                </li>
+                            </ul>
                         </div>
-                        <ul class="mb-6 space-y-3">
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>5-7 pages</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Custom design</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Advanced SEO</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Content management</span>
-                            </li>
-                        </ul>
-                        <button class="w-full bg-secondary text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-primary">Dashboards & Reports</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Interactive business dashboards</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Automated reporting systems</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Data visualization</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center mt-8">
+                        <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Excel Help</button>
                     </div>
                 </div>
-                
-                <!-- E-commerce Package -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover border border-gray-100">
-                    <div class="bg-accent text-white py-4 text-center">
-                        <h3 class="text-xl font-semibold">E-commerce</h3>
-                    </div>
-                    <div class="p-6">
-                        <div class="text-center mb-6">
-                            <span class="text-3xl font-bold">₦250,000</span>
-                            <span class="text-neutral">/one-time</span>
+            </div>
+            
+            <!-- Computer Repair Tab -->
+            <div id="repair" class="tab-content">
+                <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-gray-100">
+                    <h3 class="text-2xl font-semibold text-center mb-6">Computer Repair Services</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-primary">Hardware Services</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Hardware upgrades</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Component replacement</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Performance optimization</span>
+                                </li>
+                            </ul>
                         </div>
-                        <ul class="mb-6 space-y-3">
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Online store</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Product management</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Payment integration</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check text-success mr-2"></i>
-                                <span>Inventory system</span>
-                            </li>
-                        </ul>
-                        <button class="w-full bg-accent text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4 text-primary">Software Services</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Virus removal</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>OS installation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-success mt-1 mr-2"></i>
+                                    <span>Software troubleshooting</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center mt-8">
+                        <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Schedule Repair</button>
                     </div>
                 </div>
             </div>
             
             <!-- Quote Request Form -->
-            <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto border border-gray-100">
+            <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto border border-gray-100 mt-12">
                 <h3 class="text-2xl font-semibold text-center mb-6">Request a Quote</h3>
                 <form id="quote-form">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -274,13 +422,12 @@
                             <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
                         </div>
                         <div>
-                            <label for="website-type" class="block text-gray-700 mb-2">Website Type</label>
-                            <select id="website-type" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
-                                <option value="">Select a type</option>
-                                <option value="Starter">Starter (1-3 pages)</option>
-                                <option value="Business">Business (5-7 pages)</option>
-                                <option value="E-commerce">E-commerce Store</option>
-                                <option value="Custom">Custom Project</option>
+                            <label for="service-type" class="block text-gray-700 mb-2">Service Type</label>
+                            <select id="service-type" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                <option value="">Select a service</option>
+                                <option value="web">Web Development</option>
+                                <option value="excel">Excel Solutions</option>
+                                <option value="repair">Computer Repair</option>
                             </select>
                         </div>
                         <div>
@@ -301,7 +448,7 @@
     </section>
 
     <!-- Products Section -->
-    <section class="py-16 bg-white">
+    <section id="products" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Products</h2>
             
@@ -347,6 +494,184 @@
         </div>
     </section>
 
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Portfolio</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Portfolio Item 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover">
+                    <div class="h-48 bg-primary flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">E-commerce Website</h3>
+                        <p class="text-neutral mb-4">A fully responsive online store with product filtering and secure checkout.</p>
+                        <a href="#" class="text-primary font-medium hover:underline">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover">
+                    <div class="h-48 bg-accent flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Business Dashboard</h3>
+                        <p class="text-neutral mb-4">An interactive Excel dashboard for sales tracking and data visualization.</p>
+                        <a href="#" class="text-primary font-medium hover:underline">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md card-hover">
+                    <div class="h-48 bg-success flex items-center justify-center">
+                        <i class="fas fa-cogs text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">PC Optimization</h3>
+                        <p class="text-neutral mb-4">Complete system overhaul for improved performance and reliability.</p>
+                        <a href="#" class="text-primary font-medium hover:underline">View Project</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">View Full Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title">About Glyen</h2>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12 max-w-4xl mx-auto">
+                <div class="md:w-1/2">
+                    <div class="bg-primary bg-opacity-10 p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-4 text-primary">Our Story</h3>
+                        <p class="text-neutral mb-4">Glyen was founded with a simple mission: to help businesses and individuals leverage technology to solve problems and achieve their goals.</p>
+                        <p class="text-neutral">With expertise in web development, Excel automation, and computer repair, we provide comprehensive tech solutions tailored to your specific needs.</p>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-4 text-dark">Why Choose Us</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
+                                <span>Professional and reliable service</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
+                                <span>Fast turnaround times</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
+                                <span>Competitive pricing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
+                                <span>Ongoing support</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 section-title">Contact Us</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Get In Touch</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Location</h4>
+                                <p class="text-neutral">Lagos, Nigeria</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Email</h4>
+                                <p class="text-neutral">glyen.official@example.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Phone</h4>
+                                <p class="text-neutral">+234 800 000 0000</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-semibold mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Send a Message</h3>
+                    
+                    <form id="contact-form">
+                        <div class="mb-4">
+                            <label for="contact-name" class="block text-gray-700 mb-2">Name</label>
+                            <input type="text" id="contact-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="contact-email" class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="contact-subject" class="block text-gray-700 mb-2">Subject</label>
+                            <input type="text" id="contact-subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="contact-message" class="block text-gray-700 mb-2">Message</label>
+                            <textarea id="contact-message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300 w-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Newsletter Section -->
     <section class="py-16 bg-primary text-white">
         <div class="container mx-auto px-4 text-center">
@@ -371,10 +696,10 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Products</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Portfolio</a></li>
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300">Services</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white transition duration-300">Products</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition duration-300">Portfolio</a></li>
                     </ul>
                 </div>
                 
@@ -398,7 +723,7 @@
             </div>
             
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Glyen. All rights reserved.</p>
+                <p>&copy; 2023 Glyen. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -434,30 +759,50 @@
             document.getElementById('success-modal').classList.remove('hidden');
         });
 
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('success-modal').classList.remove('hidden');
+        });
+
         // Close modal
         document.getElementById('close-modal').addEventListener('click', function() {
             document.getElementById('success-modal').classList.add('hidden');
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('border-primary', 'text-primary'));
+                tabContents.forEach(content => content.classList.remove('active'));
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    document.getElementById('mobile-menu').classList.add('hidden');
-                }
+                // Add active class to clicked button and corresponding content
+                button.classList.add('border-primary', 'text-primary');
+                document.getElementById(tabId).classList.add('active');
             });
+        });
+
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Sticky navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
         });
     </script>
 </body>
