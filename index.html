@@ -3,896 +3,1195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glyen - Code. Build. Grow.</title>
+    <title>Glyen - Tech Solutions & Coding Resources</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         dark: {
-                            100: '#1e293b',
-                            200: '#172033',
-                            300: '#0f172a',
-                            400: '#0a0f1d',
-                            500: '#050a15',
+                            100: '#0d1b13',
+                            200: '#0a150f',
+                            300: '#07100b',
+                            400: '#050d08',
+                            500: '#030905',
                         },
-                        primary: '#3b82f6',
-                        secondary: '#2563eb',
-                        accent: '#f97316',
-                        light: '#f8fafc',
-                        success: '#10b981',
-                        neutral: '#64748b'
+                        primary: {
+                            light: '#8cc56d',
+                            DEFAULT: '#5e9e3d',
+                            dark: '#3d6c28'
+                        },
+                        accent: {
+                            light: '#a8e6cf',
+                            DEFAULT: '#75c9a3',
+                            dark: '#4d9c7a'
+                        },
+                        light: '#f1f8f5',
+                        neutral: '#c8d6cd'
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        pixel: ['"Press Start 2P"', 'cursive'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    animation: {
+                        'pixel-bounce': 'pixelBounce 0.5s steps(2) infinite',
+                        'glitch': 'glitch 2s infinite',
+                        'pixelate': 'pixelate 4s infinite',
+                        'typewriter': 'typewriter 2s steps(11) forwards'
+                    },
+                    keyframes: {
+                        pixelBounce: {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(-4px)' }
+                        },
+                        glitch: {
+                            '0%': { transform: 'translate(0)' },
+                            '20%': { transform: 'translate(-4px, 4px)' },
+                            '40%': { transform: 'translate(-4px, -4px)' },
+                            '60%': { transform: 'translate(4px, 4px)' },
+                            '80%': { transform: 'translate(4px, -4px)' },
+                            '100%': { transform: 'translate(0)' }
+                        },
+                        pixelate: {
+                            '0%': { filter: 'contrast(100%) brightness(100%)' },
+                            '5%': { filter: 'contrast(200%) brightness(150%)' },
+                            '10%': { filter: 'contrast(100%) brightness(100%)' },
+                            '100%': { filter: 'contrast(100%) brightness(100%)' }
+                        },
+                        typewriter: {
+                            from: { width: '0' },
+                            to: { width: '11ch' }
+                        }
                     }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #e2e8f0;
-            transition: all 0.3s ease;
+            background-color: #0a150f;
+            color: #c8d6cd;
+            overflow-x: hidden;
         }
-        .page {
-            display: none;
-            animation: fadeIn 0.5s ease;
+        
+        .pixel-border {
+            border: 4px solid #5e9e3d;
+            border-image: 
+                linear-gradient(
+                    to bottom right, 
+                    #8cc56d 0%, 
+                    #3d6c28 100%
+                ) 1;
+            box-shadow: 0 0 10px rgba(140, 197, 109, 0.3);
         }
-        .page.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-        }
-        .nav-link {
+        
+        .pixel-corners {
             position: relative;
         }
+        
+        .pixel-corners::before, .pixel-corners::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #5e9e3d;
+        }
+        
+        .pixel-corners::before {
+            top: -4px;
+            left: -4px;
+        }
+        
+        .pixel-corners::after {
+            bottom: -4px;
+            right: -4px;
+        }
+        
+        .pixel-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pixel-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(140, 197, 109, 0.1) 0%, transparent 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .pixel-card:hover::before {
+            opacity: 1;
+        }
+        
+        .pixel-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(61, 108, 40, 0.5);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
         .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
-            background-color: #3b82f6;
+            background-color: #8cc56d;
             transition: width 0.3s ease;
         }
-        .nav-link:hover::after, .nav-link.active::after {
+        
+        .nav-link:hover::after {
             width: 100%;
         }
+        
         .gradient-bg {
-            background: linear-gradient(120deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(135deg, #0d1b13 0%, #07100b 100%);
         }
-        .hero-pattern {
-            background: linear-gradient(120deg, #1e40af 0%, #0f172a 100%);
+        
+        .pixel-pattern {
+            background-image: 
+                linear-gradient(rgba(61, 108, 40, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(61, 108, 40, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        .typing-animation {
-            overflow: hidden;
-            border-right: 3px solid #3b82f6;
-            white-space: nowrap;
-            margin: 0 auto;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #3b82f6; }
-        }
-        .section-title {
+        
+        .pixel-btn {
             position: relative;
-            display: inline-block;
-            padding-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid #5e9e3d;
         }
-        .section-title::after {
+        
+        .pixel-btn::before {
             content: '';
             position: absolute;
-            width: 60px;
-            height: 3px;
-            background: #3b82f6;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .sticky-nav {
-            position: fixed;
             top: 0;
+            left: -100%;
             width: 100%;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            background-color: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(140, 197, 109, 0.3), transparent);
+            transition: all 0.6s ease;
         }
-        .progress-bar {
+        
+        .pixel-btn:hover::before {
+            left: 100%;
+        }
+        
+        .pixel-btn:hover {
+            background-color: #3d6c28;
+            box-shadow: 0 0 15px rgba(140, 197, 109, 0.5);
+        }
+        
+        .pixel-loader {
+            width: 16px;
+            height: 16px;
+            background-color: #8cc56d;
+            box-shadow: 
+                16px 0 #8cc56d, 
+                -16px 0 #8cc56d;
+            position: relative;
+            animation: flash 0.5s ease-out infinite alternate;
+        }
+        
+        @keyframes flash {
+            0% { background-color: #8cc56d; box-shadow: 16px 0 #8cc56d, -16px 0 #3d6c28; }
+            50% { background-color: #3d6c28; box-shadow: 16px 0 #8cc56d, -16px 0 #8cc56d; }
+            100% { background-color: #8cc56d; box-shadow: 16px 0 #3d6c28, -16px 0 #8cc56d; }
+        }
+        
+        .typing-demo {
+            width: 11ch;
+            animation: typewriter 2s steps(11) forwards;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #8cc56d;
+        }
+        
+        .pixel-divider {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #5e9e3d, transparent);
+            position: relative;
+        }
+        
+        .pixel-divider::before, .pixel-divider::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #5e9e3d;
+            top: -2px;
+        }
+        
+        .pixel-divider::before {
+            left: 20%;
+        }
+        
+        .pixel-divider::after {
+            right: 20%;
+        }
+        
+        .pixel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(8px, 1fr));
+            grid-auto-rows: 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .pixel {
+            background-color: rgba(140, 197, 109, 0.05);
+            border: 1px solid rgba(61, 108, 40, 0.1);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 5px rgba(140, 197, 109, 0.7);
+        }
+        
+        .pixel-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        .pixel-modal.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 0%;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6 0%, #f97316 100%);
-            z-index: 1001;
-            transition: width 0.2s ease;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 9, 5, 0.8);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 99;
         }
-        .tab-content {
-            display: none;
+        
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
         }
-        .tab-content.active {
-            display: block;
+        
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #75c9a3;
+            color: #030905;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
         }
-        .glow {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        
+        .category-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 8px;
+            margin-bottom: 8px;
         }
-        .pulse {
-            animation: pulse 2s infinite;
+        
+        .frontend-tag {
+            background-color: rgba(94, 158, 61, 0.2);
+            color: #8cc56d;
         }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        
+        .backend-tag {
+            background-color: rgba(117, 201, 163, 0.2);
+            color: #a8e6cf;
+        }
+        
+        .fullstack-tag {
+            background-color: rgba(61, 108, 40, 0.2);
+            color: #75c9a3;
+        }
+        
+        .challenge-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .challenge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(140, 197, 109, 0.1) 0%, transparent 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .challenge-card:hover::before {
+            opacity: 1;
+        }
+        
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(61, 108, 40, 0.5);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #0a150f;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #5e9e3d, #75c9a3);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .pixel-corners::before, .pixel-corners::after {
+                display: none;
+            }
         }
     </style>
 </head>
-<body class="bg-dark-300">
-    <!-- Progress Bar -->
-    <div class="progress-bar" id="progress-bar"></div>
-
+<body class="pixel-pattern">
     <!-- Navigation -->
-    <nav class="sticky-nav shadow-lg border-b border-dark-400" id="navbar">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <span class="text-primary text-2xl font-bold cursor-pointer" onclick="showPage('home')">Glyen</span>
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden lg:flex space-x-10">
-                    <a onclick="showPage('home')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Home</a>
-                    <a onclick="showPage('services')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Services</a>
-                    <a onclick="showPage('products')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Products</a>
-                    <a onclick="showPage('portfolio')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Portfolio</a>
-                    <a onclick="showPage('about')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">About</a>
-                    <a onclick="showPage('contact')" class="nav-link text-gray-300 hover:text-primary font-medium cursor-pointer">Contact</a>
-                </div>
-                
-                <!-- Mobile Menu Button -->
-                <div class="lg:hidden">
-                    <button id="menu-btn" class="text-gray-300 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
+    <nav class="fixed w-full z-50 gradient-bg py-4 px-6 border-b-2 border-primary">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold pixel-font text-primary-light glow-text">
+                <span class="text-accent-light">G</span>lyen
+            </a>
+            
+            <div class="hidden md:flex space-x-10">
+                <a href="#home" class="nav-link text-neutral hover:text-primary-light">Home</a>
+                <a href="#store" class="nav-link text-neutral hover:text-primary-light">Store</a>
+                <a href="#challenges" class="nav-link text-neutral hover:text-primary-light">Challenges</a>
+                <a href="#services" class="nav-link text-neutral hover:text-primary-light">Services</a>
+                <a href="#about" class="nav-link text-neutral hover:text-primary-light">About</a>
+                <a href="#contact" class="nav-link text-neutral hover:text-primary-light">Contact</a>
             </div>
             
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden lg:hidden pb-4">
-                <a onclick="showPage('home')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Home</a>
-                <a onclick="showPage('services')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Services</a>
-                <a onclick="showPage('products')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Products</a>
-                <a onclick="showPage('portfolio')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Portfolio</a>
-                <a onclick="showPage('about')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">About</a>
-                <a onclick="showPage('contact')" class="block py-2 text-gray-300 hover:text-primary cursor-pointer">Contact</a>
+            <div class="flex items-center space-x-4">
+                <a href="#cart" class="relative text-primary-light hover:text-accent-light" id="cart-icon">
+                    <i class="fas fa-shopping-cart text-2xl"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </a>
+                <a href="#contact" class="pixel-btn px-6 py-2 rounded bg-primary text-light font-semibold hidden md:block">
+                    Get Started
+                </a>
+                <button class="md:hidden text-primary-light" id="mobile-menu-btn">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden mt-4 hidden" id="mobile-menu">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="text-neutral hover:text-primary-light">Home</a>
+                <a href="#store" class="text-neutral hover:text-primary-light">Store</a>
+                <a href="#challenges" class="text-neutral hover:text-primary-light">Challenges</a>
+                <a href="#services" class="text-neutral hover:text-primary-light">Services</a>
+                <a href="#about" class="text-neutral hover:text-primary-light">About</a>
+                <a href="#contact" class="text-neutral hover:text-primary-light">Contact</a>
+                <a href="#contact" class="pixel-btn px-4 py-2 rounded bg-primary text-light font-semibold text-center">Get Started</a>
             </div>
         </div>
     </nav>
 
-    <!-- Home Page -->
-    <div id="home" class="page active">
-        <!-- Hero Section -->
-        <section class="hero-pattern pt-32 pb-20 px-4 text-white">
-            <div class="container mx-auto max-w-4xl text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">We Build Websites That Grow With You</h1>
-                <p class="text-xl opacity-90 mb-10 typing-animation max-w-2xl mx-auto">Code. Build. Grow.</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a onclick="showPage('services')" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-secondary transition duration-300 cursor-pointer">Our Services</a>
-                    <a onclick="showPage('products')" class="bg-dark-200 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-dark-100 transition duration-300 cursor-pointer">Our Products</a>
-                </div>
-                <div class="mt-12 floating">
-                    <a onclick="showPage('services')" class="text-white text-3xl cursor-pointer">
-                        <i class="fas fa-chevron-down"></i>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 pb-10 gradient-bg relative overflow-hidden">
+        <div class="pixel-grid" id="pixel-grid"></div>
+        
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center relative z-10">
+            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-light">
+                    <span class="text-primary-light">Tech Solutions</span> <br>
+                    <span class="text-accent">& Coding</span> 
+                    <span class="typing-demo text-primary-light">Resources</span>
+                </h1>
+                <p class="text-xl text-neutral mb-10 max-w-2xl">
+                    We create beautiful websites, fix your computer problems, provide tech consulting, and offer coding journals and challenges!
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center md:justify-start">
+                    <a href="#store" class="pixel-btn px-8 py-4 rounded text-light font-semibold text-lg bg-primary hover:bg-primary-dark text-center">
+                        Explore Journals
+                    </a>
+                    <a href="#challenges" class="border-2 border-primary-light px-8 py-4 rounded text-primary-light font-semibold text-lg hover:bg-primary-light hover:text-dark-100 transition-colors text-center">
+                        Join Challenges
                     </a>
                 </div>
             </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="py-16 bg-dark-200">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-12 section-title">What We Offer</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-dark-100 p-6 rounded-lg text-center card-hover border border-dark-400 glow">
-                        <div class="bg-primary bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-code text-primary text-2xl"></i>
+            <div class="md:w-1/2 mt-10 md:mt-0">
+                <div class="relative pixel-corners">
+                    <div class="absolute -inset-3 bg-primary-dark rounded-2xl rotate-3 opacity-70"></div>
+                    <div class="relative bg-dark-200 p-6 rounded-2xl pixel-border">
+                        <div class="rounded-2xl overflow-hidden">
+                            <img src="https://placehold.co/600x400/0a150f/5e9e3d?text=Glyen+Coding+Journals" alt="Glyen Coding Journals" class="w-full pixelate">
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Web Development</h3>
-                        <p class="text-neutral">Custom websites built with modern technologies to help your business stand out.</p>
-                    </div>
-                    
-                    <div class="bg-dark-100 p-6 rounded-lg text-center card-hover border border-dark-400 glow">
-                        <div class="bg-accent bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-book text-accent text-2xl"></i>
+                        <div class="mt-4 flex justify-center">
+                            <div class="flex space-x-2">
+                                <div class="w-3 h-3 bg-primary-light rounded-full animate-pulse"></div>
+                                <div class="w-3 h-3 bg-accent rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+                                <div class="w-3 h-3 bg-primary-dark rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Coding Journal</h3>
-                        <p class="text-neutral">Comprehensive journal to track your coding progress and improve your skills.</p>
-                    </div>
-                    
-                    <div class="bg-dark-100 p-6 rounded-lg text-center card-hover border border-dark-400 glow">
-                        <div class="bg-success bg-opacity-10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-certificate text-success text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">Certificates</h3>
-                        <p class="text-neutral">Get recognized for your achievements with our coding challenge certificates.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+            <a href="#store" class="text-primary-light text-2xl animate-bounce">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
 
-        <!-- Stats Section -->
-        <section class="py-16 bg-dark-300">
-            <div class="container mx-auto px-4">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                    <div class="p-6">
-                        <div class="text-4xl font-bold text-primary mb-2">50+</div>
-                        <div class="text-xl font-semibold">Projects Completed</div>
+    <!-- Journal Store Section -->
+    <section id="store" class="py-20 bg-dark-200 relative overflow-hidden">
+        <div class="pixel-grid" id="pixel-grid-2"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-4 text-light pixel-font">Glyen Coding Journals</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-6"></div>
+            <p class="text-xl text-center text-neutral mb-16 max-w-3xl mx-auto">
+                Track your coding progress, set goals, and improve your skills with our comprehensive coding journals.
+            </p>
+            
+            <!-- Journal Categories -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="category-filter px-4 py-2 rounded-full bg-primary text-light font-medium" data-category="all">
+                    All Journals
+                </button>
+                <button class="category-filter px-4 py-2 rounded-full bg-dark-300 text-neutral font-medium" data-category="frontend">
+                    Frontend
+                </button>
+                <button class="category-filter px-4 py-2 rounded-full bg-dark-300 text-neutral font-medium" data-category="backend">
+                    Backend
+                </button>
+                <button class="category-filter px-4 py-2 rounded-full bg-dark-300 text-neutral font-medium" data-category="fullstack">
+                    Full Stack
+                </button>
+            </div>
+            
+            <!-- Journal Products -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="journal-products">
+                <!-- Journal 1 -->
+                <div class="pixel-card bg-dark-300 p-6 rounded-2xl pixel-border" data-category="frontend">
+                    <div class="mb-6 rounded-xl overflow-hidden">
+                        <img src="https://placehold.co/400x250/0a150f/5e9e3d?text=Frontend+Journal" alt="Frontend Journal" class="w-full">
                     </div>
-                    <div class="p-6">
-                        <div class="text-4xl font-bold text-accent mb-2">30+</div>
-                        <div class="text-xl font-semibold">Happy Clients</div>
+                    <div class="flex flex-wrap mb-4">
+                        <span class="category-tag frontend-tag">Frontend</span>
                     </div>
-                    <div class="p-6">
-                        <div class="text-4xl font-bold text-success mb-2">5+</div>
-                        <div class="text-xl font-semibold">Years Experience</div>
+                    <h3 class="text-2xl font-bold mb-2 text-primary-light">Frontend Development Journal</h3>
+                    <p class="text-neutral mb-4">
+                        Track your HTML, CSS, and JavaScript progress with this comprehensive frontend journal.
+                    </p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-2xl font-bold text-accent">₦5,000</div>
+                        <div class="text-sm text-neutral">Digital & Physical</div>
+                    </div>
+                    <button class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold bg-primary add-to-cart" data-id="1" data-name="Frontend Development Journal" data-price="5000">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Journal 2 -->
+                <div class="pixel-card bg-dark-300 p-6 rounded-2xl pixel-border" data-category="backend">
+                    <div class="mb-6 rounded-xl overflow-hidden">
+                        <img src="https://placehold.co/400x250/0a150f/75c9a3?text=Backend+Journal" alt="Backend Journal" class="w-full">
+                    </div>
+                    <div class="flex flex-wrap mb-4">
+                        <span class="category-tag backend-tag">Backend</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-primary-light">Backend Development Journal</h3>
+                    <p class="text-neutral mb-4">
+                        Organize your server-side development journey with this structured backend journal.
+                    </p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-2xl font-bold text-accent">₦5,000</div>
+                        <div class="text-sm text-neutral">Digital & Physical</div>
+                    </div>
+                    <button class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold bg-primary add-to-cart" data-id="2" data-name="Backend Development Journal" data-price="5000">
+                        Add to Cart
+                    </button>
+                </div>
+                
+                <!-- Journal 3 -->
+                <div class="pixel-card bg-dark-300 p-6 rounded-2xl pixel-border" data-category="fullstack">
+                    <div class="mb-6 rounded-xl overflow-hidden">
+                        <img src="https://placehold.co/400x250/0a150f/8cc56d?text=Full+Stack+Pack" alt="Full Stack Pack" class="w-full">
+                    </div>
+                    <div class="flex flex-wrap mb-4">
+                        <span class="category-tag fullstack-tag">Full Stack</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-primary-light">Full Stack 3-Month Pack</h3>
+                    <p class="text-neutral mb-4">
+                        Complete full stack development pack with journals for 3 months of learning.
+                    </p>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-2xl font-bold text-accent">₦12,000</div>
+                        <div class="text-sm text-neutral">Digital & Physical</div>
+                    </div>
+                    <button class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold bg-primary add-to-cart" data-id="3" data-name="Full Stack 3-Month Pack" data-price="12000">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section id="challenges" class="py-20 gradient-bg relative overflow-hidden">
+        <div class="pixel-grid" id="pixel-grid-3"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-4 text-light pixel-font">Coding Challenges</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-6"></div>
+            <p class="text-xl text-center text-neutral mb-16 max-w-3xl mx-auto">
+                Test your skills, build your portfolio, and earn certificates with our monthly coding challenges.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <!-- Challenge 1 -->
+                <div class="challenge-card bg-dark-300 p-6 rounded-2xl pixel-border">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-primary-light">GitHub Setup Challenge</h3>
+                        <span class="category-tag frontend-tag">Month 1</span>
+                    </div>
+                    <p class="text-neutral mb-6">
+                        Set up your GitHub profile, create a repository, and make your first commit. Perfect for beginners!
+                    </p>
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-neutral mb-2">
+                            <span>Progress</span>
+                            <span>25% Complete</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#challenge-1" class="pixel-btn flex-1 px-4 py-2 rounded text-light font-semibold bg-primary text-center">
+                            Start Challenge
+                        </a>
+                        <button class="px-4 py-2 rounded border border-primary text-primary-light font-medium">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Challenge 2 -->
+                <div class="challenge-card bg-dark-300 p-6 rounded-2xl pixel-border">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-primary-light">Portfolio Website</h3>
+                        <span class="category-tag frontend-tag">Month 2</span>
+                    </div>
+                    <p class="text-neutral mb-6">
+                        Build a responsive portfolio website to showcase your projects and skills to potential employers.
+                    </p>
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-neutral mb-2">
+                            <span>Progress</span>
+                            <span>10% Complete</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 10%"></div>
+                        </div>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#challenge-2" class="pixel-btn flex-1 px-4 py-2 rounded text-light font-semibold bg-primary text-center">
+                            Start Challenge
+                        </a>
+                        <button class="px-4 py-2 rounded border border-primary text-primary-light font-medium">
+                            <i class="fas fa-download"></i>
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+            
+            <div class="bg-dark-300 p-8 rounded-2xl pixel-border max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold mb-4 text-primary-light text-center">How to Participate</h3>
+                <ol class="list-decimal list-inside space-y-4 text-neutral">
+                    <li class="pb-2">Choose a challenge that matches your skill level</li>
+                    <li class="pb-2">Create a GitHub repository for your solution</li>
+                    <li class="pb-2">Build your project and push code regularly</li>
+                    <li class="pb-2">Submit your solution via our Google Form</li>
+                    <li class="pb-2">Get feedback and receive your certificate</li>
+                </ol>
+                <div class="text-center mt-8">
+                    <a href="#submit" class="pixel-btn inline-block px-8 py-3 rounded text-light font-semibold text-lg bg-primary">
+                        Submit Your Solution
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Services Page -->
-    <div id="services" class="page">
-        <section class="pt-32 pb-20 px-4">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-4 section-title">Our Services</h2>
-                <p class="text-center text-neutral mb-12 max-w-2xl mx-auto">Affordable websites built for your needs. Choose a package or request a custom quote.</p>
-                
-                <!-- Service Tabs -->
-                <div class="flex flex-wrap justify-center mb-12 border-b border-dark-400">
-                    <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="web-dev">Web Development</button>
-                    <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="excel">Excel Solutions</button>
-                    <button class="tab-btn py-3 px-6 text-lg font-medium text-neutral border-b-2 border-transparent hover:text-primary transition" data-tab="repair">Computer Repair</button>
+    <!-- Services Section (Shortened) -->
+    <section id="services" class="py-20 bg-dark-200 relative overflow-hidden">
+        <div class="pixel-grid" id="pixel-grid-4"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-4 text-light pixel-font">Our Services</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-6"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Service 1 -->
+                <div class="pixel-card bg-dark-300 p-6 rounded-2xl pixel-border">
+                    <div class="w-16 h-16 rounded-full bg-primary-light flex items-center justify-center text-2xl text-dark-100 mb-6 mx-auto">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary-light text-center">Web Development</h3>
+                    <p class="text-neutral text-center">
+                        Custom websites, e-commerce solutions, and web applications tailored to your needs.
+                    </p>
                 </div>
                 
-                <!-- Web Development Tab -->
-                <div id="web-dev" class="tab-content active">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                        <!-- Starter Package -->
-                        <div class="bg-dark-200 rounded-lg shadow-lg overflow-hidden card-hover border border-dark-400 glow">
-                            <div class="bg-primary text-white py-4 text-center">
-                                <h3 class="text-xl font-semibold">Starter</h3>
+                <!-- Service 2 -->
+                <div class="pixel-card bg-dark-300 p-6 rounded-2xl pixel-border">
+                    <div class="w-16 h-16 rounded-full bg-accent flex items-center justify-center text-2xl text-dark-100 mb-6 mx-auto">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary-light text-center">Computer Repair</h3>
+                    <p class="text-neutral text-center">
+                        Hardware and software diagnostics, repairs, and maintenance for all types of computers.
+                    </p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="pixel-card bg-dark-300 p-6 rounded-2xl pixel-border">
+                    <div class="w-16 h-16 rounded-full bg-primary-dark flex items-center justify-center text-2xl text-light mb-6 mx-auto">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary-light text-center">Tech Consulting</h3>
+                    <p class="text-neutral text-center">
+                        Strategic technology advice to help your business make the right tech decisions.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#contact" class="pixel-btn inline-block px-8 py-3 rounded text-light font-semibold text-lg bg-primary">
+                    All Our Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Shortened) -->
+    <section id="about" class="py-20 gradient-bg relative overflow-hidden">
+        <div class="pixel-grid" id="pixel-grid-5"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-4 text-light pixel-font">About Glyen</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-6"></div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12 max-w-4xl mx-auto">
+                <div class="md:w-1/2">
+                    <div class="bg-dark-300 p-6 rounded-2xl pixel-border">
+                        <h3 class="text-2xl font-bold mb-4 text-primary-light">Our Mission</h3>
+                        <p class="text-neutral mb-4">
+                            Glyen was founded with a simple mission: to help businesses and individuals leverage technology to solve problems and achieve their goals.
+                        </p>
+                        <p class="text-neutral">
+                            With our coding journals and challenges, we're making tech education accessible and structured for everyone.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="bg-dark-300 p-6 rounded-2xl pixel-border">
+                        <h3 class="text-2xl font-bold mb-4 text-light">Why Choose Us</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-2"></i>
+                                <span>Professional and reliable service</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-2"></i>
+                                <span>Structured learning resources</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-2"></i>
+                                <span>Hands-on coding challenges</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent mt-1 mr-2"></i>
+                                <span>Ongoing support</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark-200 relative overflow-hidden">
+        <div class="pixel-grid" id="pixel-grid-6"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-3xl font-bold text-center mb-4 text-light pixel-font">Get In Touch</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-6"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-primary-light">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-dark-100 text-xl mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
                             </div>
-                            <div class="p-6">
-                                <div class="text-center mb-6">
-                                    <span class="text-3xl font-bold">₦50,000</span>
-                                    <span class="text-neutral">/one-time</span>
-                                </div>
-                                <ul class="mb-6 space-y-3">
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>1-3 pages</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Responsive design</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Basic SEO</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Contact form</span>
-                                    </li>
-                                </ul>
-                                <button class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Started</button>
+                            <div>
+                                <h4 class="text-lg font-semibold text-neutral mb-1">Address</h4>
+                                <p class="text-neutral">Lagos, Nigeria</p>
                             </div>
                         </div>
                         
-                        <!-- Business Package -->
-                        <div class="bg-dark-200 rounded-lg shadow-xl overflow-hidden card-hover transform scale-105 border border-dark-400 glow">
-                            <div class="bg-secondary text-white py-4 text-center">
-                                <h3 class="text-xl font-semibold">Business</h3>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-dark-100 text-xl mr-4">
+                                <i class="fas fa-envelope"></i>
                             </div>
-                            <div class="p-6">
-                                <div class="text-center mb-6">
-                                    <span class="text-3xl font-bold">₦120,000</span>
-                                    <span class="text-neutral">/one-time</span>
-                                </div>
-                                <ul class="mb-6 space-y-3">
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>5-7 pages</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Custom design</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Advanced SEO</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Content management</span>
-                                    </li>
-                                </ul>
-                                <button class="w-full bg-secondary text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
+                            <div>
+                                <h4 class="text-lg font-semibold text-neutral mb-1">Email</h4>
+                                <p class="text-neutral">hello@glyen.com</p>
                             </div>
                         </div>
                         
-                        <!-- E-commerce Package -->
-                        <div class="bg-dark-200 rounded-lg shadow-lg overflow-hidden card-hover border border-dark-400 glow">
-                            <div class="bg-accent text-white py-4 text-center">
-                                <h3 class="text-xl font-semibold">E-commerce</h3>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-xl mr-4">
+                                <i class="fas fa-phone"></i>
                             </div>
-                            <div class="p-6">
-                                <div class="text-center mb-6">
-                                    <span class="text-3xl font-bold">₦250,000</span>
-                                    <span class="text-neutral">/one-time</span>
-                                </div>
-                                <ul class="mb-6 space-y-3">
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Online store</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Product management</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Payment integration</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <i class="fas fa-check text-success mr-2"></i>
-                                        <span>Inventory system</span>
-                                    </li>
-                                </ul>
-                                <button class="w-full bg-accent text-white py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Get Started</button>
+                            <div>
+                                <h4 class="text-lg font-semibold text-neutral mb-1">Phone</h4>
+                                <p class="text-neutral">+234 800 000 0000</p>
                             </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-neutral mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-xl hover:bg-primary-light transition-colors">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-xl hover:bg-primary-light transition-colors">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-xl hover:bg-primary-light transition-colors">
+                                <i class="fab fa-github"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Excel Solutions Tab -->
-                <div id="excel" class="tab-content">
-                    <div class="bg-dark-200 rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-dark-400 glow">
-                        <h3 class="text-2xl font-semibold text-center mb-6">Excel Solutions</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div>
-                                <h4 class="text-lg font-semibold mb-4 text-primary">Automation & Macros</h4>
-                                <ul class="space-y-3">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Custom spreadsheet automation</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Data processing macros</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Workflow optimization</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold mb-4 text-primary">Dashboards & Reports</h4>
-                                <ul class="space-y-3">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Interactive business dashboards</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Automated reporting systems</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Data visualization</span>
-                                    </li>
-                                </ul>
-                            </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-primary-light">Send a Message</h3>
+                    
+                    <form id="contact-form">
+                        <div class="mb-4">
+                            <label for="contact-name" class="block text-neutral mb-2">Name</label>
+                            <input type="text" id="contact-name" class="w-full px-4 py-3 bg-dark-300 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent" required>
                         </div>
-                        <div class="text-center mt-8">
-                            <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Get Excel Help</button>
+                        
+                        <div class="mb-4">
+                            <label for="contact-email" class="block text-neutral mb-2">Email</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-3 bg-dark-300 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent" required>
                         </div>
-                    </div>
-                </div>
-                
-                <!-- Computer Repair Tab -->
-                <div id="repair" class="tab-content">
-                    <div class="bg-dark-200 rounded-lg shadow-lg p-8 max-w-3xl mx-auto border border-dark-400 glow">
-                        <h3 class="text-2xl font-semibold text-center mb-6">Computer Repair Services</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div>
-                                <h4 class="text-lg font-semibold mb-4 text-primary">Hardware Services</h4>
-                                <ul class="space-y-3">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Hardware upgrades</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Component replacement</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Performance optimization</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold mb-4 text-primary">Software Services</h4>
-                                <ul class="space-y-3">
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Virus removal</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>OS installation</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fas fa-check text-success mt-1 mr-2"></i>
-                                        <span>Software troubleshooting</span>
-                                    </li>
-                                </ul>
-                            </div>
+                        
+                        <div class="mb-4">
+                            <label for="contact-subject" class="block text-neutral mb-2">Subject</label>
+                            <input type="text" id="contact-subject" class="w-full px-4 py-3 bg-dark-300 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent" required>
                         </div>
-                        <div class="text-center mt-8">
-                            <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Schedule Repair</button>
+                        
+                        <div class="mb-4">
+                            <label for="contact-message" class="block text-neutral mb-2">Message</label>
+                            <textarea id="contact-message" rows="4" class="w-full px-4 py-3 bg-dark-300 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent" required></textarea>
                         </div>
-                    </div>
-                </div>
-                
-                <!-- Quote Request Form -->
-                <div class="bg-dark-200 rounded-lg shadow-lg p-8 max-w-2xl mx-auto border border-dark-400 mt-12 glow">
-                    <h3 class="text-2xl font-semibold text-center mb-6">Request a Quote</h3>
-                    <form id="quote-form">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block text-gray-300 mb-2">Name</label>
-                                <input type="text" id="name" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
-                            </div>
-                            <div>
-                                <label for="email" class="block text-gray-300 mb-2">Email</label>
-                                <input type="email" id="email" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
-                            </div>
-                            <div>
-                                <label for="service-type" class="block text-gray-300 mb-2">Service Type</label>
-                                <select id="service-type" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
-                                    <option value="">Select a service</option>
-                                    <option value="web">Web Development</option>
-                                    <option value="excel">Excel Solutions</option>
-                                    <option value="repair">Computer Repair</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="budget" class="block text-gray-300 mb-2">Budget (₦)</label>
-                                <input type="number" id="budget" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
-                            </div>
-                            <div class="md:col-span-2">
-                                <label for="message" class="block text-gray-300 mb-2">Message</label>
-                                <textarea id="message" rows="4" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required></textarea>
-                            </div>
-                        </div>
-                        <div class="text-center mt-6">
-                            <button type="submit" class="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300">Submit Request</button>
-                        </div>
+                        
+                        <button type="submit" class="pixel-btn w-full px-6 py-3 rounded-lg text-light font-semibold bg-primary">
+                            Send Message
+                        </button>
                     </form>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cart-overlay"></div>
+    <div class="pixel-modal bg-dark-300 p-8 rounded-2xl pixel-border w-11/12 max-w-md" id="cart-modal">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-semibold text-light">Your Cart</h3>
+            <button class="text-neutral hover:text-primary-light" id="close-cart">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <div class="mb-6 max-h-80 overflow-y-auto" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <p class="text-neutral text-center py-4" id="empty-cart-message">Your cart is empty</p>
+        </div>
+        
+        <div class="border-t border-primary-dark pt-4 mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-neutral">Subtotal:</span>
+                <span class="text-light font-semibold" id="cart-subtotal">₦0</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-neutral">Total:</span>
+                <span class="text-accent font-bold text-xl" id="cart-total">₦0</span>
+            </div>
+        </div>
+        
+        <div class="flex space-x-4">
+            <button class="pixel-btn flex-1 px-4 py-2 rounded text-light font-semibold bg-primary" id="checkout-btn">
+                Checkout
+            </button>
+            <button class="px-4 py-2 rounded border border-primary text-primary-light font-medium" id="clear-cart">
+                Clear
+            </button>
+        </div>
     </div>
 
-    <!-- Products Page -->
-    <div id="products" class="page">
-        <section class="pt-32 pb-20 px-4">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Products</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                    <!-- Coding Journal -->
-                    <div class="bg-dark-200 p-8 rounded-lg card-hover border border-dark-400 glow">
-                        <div class="text-center mb-6">
-                            <i class="fas fa-book-open text-5xl text-primary mb-4 floating"></i>
-                            <h3 class="text-2xl font-semibold">Glyen Coding Journal</h3>
-                        </div>
-                        <p class="text-neutral mb-6">Track your coding progress, set goals, and improve your skills with our comprehensive coding journal. Perfect for beginners and experienced developers alike.</p>
-                        <div class="text-center">
-                            <button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">Buy Now (₦5,000)</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Coding Challenge -->
-                    <div class="bg-dark-200 p-8 rounded-lg card-hover border border-dark-400 glow">
-                        <div class="text-center mb-6">
-                            <i class="fas fa-laptop-code text-5xl text-accent mb-4 floating"></i>
-                            <h3 class="text-2xl font-semibold">Coding Challenge</h3>
-                        </div>
-                        <p class="text-neutral mb-6">Join our monthly coding challenges to test your skills, build your portfolio, and earn certificates. Open to all skill levels.</p>
-                        <ul class="mb-6 space-y-2">
-                            <li class="flex items-center">
-                                <i class="fas fa-check-circle text-success mr-2"></i>
-                                <span>Create a GitHub repository</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check-circle text-success mr-2"></i>
-                                <span>Push your code</span>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-check-circle text-success mr-2"></i>
-                                <span>Submit via Google Form</span>
-                            </li>
-                        </ul>
-                        <div class="text-center">
-                            <button class="bg-accent text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition duration-300">Join Challenge</button>
-                        </div>
-                    </div>
-                </div>
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="success-overlay"></div>
+    <div class="pixel-modal bg-dark-300 p-8 rounded-2xl pixel-border w-11/12 max-w-md" id="success-modal">
+        <div class="text-center">
+            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check text-dark-100 text-2xl"></i>
             </div>
-        </section>
-    </div>
-
-    <!-- Portfolio Page -->
-    <div id="portfolio" class="page">
-        <section class="pt-32 pb-20 px-4">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-12 section-title">Our Portfolio</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Portfolio Item 1 -->
-                    <div class="bg-dark-200 rounded-lg overflow-hidden shadow-md card-hover border border-dark-400 glow">
-                        <div class="h-48 bg-primary flex items-center justify-center">
-                            <i class="fas fa-laptop-code text-white text-5xl"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">E-commerce Website</h3>
-                            <p class="text-neutral mb-4">A fully responsive online store with product filtering and secure checkout.</p>
-                            <a class="text-primary font-medium hover:underline cursor-pointer">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Portfolio Item 2 -->
-                    <div class="bg-dark-200 rounded-lg overflow-hidden shadow-md card-hover border border-dark-400 glow">
-                        <div class="h-48 bg-accent flex items-center justify-center">
-                            <i class="fas fa-chart-line text-white text-5xl"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">Business Dashboard</h3>
-                            <p class="text-neutral mb-4">An interactive Excel dashboard for sales tracking and data visualization.</p>
-                            <a class="text-primary font-medium hover:underline cursor-pointer">View Project</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Portfolio Item 3 -->
-                    <div class="bg-dark-200 rounded-lg overflow-hidden shadow-md card-hover border border-dark-400 glow">
-                        <div class="h-48 bg-success flex items-center justify-center">
-                            <i class="fas fa-cogs text-white text-5xl"></i>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold mb-2">PC Optimization</h3>
-                            <p class="text-neutral mb-4">Complete system overhaul for improved performance and reliability.</p>
-                            <a class="text-primary font-medium hover:underline cursor-pointer">View Project</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-12">
-                    <a class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition duration-300 cursor-pointer">View Full Portfolio</a>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- About Page -->
-    <div id="about" class="page">
-        <section class="pt-32 pb-20 px-4">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-12 section-title">About Glyen</h2>
-                
-                <div class="flex flex-col md:flex-row items-center gap-12 max-w-4xl mx-auto">
-                    <div class="md:w-1/2">
-                        <div class="bg-dark-200 p-6 rounded-lg border border-dark-400 glow">
-                            <h3 class="text-2xl font-semibold mb-4 text-primary">Our Story</h3>
-                            <p class="text-neutral mb-4">Glyen was founded with a simple mission: to help businesses and individuals leverage technology to solve problems and achieve their goals.</p>
-                            <p class="text-neutral">With expertise in web development, Excel automation, and computer repair, we provide comprehensive tech solutions tailored to your specific needs.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="md:w-1/2">
-                        <div class="bg-dark-200 p-6 rounded-lg border border-dark-400 glow">
-                            <h3 class="text-2xl font-semibold mb-4 text-white">Why Choose Us</h3>
-                            <ul class="space-y-3">
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
-                                    <span>Professional and reliable service</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
-                                    <span>Fast turnaround times</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
-                                    <span>Competitive pricing</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-success mt-1 mr-2"></i>
-                                    <span>Ongoing support</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Contact Page -->
-    <div id="contact" class="page">
-        <section class="pt-32 pb-20 px-4">
-            <div class="container mx-auto">
-                <h2 class="text-3xl font-bold text-center mb-12 section-title">Contact Us</h2>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-6">Get In Touch</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                                    <i class="fas fa-map-marker-alt text-primary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-1">Location</h4>
-                                    <p class="text-neutral">Lagos, Nigeria</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                                    <i class="fas fa-envelope text-primary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-1">Email</h4>
-                                    <p class="text-neutral">glyen.official@example.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="bg-primary bg-opacity-10 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                                    <i class="fas fa-phone text-primary"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-1">Phone</h4>
-                                    <p class="text-neutral">+234 800 000 0000</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8">
-                            <h4 class="font-semibold mb-4">Follow Us</h4>
-                            <div class="flex space-x-4">
-                                <a class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition cursor-pointer">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition cursor-pointer">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition cursor-pointer">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-6">Send a Message</h3>
-                        
-                        <form id="contact-form">
-                            <div class="mb-4">
-                                <label for="contact-name" class="block text-gray-300 mb-2">Name</label>
-                                <input type="text" id="contact-name" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="contact-email" class="block text-gray-300 mb-2">Email</label>
-                                <input type="email" id="contact-email" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="contact-subject" class="block text-gray-300 mb-2">Subject</label>
-                                <input type="text" id="contact-subject" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="contact-message" class="block text-gray-300 mb-2">Message</label>
-                                <textarea id="contact-message" rows="4" class="w-full px-4 py-2 bg-dark-100 border border-dark-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-white" required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300 w-full">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <h3 class="text-2xl font-semibold mb-2 text-light">Success!</h3>
+            <p class="text-neutral mb-6">Your message has been sent successfully. We'll get back to you soon.</p>
+            <button class="pixel-btn px-6 py-2 rounded text-light font-semibold bg-primary" id="close-success-modal">
+                OK
+            </button>
+        </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark-400 text-white py-12">
-        <div class="container mx-auto px-4">
+    <footer class="py-12 bg-dark-300 border-t-2 border-primary-dark">
+        <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-4">Glyen</h3>
-                    <p class="text-gray-400">Building digital solutions for businesses and developers.</p>
+                    <h3 class="text-xl font-bold mb-4 text-primary-light">Glyen</h3>
+                    <p class="text-neutral">Building digital solutions and learning resources for developers.</p>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <h4 class="text-lg font-semibold mb-4 text-light">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a onclick="showPage('home')" class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Home</a></li>
-                        <li><a onclick="showPage('services')" class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Services</a></li>
-                        <li><a onclick="showPage('products')" class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Products</a></li>
-                        <li><a onclick="showPage('portfolio')" class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Portfolio</a></li>
+                        <li><a href="#home" class="text-neutral hover:text-primary-light transition duration-300">Home</a></li>
+                        <li><a href="#store" class="text-neutral hover:text-primary-light transition duration-300">Store</a></li>
+                        <li><a href="#challenges" class="text-neutral hover:text-primary-light transition duration-300">Challenges</a></li>
+                        <li><a href="#services" class="text-neutral hover:text-primary-light transition duration-300">Services</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <h4 class="text-lg font-semibold mb-4 text-light">Resources</h4>
                     <ul class="space-y-2">
-                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Blog</a></li>
-                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Documentation</a></li>
-                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Support</a></li>
+                        <li><a href="#" class="text-neutral hover:text-primary-light transition duration-300">Blog</a></li>
+                        <li><a href="#" class="text-neutral hover:text-primary-light transition duration-300">Documentation</a></li>
+                        <li><a href="#" class="text-neutral hover:text-primary-light transition duration-300">Support</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
+                    <h4 class="text-lg font-semibold mb-4 text-light">Legal</h4>
                     <ul class="space-y-2">
-                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Privacy Policy</a></li>
-                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Terms of Service</a></li>
-                        <li><a class="text-gray-400 hover:text-white transition duration-300 cursor-pointer">Refund Policy</a></li>
+                        <li><a href="#" class="text-neutral hover:text-primary-light transition duration-300">Privacy Policy</a></li>
+                        <li><a href="#" class="text-neutral hover:text-primary-light transition duration-300">Terms of Service</a></li>
+                        <li><a href="#" class="text-neutral hover:text-primary-light transition duration-300">Refund Policy</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-dark-300 mt-8 pt-8 text-center text-gray-400">
+            <div class="border-t border-primary-dark mt-8 pt-8 text-center text-neutral">
                 <p>&copy; 2023 Glyen. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Success Modal -->
-    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
-        <div class="bg-dark-200 rounded-lg p-8 max-w-md mx-4 border border-dark-400">
-            <div class="text-center">
-                <div class="w-16 h-16 bg-success rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-check text-white text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-semibold mb-2">Success!</h3>
-                <p class="text-gray-400 mb-6">Your message has been sent successfully. We'll get back to you soon.</p>
-                <button id="close-modal" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-secondary transition duration-300">OK</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Page navigation
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
+        // Create pixel grid backgrounds
+        function createPixelGrid(containerId, rows, cols) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
             
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Update active nav link
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-            
-            // Close mobile menu if open
-            document.getElementById('mobile-menu').classList.add('hidden');
-        }
-
-        // Mobile menu toggle
-        document.getElementById('menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        // Form submission handlers
-        document.getElementById('quote-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('success-modal').classList.remove('hidden');
-        });
-
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('success-modal').classList.remove('hidden');
-        });
-
-        // Close modal
-        document.getElementById('close-modal').addEventListener('click', function() {
-            document.getElementById('success-modal').classList.add('hidden');
-        });
-
-        // Tab functionality
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const tabId = button.getAttribute('data-tab');
-                
-                // Remove active class from all buttons and contents
-                tabButtons.forEach(btn => btn.classList.remove('border-primary', 'text-primary'));
-                tabContents.forEach(content => content.classList.remove('active'));
-                
-                // Add active class to clicked button and corresponding content
-                button.classList.add('border-primary', 'text-primary');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-
-        // Scroll progress bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progress-bar').style.width = scrolled + '%';
-        });
-
-        // Sticky navbar
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-lg');
-            } else {
-                navbar.classList.remove('shadow-lg');
+            for (let i = 0; i < rows * cols; i++) {
+                const pixel = document.createElement('div');
+                pixel.classList.add('pixel');
+                // Randomly make some pixels more visible
+                if (Math.random() > 0.7) {
+                    pixel.style.backgroundColor = 'rgba(140, 197, 109, 0.1)';
+                }
+                container.appendChild(pixel);
             }
-        });
-
-        // Initialize page
+        }
+        
+        // Cart functionality
+        let cart = [];
+        
+        function updateCart() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            const cartTotal = document.getElementById('cart-total');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            
+            // Update cart count
+            cartCount.textContent = cart.length;
+            
+            // Update cart items
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                cartSubtotal.textContent = '₦0';
+                cartTotal.textContent = '₦0';
+                return;
+            }
+            
+            emptyCartMessage.classList.add('hidden');
+            
+            let subtotal = 0;
+            
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('flex', 'justify-between', 'items-center', 'mb-4', 'pb-4', 'border-b', 'border-primary-dark');
+                
+                cartItem.innerHTML = `
+                    <div class="flex-1">
+                        <h4 class="text-light font-medium">${item.name}</h4>
+                        <p class="text-neutral text-sm">₦${item.price.toLocaleString()}</p>
+                    </div>
+                    <button class="text-neutral hover:text-accent remove-from-cart" data-index="${index}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+                subtotal += item.price;
+            });
+            
+            // Update totals
+            cartSubtotal.textContent = `₦${subtotal.toLocaleString()}`;
+            cartTotal.textContent = `₦${subtotal.toLocaleString()}`;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-from-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cart.splice(index, 1);
+                    updateCart();
+                });
+            });
+        }
+        
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            // Show home page by default
-            showPage('home');
+            createPixelGrid('pixel-grid', 25, 20);
+            createPixelGrid('pixel-grid-2', 20, 15);
+            createPixelGrid('pixel-grid-3', 25, 20);
+            createPixelGrid('pixel-grid-4', 20, 15);
+            createPixelGrid('pixel-grid-5', 25, 20);
+            createPixelGrid('pixel-grid-6', 20, 15);
+            
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Close mobile menu if open
+                        document.getElementById('mobile-menu').classList.add('hidden');
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add to cart functionality
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+                    const price = parseInt(this.getAttribute('data-price'));
+                    
+                    cart.push({
+                        id: id,
+                        name: name,
+                        price: price
+                    });
+                    
+                    updateCart();
+                    
+                    // Show confirmation
+                    const originalText = this.textContent;
+                    this.textContent = 'Added to Cart!';
+                    this.classList.add('bg-accent');
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.classList.remove('bg-accent');
+                    }, 2000);
+                });
+            });
+            
+            // Cart modal functionality
+            document.getElementById('cart-icon').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('cart-overlay').classList.add('active');
+                document.getElementById('cart-modal').classList.add('active');
+            });
+            
+            document.getElementById('close-cart').addEventListener('click', function() {
+                document.getElementById('cart-overlay').classList.remove('active');
+                document.getElementById('cart-modal').classList.remove('active');
+            });
+            
+            document.getElementById('cart-overlay').addEventListener('click', function() {
+                document.getElementById('cart-overlay').classList.remove('active');
+                document.getElementById('cart-modal').classList.remove('active');
+            });
+            
+            // Clear cart
+            document.getElementById('clear-cart').addEventListener('click', function() {
+                cart = [];
+                updateCart();
+            });
+            
+            // Checkout
+            document.getElementById('checkout-btn').addEventListener('click', function() {
+                if (cart.length === 0) return;
+                
+                // In a real implementation, this would redirect to Paystack or a Google Form
+                alert('In a real implementation, this would redirect to checkout.');
+            });
+            
+            // Form submission handling
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show success modal
+                document.getElementById('success-overlay').classList.add('active');
+                document.getElementById('success-modal').classList.add('active');
+                
+                this.reset();
+            });
+            
+            // Close success modal
+            document.getElementById('close-success-modal').addEventListener('click', function() {
+                document.getElementById('success-overlay').classList.remove('active');
+                document.getElementById('success-modal').classList.remove('active');
+            });
+            
+            document.getElementById('success-overlay').addEventListener('click', function() {
+                document.getElementById('success-overlay').classList.remove('active');
+                document.getElementById('success-modal').classList.remove('active');
+            });
+            
+            // Journal category filtering
+            document.querySelectorAll('.category-filter').forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    document.querySelectorAll('.category-filter').forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-light');
+                        btn.classList.add('bg-dark-300', 'text-neutral');
+                    });
+                    
+                    this.classList.remove('bg-dark-300', 'text-neutral');
+                    this.classList.add('bg-primary', 'text-light');
+                    
+                    // Filter journals
+                    document.querySelectorAll('#journal-products > div').forEach(journal => {
+                        if (category === 'all' || journal.getAttribute('data-category') === category) {
+                            journal.classList.remove('hidden');
+                        } else {
+                            journal.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+            
+            // Add pixel animation to cards on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'pixelate 4s infinite';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all pixel-cards and challenge-cards
+            document.querySelectorAll('.pixel-card, .challenge-card').forEach(card => {
+                observer.observe(card);
+            });
         });
     </script>
 </body>
