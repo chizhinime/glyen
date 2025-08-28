@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glyen – Code. Build. Support.</title>
+    <title>Glyen – Code. Build. Support. | Tech Solutions & Coding Journal</title>
+    <meta name="description" content="Glyen offers coding journals, web development services, IT support, and coding challenges. Track your progress, build your skills, and grow in tech.">
+    <meta property="og:title" content="Glyen – Code. Build. Support.">
+    <meta property="og:description" content="Tech solutions, coding journals, and challenges to help you grow in tech.">
+    <meta property="og:type" content="website">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -189,6 +193,40 @@
             margin: 0 10px;
         }
         
+        .testimonial-card {
+            background: linear-gradient(145deg, #0a150f, #07100b);
+            border: 1px solid #3d6c28;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(61, 108, 40, 0.3);
+        }
+        
+        .portfolio-item {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 21, 15, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
         @media (max-width: 640px) {
             .pixel-border {
                 border-width: 2px;
@@ -203,6 +241,14 @@
             }
         }
     </style>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
 </head>
 <body class="min-h-screen">
     <!-- Navigation -->
@@ -217,6 +263,8 @@
                 <a href="#journal" class="nav-link text-neutral hover:text-primary-light text-sm">Journal</a>
                 <a href="#webdev" class="nav-link text-neutral hover:text-primary-light text-sm">Web Dev</a>
                 <a href="#itsupport" class="nav-link text-neutral hover:text-primary-light text-sm">IT Support</a>
+                <a href="#portfolio" class="nav-link text-neutral hover:text-primary-light text-sm">Portfolio</a>
+                <a href="#about" class="nav-link text-neutral hover:text-primary-light text-sm">About</a>
                 <a href="#contact" class="nav-link text-neutral hover:text-primary-light text-sm">Contact</a>
             </div>
             
@@ -236,16 +284,18 @@
         <a href="#journal" class="text-primary-light text-xl fancy-font">Journal</a>
         <a href="#webdev" class="text-primary-light text-xl fancy-font">Web Dev</a>
         <a href="#itsupport" class="text-primary-light text-xl fancy-font">IT Support</a>
+        <a href="#portfolio" class="text-primary-light text-xl fancy-font">Portfolio</a>
+        <a href="#about" class="text-primary-light text-xl fancy-font">About</a>
         <a href="#contact" class="text-primary-light text-xl fancy-font">Contact</a>
         
         <div class="flex space-x-4 mt-8">
-            <a href="#" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg">
+            <a href="https://twitter.com/glyen_tech" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a href="#" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg">
+            <a href="https://instagram.com/glyen_tech" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="#" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg">
+            <a href="https://github.com/glyen-tech" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg">
                 <i class="fab fa-github"></i>
             </a>
         </div>
@@ -302,6 +352,30 @@
                         <h3 class="text-primary-light font-semibold text-sm mb-2 fancy-font">IT Support</h3>
                         <p class="text-neutral text-xs">Expert technical assistance</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges Section -->
+    <section class="py-8 bg-dark-200">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary-light fancy-font">200+</div>
+                    <div class="text-neutral text-sm">Journals Sold</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-accent fancy-font">50+</div>
+                    <div class="text-neutral text-sm">Projects Completed</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary-light fancy-font">98%</div>
+                    <div class="text-neutral text-sm">Client Satisfaction</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-accent fancy-font">3+</div>
+                    <div class="text-neutral text-sm">Years Experience</div>
                 </div>
             </div>
         </div>
@@ -375,6 +449,99 @@
                 </div>
             </div>
             
+            <!-- Testimonials -->
+            <div class="mt-16">
+                <h3 class="text-xl font-bold text-center mb-6 text-primary-light fancy-font">What Our Customers Say</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="testimonial-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-dark-100 font-bold mr-3">
+                                A
+                            </div>
+                            <div>
+                                <h4 class="text-light font-semibold">Aisha</h4>
+                                <div class="flex text-accent">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-neutral text-sm">"The coding journal helped me stay consistent with my learning. I've made more progress in 2 months than I did in the previous year!"</p>
+                    </div>
+                    
+                    <div class="testimonial-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-dark-100 font-bold mr-3">
+                                C
+                            </div>
+                            <div>
+                                <h4 class="text-light font-semibold">Chike</h4>
+                                <div class="flex text-accent">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-neutral text-sm">"The GitHub challenge was exactly what I needed to finally understand version control. Now I contribute to open source projects confidently."</p>
+                    </div>
+                    
+                    <div class="testimonial-card p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light font-bold mr-3">
+                                T
+                            </div>
+                            <div>
+                                <h4 class="text-light font-semibold">Tunde</h4>
+                                <div class="flex text-accent">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-neutral text-sm">"I purchased the journal for my team, and it's improved our productivity and goal-setting. The reflection sections are particularly valuable."</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="mt-16">
+                <h3 class="text-xl font-bold text-center mb-6 text-primary-light fancy-font">Frequently Asked Questions</h3>
+                
+                <div class="bg-dark-300 p-6 rounded-xl pixel-border max-w-3xl mx-auto">
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-light font-semibold mb-2 fancy-font">What format is the journal delivered in?</h4>
+                            <p class="text-neutral text-sm">The journal is delivered as a PDF file that you can print or use digitally. You'll receive a download link immediately after purchase.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-light font-semibold mb-2 fancy-font">Is there a physical version available?</h4>
+                            <p class="text-neutral text-sm">Currently, we only offer the digital PDF version. This allows us to keep the price affordable and deliver instantly.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-light font-semibold mb-2 fancy-font">What's your refund policy?</h4>
+                            <p class="text-neutral text-sm">We offer a 14-day money-back guarantee if you're not satisfied with the journal. Just contact us with your purchase details.</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-light font-semibold mb-2 fancy-font">How do I access the challenge after purchase?</h4>
+                            <p class="text-neutral text-sm">The challenge instructions are included in the journal PDF. You'll also receive an email with additional resources and the submission form.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Challenge Section -->
             <div class="mt-16">
                 <h3 class="text-xl font-bold text-center mb-6 text-primary-light fancy-font">Coding Challenge</h3>
@@ -407,6 +574,21 @@
                         </li>
                     </ul>
                     
+                    <div class="mb-6">
+                        <h4 class="text-light font-semibold mb-2 fancy-font">Challenge Resources</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="#" class="px-3 py-1 bg-primary-dark text-light rounded text-sm hover:bg-primary transition">
+                                GitHub Guide PDF
+                            </a>
+                            <a href="#" class="px-3 py-1 bg-primary-dark text-light rounded text-sm hover:bg-primary transition">
+                                Video Tutorials
+                            </a>
+                            <a href="#" class="px-3 py-1 bg-primary-dark text-light rounded text-sm hover:bg-primary transition">
+                                Cheat Sheet
+                            </a>
+                        </div>
+                    </div>
+                    
                     <button id="start-challenge-btn" class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold text-sm bg-primary fancy-font">
                         Start Challenge
                     </button>
@@ -424,36 +606,194 @@
                 We build modern, responsive websites to help your business stand out online.
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
-                    <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-dark-100 text-lg mx-auto mb-4">
-                        <i class="fas fa-briefcase"></i>
+            <!-- Pricing Packages -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12">
+                <div class="pixel-card bg-dark-300 p-6 rounded-xl pixel-border">
+                    <div class="text-center mb-6">
+                        <h3 class="text-lg font-bold text-primary-light mb-2 fancy-font">Starter</h3>
+                        <div class="text-2xl font-bold text-light">₦50,000</div>
+                        <p class="text-neutral text-sm">Ideal for small businesses</p>
                     </div>
-                    <h3 class="text-lg font-bold text-center text-primary-light mb-3 fancy-font">Business/Portfolio Websites</h3>
-                    <p class="text-neutral text-sm text-center">Professional websites to showcase your business or personal portfolio.</p>
+                    
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>1-3 page website</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Responsive design</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Basic SEO</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Contact form</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-times text-red-400 mr-2"></i>
+                            <span>E-commerce</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold text-sm bg-primary fancy-font request-quote-btn" data-package="Starter Website">
+                        Request Quote
+                    </button>
                 </div>
                 
-                <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
-                    <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-dark-100 text-lg mx-auto mb-4">
-                        <i class="fas fa-shopping-cart"></i>
+                <div class="pixel-card bg-dark-300 p-6 rounded-xl pixel-border transform scale-105">
+                    <div class="text-center mb-6">
+                        <div class="bg-primary text-light text-xs font-bold py-1 px-3 rounded-full inline-block mb-2">
+                            MOST POPULAR
+                        </div>
+                        <h3 class="text-lg font-bold text-primary-light mb-2 fancy-font">Business</h3>
+                        <div class="text-2xl font-bold text-light">₦120,000</div>
+                        <p class="text-neutral text-sm">Perfect for growing businesses</p>
                     </div>
-                    <h3 class="text-lg font-bold text-center text-primary-light mb-3 fancy-font">E-commerce Stores</h3>
-                    <p class="text-neutral text-sm text-center">Online stores with product management and secure payment integration.</p>
+                    
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>5-7 page website</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Custom design</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Advanced SEO</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Content management</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Basic e-commerce</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold text-sm bg-primary fancy-font request-quote-btn" data-package="Business Website">
+                        Request Quote
+                    </button>
                 </div>
                 
-                <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
-                    <div class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg mx-auto mb-4">
-                        <i class="fas fa-window-restore"></i>
+                <div class="pixel-card bg-dark-300 p-6 rounded-xl pixel-border">
+                    <div class="text-center mb-6">
+                        <h3 class="text-lg font-bold text-primary-light mb-2 fancy-font">E-commerce</h3>
+                        <div class="text-2xl font-bold text-light">₦250,000</div>
+                        <p class="text-neutral text-sm">For online stores</p>
                     </div>
-                    <h3 class="text-lg font-bold text-center text-primary-light mb-3 fancy-font">Landing Pages</h3>
-                    <p class="text-neutral text-sm text-center">High-converting landing pages for your products or services.</p>
+                    
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Online store</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Product management</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Payment integration</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Inventory system</span>
+                        </li>
+                        <li class="flex items-center text-neutral text-sm">
+                            <i class="fas fa-check text-accent mr-2"></i>
+                            <span>Order tracking</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold text-sm bg-primary fancy-font request-quote-btn" data-package="E-commerce Website">
+                        Request Quote
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Web Dev FAQ -->
+            <div class="bg-dark-300 p-6 rounded-xl pixel-border max-w-3xl mx-auto">
+                <h3 class="text-lg font-bold text-center mb-6 text-primary-light fancy-font">Web Development FAQ</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-light font-semibold mb-2 fancy-font">How long does it take?</h4>
+                        <p class="text-neutral text-sm">Starter websites take 1-2 weeks, Business sites 2-3 weeks, and E-commerce sites 3-4 weeks.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-light font-semibold mb-2 fancy-font">Do you provide hosting?</h4>
+                        <p class="text-neutral text-sm">Yes, we offer hosting solutions or can help you set up your own hosting environment.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-light font-semibold mb-2 fancy-font">Will my website be mobile-friendly?</h4>
+                        <p class="text-neutral text-sm">Absolutely! All our websites are fully responsive and work perfectly on all devices.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-light font-semibold mb-2 fancy-font">Do you provide maintenance?</h4>
+                        <p class="text-neutral text-sm">Yes, we offer ongoing maintenance plans to keep your website secure and up-to-date.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-12 bg-dark-200 px-4">
+        <div class="container mx-auto">
+            <h2 class="section-heading text-2xl md:text-3xl font-bold text-center mb-4 text-light fancy-font">Our Portfolio</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-4"></div>
+            <p class="text-neutral text-center mb-8 max-w-2xl mx-auto text-sm md:text-base">
+                Check out some of our recent projects and client work.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="portfolio-item rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/400x300/0a150f/5e9e3d?text=E-commerce+Store" alt="E-commerce Store" class="w-full h-48 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="text-center">
+                            <h3 class="text-light font-bold mb-2 fancy-font">E-commerce Store</h3>
+                            <p class="text-neutral text-sm mb-3">Full online store with payment integration</p>
+                            <a href="#" class="px-3 py-1 bg-primary text-light rounded text-sm">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/400x300/0a150f/5e9e3d?text=Business+Website" alt="Business Website" class="w-full h-48 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="text-center">
+                            <h3 class="text-light font-bold mb-2 fancy-font">Business Website</h3>
+                            <p class="text-neutral text-sm mb-3">Corporate website with booking system</p>
+                            <a href="#" class="px-3 py-1 bg-primary text-light rounded text-sm">View Project</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item rounded-lg overflow-hidden">
+                    <img src="https://placehold.co/400x300/0a150f/5e9e3d?text=Portfolio+Site" alt="Portfolio Site" class="w-full h-48 object-cover">
+                    <div class="portfolio-overlay">
+                        <div class="text-center">
+                            <h3 class="text-light font-bold mb-2 fancy-font">Portfolio Site</h3>
+                            <p class="text-neutral text-sm mb-3">Personal portfolio for a creative professional</p>
+                            <a href="#" class="px-3 py-1 bg-primary text-light rounded text-sm">View Project</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="text-center mt-10">
-                <button id="request-website-btn" class="pixel-btn px-6 py-3 rounded text-light font-semibold text-sm bg-primary fancy-font">
-                    Request a Website
-                </button>
+                <a href="#contact" class="pixel-btn px-6 py-3 rounded text-light font-semibold text-sm bg-primary fancy-font">
+                    View Full Portfolio
+                </a>
             </div>
         </div>
     </section>
@@ -474,6 +814,11 @@
                     </div>
                     <h3 class="text-lg font-bold text-center text-primary-light mb-3 fancy-font">Computer Repair & Maintenance</h3>
                     <p class="text-neutral text-sm text-center">Hardware and software diagnostics, repairs, and optimization.</p>
+                    <div class="text-center mt-4">
+                        <button class="request-quote-btn text-primary-light text-sm fancy-underline" data-package="Computer Repair">
+                            Request Service
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
@@ -482,6 +827,11 @@
                     </div>
                     <h3 class="text-lg font-bold text-center text-primary-light mb-3 fancy-font">Network Troubleshooting</h3>
                     <p class="text-neutral text-sm text-center">Fix connectivity issues and optimize your network performance.</p>
+                    <div class="text-center mt-4">
+                        <button class="request-quote-btn text-primary-light text-sm fancy-underline" data-package="Network Troubleshooting">
+                            Request Service
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
@@ -490,13 +840,81 @@
                     </div>
                     <h3 class="text-lg font-bold text-center text-primary-light mb-3 fancy-font">Software Installation & Updates</h3>
                     <p class="text-neutral text-sm text-center">Professional software installation, configuration, and maintenance.</p>
+                    <div class="text-center mt-4">
+                        <button class="request-quote-btn text-primary-light text-sm fancy-underline" data-package="Software Installation">
+                            Request Service
+                        </button>
+                    </div>
                 </div>
             </div>
             
-            <div class="text-center mt-10">
-                <button id="request-support-btn" class="pixel-btn px-6 py-3 rounded text-light font-semibold text-sm bg-primary fancy-font">
-                    Request IT Support
-                </button>
+            <!-- IT Support FAQ -->
+            <div class="mt-12 bg-dark-300 p-6 rounded-xl pixel-border max-w-3xl mx-auto">
+                <h3 class="text-lg font-bold text-center mb-6 text-primary-light fancy-font">IT Support FAQ</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-light font-semibold mb-2 fancy-font">What's your response time?</h4>
+                        <p class="text-neutral text-sm">We guarantee initial response within 2 hours for urgent issues, and 24 hours for standard requests.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-light font-semibold mb-2 fancy-font">Do you offer remote support?</h4>
+                        <p class="text-neutral text-sm">Yes, we provide remote support for software issues and can guide you through solutions.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-light font-semibold mb-2 fancy-font">What areas do you serve?</h4>
+                        <p class="text-neutral text-sm">We primarily serve Lagos, but offer remote support nationwide and on-site services in select areas.</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-light font-semibold mb-2 fancy-font">Do you provide maintenance contracts?</h4>
+                        <p class="text-neutral text-sm">Yes, we offer monthly and annual maintenance contracts for businesses needing ongoing support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 gradient-bg px-4">
+        <div class="container mx-auto">
+            <h2 class="section-heading text-2xl md:text-3xl font-bold text-center mb-4 text-light fancy-font">About Glyen</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-4"></div>
+            
+            <div class="flex flex-col lg:flex-row gap-8 items-center max-w-4xl mx-auto">
+                <div class="lg:w-1/2">
+                    <div class="bg-dark-300 rounded-xl pixel-border p-6">
+                        <img src="https://placehold.co/400x400/0a150f/5e9e3d?text=Glyen+Team" alt="Glyen Team" class="w-full rounded-lg">
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <h3 class="text-xl font-bold mb-4 text-primary-light fancy-font">Our Story</h3>
+                    <p class="text-neutral mb-4">Glyen was founded in 2020 with a mission to make technology accessible and empowering for everyone. We believe that with the right tools and support, anyone can build valuable tech skills.</p>
+                    
+                    <p class="text-neutral mb-6">Our team consists of experienced developers, IT specialists, and educators who are passionate about helping others succeed in the tech industry.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-accent fancy-font">3+</div>
+                            <div class="text-neutral text-sm">Years Experience</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary-light fancy-font">50+</div>
+                            <div class="text-neutral text-sm">Projects Completed</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-accent fancy-font">200+</div>
+                            <div class="text-neutral text-sm">Happy Clients</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary-light fancy-font">15+</div>
+                            <div class="text-neutral text-sm">Technologies</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -510,35 +928,126 @@
                 Have questions or need our services? Reach out to us!
             </p>
             
-            <div class="bg-dark-300 p-6 rounded-xl pixel-border max-w-2xl mx-auto">
-                <form id="contact-form">
-                    <div class="mb-4">
-                        <label for="name" class="block text-neutral mb-2 text-sm fancy-font">Your Name</label>
-                        <input type="text" id="name" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required>
+            <div class="flex flex-col lg:flex-row gap-8 max-w-5xl mx-auto">
+                <div class="lg:w-1/2">
+                    <div class="bg-dark-300 p-6 rounded-xl pixel-border h-full">
+                        <h3 class="text-lg font-bold mb-6 text-primary-light fancy-font">Get In Touch</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center text-dark-100 mr-4 flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-light font-semibold mb-1">Location</h4>
+                                    <p class="text-neutral text-sm">Lagos, Nigeria</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-dark-100 mr-4 flex-shrink-0">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-light font-semibold mb-1">Email</h4>
+                                    <p class="text-neutral text-sm">hello@glyen.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light mr-4 flex-shrink-0">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-light font-semibold mb-1">Phone</h4>
+                                    <p class="text-neutral text-sm">+234 800 000 0000</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center text-dark-100 mr-4 flex-shrink-0">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-light font-semibold mb-1">WhatsApp</h4>
+                                    <p class="text-neutral text-sm">+234 800 000 0000</p>
+                                    <a href="https://wa.me/2348000000000" class="text-accent text-sm fancy-underline">Send us a message</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-light font-semibold mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://twitter.com/glyen_tech" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg hover:bg-primary-light transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://instagram.com/glyen_tech" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg hover:bg-primary-light transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://github.com/glyen-tech" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg hover:bg-primary-light transition">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com/company/glyen" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg hover:bg-primary-light transition">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="mb-4">
-                        <label for="email" class="block text-neutral mb-2 text-sm fancy-font">Email Address</label>
-                        <input type="email" id="email" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-dark-300 p-6 rounded-xl pixel-border h-full">
+                        <h3 class="text-lg font-bold mb-6 text-primary-light fancy-font">Send a Message</h3>
+                        
+                        <form id="contact-form">
+                            <div class="mb-4">
+                                <label for="name" class="block text-neutral mb-2 text-sm fancy-font">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="email" class="block text-neutral mb-2 text-sm fancy-font">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="service" class="block text-neutral mb-2 text-sm fancy-font">Service Needed</label>
+                                <select id="service" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm">
+                                    <option value="">Select a service</option>
+                                    <option value="journal">Coding Journal</option>
+                                    <option value="webdev">Web Development</option>
+                                    <option value="itsupport">IT Support</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="message" class="block text-neutral mb-2 text-sm fancy-font">Message</label>
+                                <textarea id="message" rows="3" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold text-sm bg-primary fancy-font">
+                                Send Message
+                            </button>
+                        </form>
                     </div>
-                    
-                    <div class="mb-4">
-                        <label for="service" class="block text-neutral mb-2 text-sm fancy-font">Service Needed</label>
-                        <select id="service" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm">
-                            <option value="journal">Coding Journal</option>
-                            <option value="webdev">Web Development</option>
-                            <option value="itsupport">IT Support</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label for="message" class="block text-neutral mb-2 text-sm fancy-font">Message</label>
-                        <textarea id="message" rows="3" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold text-sm bg-primary fancy-font">
-                        Send Message
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-12 bg-dark-200 px-4">
+        <div class="container mx-auto max-w-3xl">
+            <div class="bg-dark-300 p-6 rounded-xl pixel-border text-center">
+                <h3 class="text-xl font-bold mb-3 text-primary-light fancy-font">Stay Updated</h3>
+                <p class="text-neutral mb-6 max-w-md mx-auto text-sm">Subscribe to our newsletter for updates on new products, services, and tech tips.</p>
+                
+                <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input type="email" placeholder="Your email address" class="flex-grow px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required>
+                    <button type="submit" class="pixel-btn px-4 py-2 rounded text-light font-semibold text-sm bg-primary fancy-font">
+                        Subscribe
                     </button>
                 </form>
             </div>
@@ -560,24 +1069,26 @@
                     <a href="#journal" class="text-neutral hover:text-primary-light text-sm fancy-underline">Journal</a>
                     <a href="#webdev" class="text-neutral hover:text-primary-light text-sm fancy-underline">Web Dev</a>
                     <a href="#itsupport" class="text-neutral hover:text-primary-light text-sm fancy-underline">IT Support</a>
+                    <a href="#portfolio" class="text-neutral hover:text-primary-light text-sm fancy-underline">Portfolio</a>
+                    <a href="#about" class="text-neutral hover:text-primary-light text-sm fancy-underline">About</a>
                     <a href="#contact" class="text-neutral hover:text-primary-light text-sm fancy-underline">Contact</a>
                 </div>
                 
                 <div class="flex space-x-4">
-                    <a href="#" class="text-neutral hover:text-primary-light">
+                    <a href="https://twitter.com/glyen_tech" class="text-neutral hover:text-primary-light">
                         <i class="fab fa-twitter text-lg"></i>
                     </a>
-                    <a href="#" class="text-neutral hover:text-primary-light">
+                    <a href="https://instagram.com/glyen_tech" class="text-neutral hover:text-primary-light">
                         <i class="fab fa-instagram text-lg"></i>
                     </a>
-                    <a href="#" class="text-neutral hover:text-primary-light">
+                    <a href="https://github.com/glyen-tech" class="text-neutral hover:text-primary-light">
                         <i class="fab fa-github text-lg"></i>
                     </a>
                 </div>
             </div>
             
             <div class="border-t border-primary-dark mt-6 pt-6 text-center text-neutral text-xs">
-                <p>&copy; 2023 Glyen. All rights reserved.</p>
+                <p>&copy; <span id="current-year"></span> Glyen. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -597,7 +1108,7 @@
             <div class="bg-dark-200 p-4 rounded-lg mb-4">
                 <h4 class="text-md font-semibold text-primary-light mb-2 fancy-font">Payment Options</h4>
                 <div class="space-y-3">
-                    <button class="w-full pixel-btn py-2 rounded text-light font-semibold text-sm bg-primary fancy-font">
+                    <button class="w-full pixel-btn py-2 rounded text-light font-semibold text-sm bg-primary fancy-font" id="paystack-button">
                         Pay with Paystack
                     </button>
                     <a href="https://forms.google.com" target="_blank" class="block w-full border border-primary-light py-2 rounded text-primary-light font-semibold text-sm text-center hover:bg-primary-light hover:text-dark-100 transition-colors fancy-font">
@@ -621,7 +1132,7 @@
             <h3 class="text-lg font-semibold mb-2 text-light fancy-font">Start the Challenge</h3>
             <p class="text-neutral mb-4 text-sm">Submit your GitHub repository link to complete the challenge</p>
             
-            <form class="mb-4">
+            <form class="mb-4" id="challenge-form">
                 <div class="mb-3">
                     <label for="github-link" class="block text-neutral mb-1 text-sm text-left fancy-font">GitHub Repository URL</label>
                     <input type="url" id="github-link" class="w-full px-3 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" placeholder="https://github.com/yourusername/yourrepo" required>
@@ -632,9 +1143,14 @@
                     <input type="url" id="github-profile" class="w-full px-3 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" placeholder="https://github.com/yourusername" required>
                 </div>
                 
-                <a href="https://forms.google.com" target="_blank" class="block w-full pixel-btn py-2 rounded text-light font-semibold text-sm bg-primary fancy-font">
+                <div class="mb-3">
+                    <label for="challenge-email" class="block text-neutral mb-1 text-sm text-left fancy-font">Your Email</label>
+                    <input type="email" id="challenge-email" class="w-full px-3 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" placeholder="your@email.com" required>
+                </div>
+                
+                <button type="submit" class="w-full pixel-btn py-2 rounded text-light font-semibold text-sm bg-primary fancy-font">
                     Submit Challenge
-                </a>
+                </button>
             </form>
             
             <button id="close-challenge-modal" class="text-neutral hover:text-primary-light text-sm fancy-underline">
@@ -652,11 +1168,31 @@
             <h3 class="text-lg font-semibold mb-2 text-light fancy-font" id="service-modal-title">Request Service</h3>
             <p class="text-neutral mb-4 text-sm" id="service-modal-desc">Tell us about your project needs</p>
             
-            <a href="https://forms.google.com" target="_blank" class="block w-full pixel-btn py-2 rounded text-light font-semibold text-sm bg-primary fancy-font mb-3">
-                Google Form
-            </a>
-            
-            <p class="text-neutral text-xs">You'll be redirected to Google Forms to submit your request</p>
+            <form id="service-request-form">
+                <div class="mb-3">
+                    <label for="service-name" class="block text-neutral mb-1 text-sm text-left fancy-font">Your Name</label>
+                    <input type="text" id="service-name" class="w-full px-3 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="service-email" class="block text-neutral mb-1 text-sm text-left fancy-font">Your Email</label>
+                    <input type="email" id="service-email" class="w-full px-3 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="service-package" class="block text-neutral mb-1 text-sm text-left fancy-font">Service Package</label>
+                    <input type="text" id="service-package" class="w-full px-3 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" readonly>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="service-message" class="block text-neutral mb-1 text-sm text-left fancy-font">Additional Details</label>
+                    <textarea id="service-message" rows="2" class="w-full px-3 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" placeholder="Tell us about your specific needs"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full pixel-btn py-2 rounded text-light font-semibold text-sm bg-primary fancy-font">
+                    Submit Request
+                </button>
+            </form>
             
             <button id="close-service-modal" class="text-neutral hover:text-primary-light text-sm mt-4 fancy-underline">
                 Cancel
@@ -680,6 +1216,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
             // Mobile menu functionality
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const closeMenuBtn = document.getElementById('close-menu-btn');
@@ -747,6 +1286,15 @@
             
             document.getElementById('close-journal-modal').addEventListener('click', closeModals);
             
+            // Paystack integration
+            document.getElementById('paystack-button').addEventListener('click', function() {
+                // In a real implementation, this would initialize Paystack payment
+                // For demo purposes, we'll show a success message
+                closeModals();
+                document.getElementById('success-message').textContent = 'Payment successful! Your journal download link has been sent to your email.';
+                openModal(modals.success);
+            });
+            
             // Challenge modal
             document.getElementById('start-challenge-btn').addEventListener('click', function() {
                 openModal(modals.challenge);
@@ -754,34 +1302,56 @@
             
             document.getElementById('close-challenge-modal').addEventListener('click', closeModals);
             
-            // Service modals
-            document.getElementById('request-website-btn').addEventListener('click', function() {
-                document.getElementById('service-modal-title').textContent = 'Web Development Request';
-                document.getElementById('service-modal-desc').textContent = 'Tell us about your website needs';
-                openModal(modals.service);
+            // Challenge form submission
+            document.getElementById('challenge-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // In a real implementation, this would submit to Google Forms or a backend
+                closeModals();
+                document.getElementById('success-message').textContent = 'Challenge submission received! We\'ll review your GitHub repository and send your certificate within 48 hours.';
+                openModal(modals.success);
+                
+                this.reset();
             });
             
-            document.getElementById('request-support-btn').addEventListener('click', function() {
-                document.getElementById('service-modal-title').textContent = 'IT Support Request';
-                document.getElementById('service-modal-desc').textContent = 'Tell us about your technical issues';
-                openModal(modals.service);
+            // Service modals
+            document.querySelectorAll('.request-quote-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const packageName = this.getAttribute('data-package');
+                    document.getElementById('service-modal-title').textContent = `Request ${packageName}`;
+                    document.getElementById('service-modal-desc').textContent = 'Tell us about your needs';
+                    document.getElementById('service-package').value = packageName;
+                    openModal(modals.service);
+                });
             });
             
             document.getElementById('close-service-modal').addEventListener('click', closeModals);
             
-            // Success modal
-            document.getElementById('close-success-modal').addEventListener('click', closeModals);
+            // Service request form submission
+            document.getElementById('service-request-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // In a real implementation, this would submit to Google Forms or a backend
+                closeModals();
+                document.getElementById('success-message').textContent = 'Service request received! We\'ll contact you within 24 hours to discuss your project.';
+                openModal(modals.success);
+                
+                this.reset();
+            });
             
             // Contact form submission
             document.getElementById('contact-form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Show success modal
-                document.getElementById('success-message').textContent = 'Your message has been received successfully. We will get back to you soon.';
+                // In a real implementation, this would submit to Google Forms or a backend
+                document.getElementById('success-message').textContent = 'Your message has been received successfully. We will get back to you within 24 hours.';
                 openModal(modals.success);
                 
                 this.reset();
             });
+            
+            // Success modal
+            document.getElementById('close-success-modal').addEventListener('click', closeModals);
             
             // Close modal when clicking on overlay
             overlay.addEventListener('click', closeModals);
