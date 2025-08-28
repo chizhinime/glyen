@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glyen - Coding Journal & Challenges</title>
+    <title>Glyen – Code. Build. Support.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -34,36 +34,6 @@
                     fontFamily: {
                         pixel: ['"Press Start 2P"', 'cursive'],
                         sans: ['Inter', 'sans-serif']
-                    },
-                    animation: {
-                        'pixel-bounce': 'pixelBounce 0.5s steps(2) infinite',
-                        'glitch': 'glitch 2s infinite',
-                        'pixelate': 'pixelate 4s infinite',
-                        'typewriter': 'typewriter 2s steps(11) forwards'
-                    },
-                    keyframes: {
-                        pixelBounce: {
-                            '0%': { transform: 'translateY(0)' },
-                            '100%': { transform: 'translateY(-4px)' }
-                        },
-                        glitch: {
-                            '0%': { transform: 'translate(0)' },
-                            '20%': { transform: 'translate(-4px, 4px)' },
-                            '40%': { transform: 'translate(-4px, -4px)' },
-                            '60%': { transform: 'translate(4px, 4px)' },
-                            '80%': { transform: 'translate(4px, -4px)' },
-                            '100%': { transform: 'translate(0)' }
-                        },
-                        pixelate: {
-                            '0%': { filter: 'contrast(100%) brightness(100%)' },
-                            '5%': { filter: 'contrast(200%) brightness(150%)' },
-                            '10%': { filter: 'contrast(100%) brightness(100%)' },
-                            '100%': { filter: 'contrast(100%) brightness(100%)' }
-                        },
-                        typewriter: {
-                            from: { width: '0' },
-                            to: { width: '11ch' }
-                        }
                     }
                 }
             }
@@ -79,36 +49,8 @@
         }
         
         .pixel-border {
-            border: 4px solid #5e9e3d;
-            border-image: 
-                linear-gradient(
-                    to bottom right, 
-                    #8cc56d 0%, 
-                    #3d6c28 100%
-                ) 1;
+            border: 3px solid #5e9e3d;
             box-shadow: 0 0 10px rgba(140, 197, 109, 0.3);
-        }
-        
-        .pixel-corners {
-            position: relative;
-        }
-        
-        .pixel-corners::before, .pixel-corners::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #5e9e3d;
-        }
-        
-        .pixel-corners::before {
-            top: -4px;
-            left: -4px;
-        }
-        
-        .pixel-corners::after {
-            bottom: -4px;
-            right: -4px;
         }
         
         .pixel-card {
@@ -117,25 +59,8 @@
             overflow: hidden;
         }
         
-        .pixel-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(140, 197, 109, 0.1) 0%, transparent 100%);
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .pixel-card:hover::before {
-            opacity: 1;
-        }
-        
         .pixel-card:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(61, 108, 40, 0.5);
         }
         
@@ -163,13 +88,6 @@
             background: linear-gradient(135deg, #0d1b13 0%, #07100b 100%);
         }
         
-        .pixel-pattern {
-            background-image: 
-                linear-gradient(rgba(61, 108, 40, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(61, 108, 40, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        
         .pixel-btn {
             position: relative;
             overflow: hidden;
@@ -177,111 +95,28 @@
             border: 2px solid #5e9e3d;
         }
         
-        .pixel-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(140, 197, 109, 0.3), transparent);
-            transition: all 0.6s ease;
-        }
-        
-        .pixel-btn:hover::before {
-            left: 100%;
-        }
-        
         .pixel-btn:hover {
             background-color: #3d6c28;
             box-shadow: 0 0 15px rgba(140, 197, 109, 0.5);
         }
         
-        .pixel-loader {
-            width: 16px;
-            height: 16px;
-            background-color: #8cc56d;
-            box-shadow: 
-                16px 0 #8cc56d, 
-                -16px 0 #8cc56d;
-            position: relative;
-            animation: flash 0.5s ease-out infinite alternate;
-        }
-        
-        @keyframes flash {
-            0% { background-color: #8cc56d; box-shadow: 16px 0 #8cc56d, -16px 0 #3d6c28; }
-            50% { background-color: #3d6c28; box-shadow: 16px 0 #8cc56d, -16px 0 #8cc56d; }
-            100% { background-color: #8cc56d; box-shadow: 16px 0 #3d6c28, -16px 0 #8cc56d; }
-        }
-        
-        .typing-demo {
-            width: 11ch;
-            animation: typewriter 2s steps(11) forwards;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 3px solid #8cc56d;
-        }
-        
         .pixel-divider {
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, #5e9e3d, transparent);
             position: relative;
-        }
-        
-        .pixel-divider::before, .pixel-divider::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #5e9e3d;
-            top: -2px;
-        }
-        
-        .pixel-divider::before {
-            left: 20%;
-        }
-        
-        .pixel-divider::after {
-            right: 20%;
-        }
-        
-        .pixel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(8px, 1fr));
-            grid-auto-rows: 8px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .pixel {
-            background-color: rgba(140, 197, 109, 0.05);
-            border: 1px solid rgba(61, 108, 40, 0.1);
         }
         
         .glow-text {
             text-shadow: 0 0 5px rgba(140, 197, 109, 0.7);
         }
         
-        .pixel-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 100;
-            pointer-events: none;
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
         }
         
-        .pixel-modal.active {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-            pointer-events: all;
+        .mobile-menu.open {
+            transform: translateX(0);
         }
         
         .modal-overlay {
@@ -302,429 +137,393 @@
             pointer-events: all;
         }
         
-        .journal-page {
-            background: linear-gradient(to bottom right, #0a150f, #07100b);
-            border: 2px solid #5e9e3d;
-            box-shadow: 0 0 15px rgba(94, 158, 61, 0.3);
+        .pixel-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+            pointer-events: none;
+            width: 90%;
+            max-width: 400px;
         }
         
-        .page-edge {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 100%;
-            background: linear-gradient(to right, #3d6c28, transparent);
+        .pixel-modal.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            pointer-events: all;
         }
         
-        .code-line {
-            font-family: 'Courier New', monospace;
-            color: #8cc56d;
-        }
-        
-        @media (max-width: 768px) {
-            .pixel-corners::before, .pixel-corners::after {
-                display: none;
+        @media (max-width: 640px) {
+            .pixel-border {
+                border-width: 2px;
+            }
+            
+            .hero-heading {
+                font-size: 1.75rem;
+            }
+            
+            .section-heading {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
-<body class="pixel-pattern">
+<body class="min-h-screen">
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 gradient-bg py-4 px-6 border-b-2 border-primary">
+    <nav class="fixed w-full z-50 gradient-bg py-3 px-4 border-b-2 border-primary">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold pixel-font text-primary-light glow-text">
+            <a href="#" class="text-xl font-bold pixel-font text-primary-light glow-text">
                 <span class="text-accent-light">G</span>lyen
             </a>
             
-            <div class="hidden md:flex space-x-10">
-                <a href="#home" class="nav-link text-neutral hover:text-primary-light">Home</a>
-                <a href="#journal" class="nav-link text-neutral hover:text-primary-light">Journal</a>
-                <a href="#challenge" class="nav-link text-neutral hover:text-primary-light">Challenge</a>
-                <a href="#contact" class="nav-link text-neutral hover:text-primary-light">Contact</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="nav-link text-neutral hover:text-primary-light text-sm">Home</a>
+                <a href="#journal" class="nav-link text-neutral hover:text-primary-light text-sm">Journal</a>
+                <a href="#webdev" class="nav-link text-neutral hover:text-primary-light text-sm">Web Dev</a>
+                <a href="#itsupport" class="nav-link text-neutral hover:text-primary-light text-sm">IT Support</a>
+                <a href="#contact" class="nav-link text-neutral hover:text-primary-light text-sm">Contact</a>
             </div>
-            
-            <a href="#journal" class="pixel-btn px-6 py-2 rounded bg-primary text-light font-semibold hidden md:block">
-                Get the Journal
-            </a>
             
             <button class="md:hidden text-primary-light" id="mobile-menu-btn">
-                <i class="fas fa-bars text-2xl"></i>
+                <i class="fas fa-bars text-xl"></i>
             </button>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div class="md:hidden mt-4 hidden" id="mobile-menu">
-            <div class="flex flex-col space-y-4">
-                <a href="#home" class="text-neutral hover:text-primary-light">Home</a>
-                <a href="#journal" class="text-neutral hover:text-primary-light">Journal</a>
-                <a href="#challenge" class="text-neutral hover:text-primary-light">Challenge</a>
-                <a href="#contact" class="text-neutral hover:text-primary-light">Contact</a>
-                <a href="#journal" class="pixel-btn px-4 py-2 rounded bg-primary text-light font-semibold text-center">Get the Journal</a>
-            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center pt-20 pb-10 gradient-bg relative overflow-hidden">
-        <div class="pixel-grid" id="pixel-grid"></div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-0 z-40 gradient-bg flex flex-col items-center justify-center space-y-8 md:hidden" id="mobile-menu">
+        <button class="absolute top-5 right-5 text-primary-light" id="close-menu-btn">
+            <i class="fas fa-times text-xl"></i>
+        </button>
         
-        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center relative z-10">
-            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-light">
-                    <span class="text-primary-light">Glyen Coding Journal</span> <br>
-                    <span class="text-accent">Code. Build.</span> 
-                    <span class="typing-demo text-primary-light">Grow.</span>
-                </h1>
-                <p class="text-xl text-neutral mb-10 max-w-2xl">
-                    Track your coding journey, set goals, and improve your skills with our comprehensive coding journal and challenges.
-                </p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center md:justify-start">
-                    <a href="#journal" class="pixel-btn px-8 py-4 rounded text-light font-semibold text-lg bg-primary hover:bg-primary-dark text-center">
-                        Get the Journal
-                    </a>
-                    <a href="#challenge" class="border-2 border-primary-light px-8 py-4 rounded text-primary-light font-semibold text-lg hover:bg-primary-light hover:text-dark-100 transition-colors text-center">
-                        Join the Challenge
-                    </a>
-                </div>
+        <a href="#home" class="text-primary-light text-xl font-medium">Home</a>
+        <a href="#journal" class="text-primary-light text-xl font-medium">Journal</a>
+        <a href="#webdev" class="text-primary-light text-xl font-medium">Web Dev</a>
+        <a href="#itsupport" class="text-primary-light text-xl font-medium">IT Support</a>
+        <a href="#contact" class="text-primary-light text-xl font-medium">Contact</a>
+        
+        <div class="flex space-x-4 mt-8">
+            <a href="#" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-12 gradient-bg px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="hero-heading text-3xl md:text-4xl font-bold mb-4 text-light">
+                <span class="text-primary-light">Glyen</span> – <span class="text-accent">Code.</span> <span class="text-primary-light">Build.</span> <span class="text-accent">Support.</span>
+            </h1>
+            <p class="text-neutral mb-8 max-w-2xl mx-auto text-sm md:text-base">
+                Empowering you with tools, services, and challenges to grow in tech.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-3 mb-12">
+                <a href="#journal" class="pixel-btn px-5 py-3 rounded text-light font-semibold text-sm bg-primary">
+                    Get the Journal
+                </a>
+                <a href="#webdev" class="pixel-btn px-5 py-3 rounded text-light font-semibold text-sm bg-primary">
+                    Web Development
+                </a>
+                <a href="#itsupport" class="pixel-btn px-5 py-3 rounded text-light font-semibold text-sm bg-primary">
+                    IT Support
+                </a>
             </div>
-            <div class="md:w-1/2 mt-10 md:mt-0">
-                <div class="relative pixel-corners">
-                    <div class="absolute -inset-3 bg-primary-dark rounded-2xl rotate-3 opacity-70"></div>
-                    <div class="relative bg-dark-200 p-6 rounded-2xl pixel-border">
-                        <div class="journal-page rounded-lg p-6 relative overflow-hidden">
-                            <div class="page-edge"></div>
-                            <h3 class="text-xl text-primary-light mb-4 font-bold">Coding Journal</h3>
-                            <div class="code-line mb-2">> git commit -m "Progress"</div>
-                            <div class="code-line mb-2">> console.log("Hello World");</div>
-                            <div class="code-line mb-2">> function createProject() {</div>
-                            <div class="code-line mb-2">>   return "Success!";</div>
-                            <div class="code-line mb-4">> }</div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-accent">📊 Track your progress</span>
-                                <span class="text-primary-light animate-pulse">▼</span>
-                            </div>
+            
+            <div class="bg-dark-300 rounded-xl pixel-border p-6 max-w-2xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-dark-100 text-lg mx-auto mb-3">
+                            <i class="fas fa-book"></i>
                         </div>
-                        <div class="mt-4 flex justify-center">
-                            <div class="flex space-x-2">
-                                <div class="w-3 h-3 bg-primary-light rounded-full animate-pulse"></div>
-                                <div class="w-3 h-3 bg-accent rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
-                                <div class="w-3 h-3 bg-primary-dark rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
-                            </div>
+                        <h3 class="text-primary-light font-semibold text-sm mb-2">Coding Journal</h3>
+                        <p class="text-neutral text-xs">Track your progress and challenges</p>
+                    </div>
+                    
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-dark-100 text-lg mx-auto mb-3">
+                            <i class="fas fa-laptop-code"></i>
                         </div>
+                        <h3 class="text-primary-light font-semibold text-sm mb-2">Web Development</h3>
+                        <p class="text-neutral text-xs">Modern, responsive websites</p>
+                    </div>
+                    
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg mx-auto mb-3">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="text-primary-light font-semibold text-sm mb-2">IT Support</h3>
+                        <p class="text-neutral text-xs">Expert technical assistance</p>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-            <a href="#journal" class="text-primary-light text-2xl animate-bounce">
-                <i class="fas fa-chevron-down"></i>
-            </a>
         </div>
     </section>
 
     <!-- Journal Section -->
-    <section id="journal" class="py-20 bg-dark-200 relative overflow-hidden">
-        <div class="pixel-grid" id="pixel-grid-2"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-3xl font-bold text-center mb-4 text-light pixel-font">The Glyen Coding Journal</h2>
-            <div class="pixel-divider w-1/2 mx-auto my-6"></div>
-            <p class="text-xl text-center text-neutral mb-16 max-w-3xl mx-auto">
-                Your comprehensive companion for tracking progress, setting goals, and reflecting on your coding journey.
+    <section id="journal" class="py-12 bg-dark-200 px-4">
+        <div class="container mx-auto">
+            <h2 class="section-heading text-2xl md:text-3xl font-bold text-center mb-4 text-light pixel-font">Glyen Coding Journal</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-4"></div>
+            <p class="text-neutral text-center mb-8 max-w-2xl mx-auto text-sm md:text-base">
+                Track your coding journey, set goals, and improve your skills with our comprehensive coding journal and challenges.
             </p>
             
-            <div class="flex flex-col lg:flex-row gap-10 items-center">
+            <div class="flex flex-col lg:flex-row gap-6 items-center">
                 <div class="lg:w-1/2">
-                    <div class="relative pixel-corners">
-                        <div class="absolute -inset-3 bg-primary-dark rounded-2xl -rotate-3 opacity-70"></div>
-                        <div class="relative bg-dark-300 p-8 rounded-2xl pixel-border">
-                            <img src="https://placehold.co/500x700/0a150f/5e9e3d?text=Glyen+Coding+Journal" alt="Glyen Coding Journal" class="w-full rounded-lg pixelate">
-                            <div class="mt-4 flex justify-center">
-                                <div class="pixel-loader"></div>
-                                <span class="text-accent text-sm ml-2">Preview loading...</span>
-                            </div>
-                        </div>
+                    <div class="bg-dark-300 rounded-xl pixel-border p-6">
+                        <img src="https://placehold.co/400x500/0a150f/5e9e3d?text=Glyen+Coding+Journal" alt="Glyen Coding Journal" class="w-full rounded-lg">
                     </div>
                 </div>
                 
                 <div class="lg:w-1/2">
-                    <div class="bg-dark-300 p-8 rounded-2xl pixel-border">
-                        <h3 class="text-2xl font-bold mb-6 text-primary-light">Journal Features</h3>
+                    <div class="bg-dark-300 p-6 rounded-xl pixel-border">
+                        <h3 class="text-xl font-bold mb-4 text-primary-light">Journal Features</h3>
                         
-                        <ul class="space-y-4 mb-8">
+                        <ul class="space-y-3 mb-6">
                             <li class="flex items-start">
-                                <div class="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center text-dark-100 text-sm mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 rounded-full bg-primary-light flex items-center justify-center text-dark-100 text-xs mr-3 flex-shrink-0">
                                     <i class="fas fa-check"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-lg font-semibold text-light mb-1">Coding Tracker</h4>
-                                    <p class="text-neutral">Track your daily coding hours, languages learned, and projects completed.</p>
+                                    <h4 class="text-md font-semibold text-light mb-1">Coding Tracker</h4>
+                                    <p class="text-neutral text-sm">Track your daily coding hours, languages learned, and projects completed.</p>
                                 </div>
                             </li>
                             
                             <li class="flex items-start">
-                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-dark-100 text-sm mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-dark-100 text-xs mr-3 flex-shrink-0">
                                     <i class="fas fa-check"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-lg font-semibold text-light mb-1">Challenge Section</h4>
-                                    <p class="text-neutral">Includes our exclusive GitHub setup challenge with step-by-step instructions.</p>
+                                    <h4 class="text-md font-semibold text-light mb-1">Challenge Section</h4>
+                                    <p class="text-neutral text-sm">Includes our exclusive GitHub setup challenge with step-by-step instructions.</p>
                                 </div>
                             </li>
                             
                             <li class="flex items-start">
-                                <div class="w-8 h-8 rounded-full bg-primary-dark flex items-center justify-center text-light text-sm mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 rounded-full bg-primary-dark flex items-center justify-center text-light text-xs mr-3 flex-shrink-0">
                                     <i class="fas fa-check"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-lg font-semibold text-light mb-1">Notes & Reflection Space</h4>
-                                    <p class="text-neutral">Document your learning, ideas, and reflections throughout your coding journey.</p>
+                                    <h4 class="text-md font-semibold text-light mb-1">Notes & Reflection Space</h4>
+                                    <p class="text-neutral text-sm">Document your learning, ideas, and reflections throughout your coding journey.</p>
                                 </div>
                             </li>
                         </ul>
                         
-                        <div class="bg-primary-dark p-6 rounded-xl mb-8">
-                            <h4 class="text-lg font-semibold text-light mb-2">Special Offer</h4>
-                            <p class="text-light">Get the digital journal for only <span class="text-2xl font-bold">₦5,000</span></p>
-                            <p class="text-accent-light text-sm mt-2">One-time purchase, lifetime access</p>
+                        <div class="bg-primary-dark p-4 rounded-lg mb-6">
+                            <h4 class="text-md font-semibold text-light mb-1">Special Offer</h4>
+                            <p class="text-light text-sm">Get the digital journal for only <span class="text-xl font-bold">₦5,000</span></p>
+                            <p class="text-accent-light text-xs mt-1">One-time purchase, lifetime access</p>
                         </div>
                         
                         <div class="text-center">
-                            <button id="buy-now-btn" class="pixel-btn px-8 py-4 rounded text-light font-semibold text-lg bg-primary w-full">
+                            <button id="buy-now-btn" class="pixel-btn px-6 py-3 rounded text-light font-semibold text-sm bg-primary w-full">
                                 Get the Journal Now
                             </button>
-                            <p class="text-neutral text-sm mt-4">Secure payment via Paystack</p>
+                            <p class="text-neutral text-xs mt-3">Secure payment via Paystack</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Challenge Section -->
-    <section id="challenge" class="py-20 gradient-bg relative overflow-hidden">
-        <div class="pixel-grid" id="pixel-grid-3"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-3xl font-bold text-center mb-4 text-light pixel-font">Coding Challenge</h2>
-            <div class="pixel-divider w-1/2 mx-auto my-6"></div>
-            <p class="text-xl text-center text-neutral mb-16 max-w-3xl mx-auto">
-                Test your skills, build your portfolio, and earn recognition with our monthly coding challenges.
-            </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-                <div class="pixel-card bg-dark-300 p-8 rounded-2xl pixel-border">
+            <!-- Challenge Section -->
+            <div class="mt-16">
+                <h3 class="text-xl font-bold text-center mb-6 text-primary-light">Coding Challenge</h3>
+                
+                <div class="bg-dark-300 p-6 rounded-xl pixel-border max-w-2xl mx-auto">
                     <div class="text-center mb-6">
-                        <div class="w-20 h-20 rounded-full bg-primary-light flex items-center justify-center text-2xl text-dark-100 mx-auto mb-4">
+                        <div class="w-16 h-16 rounded-full bg-primary-light flex items-center justify-center text-dark-100 text-xl mx-auto mb-4">
                             <i class="fab fa-github"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-primary-light">GitHub Setup Challenge</h3>
-                        <p class="text-neutral mt-2">Get started with GitHub and learn essential version control skills</p>
+                        <h4 class="text-lg font-bold text-primary-light">GitHub Setup Challenge</h4>
+                        <p class="text-neutral mt-2 text-sm">Get started with GitHub and learn essential version control skills</p>
                     </div>
                     
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-neutral">
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center text-neutral text-sm">
                             <i class="fas fa-check-circle text-accent mr-2"></i>
                             <span>Set up your GitHub account</span>
                         </li>
-                        <li class="flex items-center text-neutral">
+                        <li class="flex items-center text-neutral text-sm">
                             <i class="fas fa-check-circle text-accent mr-2"></i>
                             <span>Create your first repository</span>
                         </li>
-                        <li class="flex items-center text-neutral">
+                        <li class="flex items-center text-neutral text-sm">
                             <i class="fas fa-check-circle text-accent mr-2"></i>
                             <span>Push your code to GitHub</span>
                         </li>
-                        <li class="flex items-center text-neutral">
+                        <li class="flex items-center text-neutral text-sm">
                             <i class="fas fa-check-circle text-accent mr-2"></i>
                             <span>Share your profile and projects</span>
                         </li>
                     </ul>
                     
-                    <button id="start-challenge-btn" class="pixel-btn w-full px-6 py-3 rounded-lg text-light font-semibold bg-primary">
+                    <button id="start-challenge-btn" class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold text-sm bg-primary">
                         Start Challenge
                     </button>
                 </div>
-                
-                <div class="pixel-card bg-dark-300 p-8 rounded-2xl pixel-border">
-                    <h3 class="text-2xl font-bold mb-6 text-primary-light">Challenge Instructions</h3>
-                    
-                    <div class="space-y-4 mb-8">
-                        <div>
-                            <h4 class="text-lg font-semibold text-light mb-2">1. Create a GitHub account</h4>
-                            <p class="text-neutral">Visit github.com and sign up for a free account if you don't have one already.</p>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-lg font-semibold text-light mb-2">2. Set up your profile</h4>
-                            <p class="text-neutral">Add a profile picture, bio, and links to your social media or website.</p>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-lg font-semibold text-light mb-2">3. Create a repository</h4>
-                            <p class="text-neutral">Initialize a new repository for your project with a README file.</p>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-lg font-semibold text-light mb-2">4. Push your code</h4>
-                            <p class="text-neutral">Use Git commands to push your code to the repository.</p>
-                        </div>
-                        
-                        <div>
-                            <h4 class="text-lg font-semibold text-light mb-2">5. Submit your work</h4>
-                            <p class="text-neutral">Share your GitHub profile link and repository URL via the submission form.</p>
-                        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web Development Section -->
+    <section id="webdev" class="py-12 gradient-bg px-4">
+        <div class="container mx-auto">
+            <h2 class="section-heading text-2xl md:text-3xl font-bold text-center mb-4 text-light pixel-font">Web Development</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-4"></div>
+            <p class="text-neutral text-center mb-8 max-w-2xl mx-auto text-sm md:text-base">
+                We build modern, responsive websites to help your business stand out online.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
+                    <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-dark-100 text-lg mx-auto mb-4">
+                        <i class="fas fa-briefcase"></i>
                     </div>
-                    
-                    <div class="bg-primary-dark p-4 rounded-xl mb-6">
-                        <h4 class="text-lg font-semibold text-light mb-2">🏆 Recognition</h4>
-                        <p class="text-light">Complete the challenge to receive:</p>
-                        <ul class="mt-2 space-y-1">
-                            <li class="flex items-center text-light">
-                                <i class="fas fa-star text-accent mr-2"></i>
-                                <span>Shoutout on our social media</span>
-                            </li>
-                            <li class="flex items-center text-light">
-                                <i class="fas fa-star text-accent mr-2"></i>
-                                <span>Downloadable certificate</span>
-                            </li>
-                            <li class="flex items-center text-light">
-                                <i class="fas fa-star text-accent mr-2"></i>
-                                <span>Featured on our website</span>
-                            </li>
-                        </ul>
-                    </div>
+                    <h3 class="text-lg font-bold text-center text-primary-light mb-3">Business/Portfolio Websites</h3>
+                    <p class="text-neutral text-sm text-center">Professional websites to showcase your business or personal portfolio.</p>
                 </div>
+                
+                <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
+                    <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-dark-100 text-lg mx-auto mb-4">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-primary-light mb-3">E-commerce Stores</h3>
+                    <p class="text-neutral text-sm text-center">Online stores with product management and secure payment integration.</p>
+                </div>
+                
+                <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
+                    <div class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg mx-auto mb-4">
+                        <i class="fas fa-window-restore"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-primary-light mb-3">Landing Pages</h3>
+                    <p class="text-neutral text-sm text-center">High-converting landing pages for your products or services.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button id="request-website-btn" class="pixel-btn px-6 py-3 rounded text-light font-semibold text-sm bg-primary">
+                    Request a Website
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- IT Support Section -->
+    <section id="itsupport" class="py-12 bg-dark-200 px-4">
+        <div class="container mx-auto">
+            <h2 class="section-heading text-2xl md:text-3xl font-bold text-center mb-4 text-light pixel-font">IT Support</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-4"></div>
+            <p class="text-neutral text-center mb-8 max-w-2xl mx-auto text-sm md:text-base">
+                We keep your systems running smoothly with expert IT support.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
+                    <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-dark-100 text-lg mx-auto mb-4">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-primary-light mb-3">Computer Repair & Maintenance</h3>
+                    <p class="text-neutral text-sm text-center">Hardware and software diagnostics, repairs, and optimization.</p>
+                </div>
+                
+                <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
+                    <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-dark-100 text-lg mx-auto mb-4">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-primary-light mb-3">Network Troubleshooting</h3>
+                    <p class="text-neutral text-sm text-center">Fix connectivity issues and optimize your network performance.</p>
+                </div>
+                
+                <div class="pixel-card bg-dark-300 p-5 rounded-xl pixel-border">
+                    <div class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-lg mx-auto mb-4">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center text-primary-light mb-3">Software Installation & Updates</h3>
+                    <p class="text-neutral text-sm text-center">Professional software installation, configuration, and maintenance.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button id="request-support-btn" class="pixel-btn px-6 py-3 rounded text-light font-semibold text-sm bg-primary">
+                    Request IT Support
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-dark-200 relative overflow-hidden">
-        <div class="pixel-grid" id="pixel-grid-4"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <h2 class="text-3xl font-bold text-center mb-4 text-light pixel-font">Get In Touch</h2>
-            <div class="pixel-divider w-1/2 mx-auto my-6"></div>
-            <p class="text-xl text-center text-neutral mb-16 max-w-3xl mx-auto">
-                Have questions about the journal or challenge? Reach out to us!
+    <section id="contact" class="py-12 gradient-bg px-4">
+        <div class="container mx-auto">
+            <h2 class="section-heading text-2xl md:text-3xl font-bold text-center mb-4 text-light pixel-font">Contact Us</h2>
+            <div class="pixel-divider w-1/2 mx-auto my-4"></div>
+            <p class="text-neutral text-center mb-8 max-w-2xl mx-auto text-sm md:text-base">
+                Have questions or need our services? Reach out to us!
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-                <div>
-                    <div class="bg-dark-300 p-8 rounded-2xl pixel-border h-full">
-                        <h3 class="text-2xl font-bold mb-6 text-primary-light">Contact Information</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center text-dark-100 text-xl mr-4">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-semibold text-neutral mb-1">Email</h4>
-                                    <p class="text-light">support@glyen.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-dark-100 text-xl mr-4">
-                                    <i class="fab fa-discord"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-semibold text-neutral mb-1">Discord</h4>
-                                    <p class="text-light">Join our community</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-xl mr-4">
-                                    <i class="fab fa-twitter"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-semibold text-neutral mb-1">Twitter</h4>
-                                    <p class="text-light">@glyen_dev</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8">
-                            <h4 class="text-lg font-semibold text-neutral mb-4">Follow Us</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-xl hover:bg-primary-light transition-colors">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-xl hover:bg-primary-light transition-colors">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-xl hover:bg-primary-light transition-colors">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="#" class="w-12 h-12 rounded-full bg-primary-dark flex items-center justify-center text-light text-xl hover:bg-primary-light transition-colors">
-                                    <i class="fab fa-discord"></i>
-                                </a>
-                            </div>
-                        </div>
+            <div class="bg-dark-300 p-6 rounded-xl pixel-border max-w-2xl mx-auto">
+                <form id="contact-form">
+                    <div class="mb-4">
+                        <label for="name" class="block text-neutral mb-2 text-sm">Your Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required>
                     </div>
-                </div>
-                
-                <div>
-                    <div class="bg-dark-300 p-8 rounded-2xl pixel-border h-full">
-                        <h3 class="text-2xl font-bold mb-6 text-primary-light">Send a Message</h3>
-                        
-                        <form id="contact-form">
-                            <div class="mb-4">
-                                <label for="name" class="block text-neutral mb-2">Your Name</label>
-                                <input type="text" id="name" class="w-full px-4 py-3 bg-dark-200 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent" required>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="email" class="block text-neutral mb-2">Email Address</label>
-                                <input type="email" id="email" class="w-full px-4 py-3 bg-dark-200 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent" required>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="subject" class="block text-neutral mb-2">Subject</label>
-                                <select id="subject" class="w-full px-4 py-3 bg-dark-200 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent">
-                                    <option value="journal">Journal Inquiry</option>
-                                    <option value="challenge">Challenge Question</option>
-                                    <option value="technical">Technical Support</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="message" class="block text-neutral mb-2">Message</label>
-                                <textarea id="message" rows="4" class="w-full px-4 py-3 bg-dark-200 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent" required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="pixel-btn w-full px-6 py-3 rounded-lg text-light font-semibold bg-primary">
-                                Send Message
-                            </button>
-                        </form>
+                    
+                    <div class="mb-4">
+                        <label for="email" class="block text-neutral mb-2 text-sm">Email Address</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required>
                     </div>
-                </div>
+                    
+                    <div class="mb-4">
+                        <label for="service" class="block text-neutral mb-2 text-sm">Service Needed</label>
+                        <select id="service" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm">
+                            <option value="journal">Coding Journal</option>
+                            <option value="webdev">Web Development</option>
+                            <option value="itsupport">IT Support</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="message" class="block text-neutral mb-2 text-sm">Message</label>
+                        <textarea id="message" rows="3" class="w-full px-4 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="pixel-btn w-full px-4 py-2 rounded text-light font-semibold text-sm bg-primary">
+                        Send Message
+                    </button>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 bg-dark-300 border-t-2 border-primary-dark">
-        <div class="container mx-auto px-6">
+    <footer class="py-8 bg-dark-300 border-t-2 border-primary-dark px-4">
+        <div class="container mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <a href="#" class="text-2xl font-bold pixel-font text-primary-light">
+                <div class="mb-4 md:mb-0 text-center md:text-left">
+                    <a href="#" class="text-xl font-bold pixel-font text-primary-light">
                         <span class="text-accent">G</span>lyen
                     </a>
-                    <p class="text-neutral mt-2">Code. Build. Grow.</p>
+                    <p class="text-neutral mt-1 text-sm">Code. Build. Support.</p>
                 </div>
                 
-                <div class="flex flex-wrap justify-center space-x-8 mb-6 md:mb-0">
-                    <a href="#home" class="text-neutral hover:text-primary-light">Home</a>
-                    <a href="#journal" class="text-neutral hover:text-primary-light">Journal</a>
-                    <a href="#challenge" class="text-neutral hover:text-primary-light">Challenge</a>
-                    <a href="#contact" class="text-neutral hover:text-primary-light">Contact</a>
+                <div class="flex flex-wrap justify-center space-x-6 mb-4 md:mb-0">
+                    <a href="#journal" class="text-neutral hover:text-primary-light text-sm">Journal</a>
+                    <a href="#webdev" class="text-neutral hover:text-primary-light text-sm">Web Dev</a>
+                    <a href="#itsupport" class="text-neutral hover:text-primary-light text-sm">IT Support</a>
+                    <a href="#contact" class="text-neutral hover:text-primary-light text-sm">Contact</a>
                 </div>
                 
                 <div class="flex space-x-4">
@@ -737,121 +536,131 @@
                     <a href="#" class="text-neutral hover:text-primary-light">
                         <i class="fab fa-github text-lg"></i>
                     </a>
-                    <a href="#" class="text-neutral hover:text-primary-light">
-                        <i class="fab fa-discord text-lg"></i>
-                    </a>
                 </div>
             </div>
             
-            <div class="border-t border-primary-dark mt-8 pt-8 text-center text-neutral">
+            <div class="border-t border-primary-dark mt-6 pt-6 text-center text-neutral text-xs">
                 <p>&copy; 2023 Glyen. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Modals -->
+    <div class="modal-overlay" id="modal-overlay"></div>
+    
     <!-- Journal Purchase Modal -->
-    <div class="modal-overlay" id="journal-modal-overlay"></div>
-    <div class="pixel-modal bg-dark-300 p-8 rounded-2xl pixel-border w-11/12 max-w-md" id="journal-modal">
+    <div class="pixel-modal bg-dark-300 p-6 rounded-xl pixel-border" id="journal-modal">
         <div class="text-center">
-            <div class="w-16 h-16 bg-primary-light rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-shopping-cart text-dark-100 text-2xl"></i>
+            <div class="w-12 h-12 bg-primary-light rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-shopping-cart text-dark-100"></i>
             </div>
-            <h3 class="text-2xl font-semibold mb-2 text-light">Get the Coding Journal</h3>
-            <p class="text-neutral mb-6">Purchase the digital journal for ₦5,000</p>
+            <h3 class="text-lg font-semibold mb-2 text-light">Get the Coding Journal</h3>
+            <p class="text-neutral mb-4 text-sm">Purchase the digital journal for ₦5,000</p>
             
-            <div class="bg-dark-200 p-4 rounded-lg mb-6">
-                <h4 class="text-lg font-semibold text-primary-light mb-2">Payment Options</h4>
+            <div class="bg-dark-200 p-4 rounded-lg mb-4">
+                <h4 class="text-md font-semibold text-primary-light mb-2">Payment Options</h4>
                 <div class="space-y-3">
-                    <button class="w-full pixel-btn py-3 rounded-lg text-light font-semibold bg-primary">
+                    <button class="w-full pixel-btn py-2 rounded text-light font-semibold text-sm bg-primary">
                         Pay with Paystack
                     </button>
-                    <button class="w-full border border-primary-light py-3 rounded-lg text-primary-light font-semibold hover:bg-primary-light hover:text-dark-100 transition-colors">
+                    <a href="https://forms.google.com" target="_blank" class="block w-full border border-primary-light py-2 rounded text-primary-light font-semibold text-sm text-center hover:bg-primary-light hover:text-dark-100 transition-colors">
                         Google Form (Manual)
-                    </button>
+                    </a>
                 </div>
             </div>
             
-            <button id="close-journal-modal" class="text-neutral hover:text-primary-light">
+            <button id="close-journal-modal" class="text-neutral hover:text-primary-light text-sm">
                 Cancel
             </button>
         </div>
     </div>
 
     <!-- Challenge Modal -->
-    <div class="modal-overlay" id="challenge-modal-overlay"></div>
-    <div class="pixel-modal bg-dark-300 p-8 rounded-2xl pixel-border w-11/12 max-w-md" id="challenge-modal">
+    <div class="pixel-modal bg-dark-300 p-6 rounded-xl pixel-border" id="challenge-modal">
         <div class="text-center">
-            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fab fa-github text-dark-100 text-2xl"></i>
+            <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fab fa-github text-dark-100"></i>
             </div>
-            <h3 class="text-2xl font-semibold mb-2 text-light">Start the Challenge</h3>
-            <p class="text-neutral mb-6">Submit your GitHub repository link to complete the challenge</p>
+            <h3 class="text-lg font-semibold mb-2 text-light">Start the Challenge</h3>
+            <p class="text-neutral mb-4 text-sm">Submit your GitHub repository link to complete the challenge</p>
             
-            <form class="mb-6">
-                <div class="mb-4">
-                    <label for="github-link" class="block text-neutral mb-2 text-left">GitHub Repository URL</label>
-                    <input type="url" id="github-link" class="w-full px-4 py-3 bg-dark-200 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent" placeholder="https://github.com/yourusername/yourrepo" required>
+            <form class="mb-4">
+                <div class="mb-3">
+                    <label for="github-link" class="block text-neutral mb-1 text-sm text-left">GitHub Repository URL</label>
+                    <input type="url" id="github-link" class="w-full px-3 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" placeholder="https://github.com/yourusername/yourrepo" required>
                 </div>
                 
-                <div class="mb-4">
-                    <label for="github-profile" class="block text-neutral mb-2 text-left">GitHub Profile URL</label>
-                    <input type="url" id="github-profile" class="w-full px-4 py-3 bg-dark-200 border border-primary-dark rounded-lg text-light focus:outline-none focus:ring-2 focus:ring-accent" placeholder="https://github.com/yourusername" required>
+                <div class="mb-3">
+                    <label for="github-profile" class="block text-neutral mb-1 text-sm text-left">GitHub Profile URL</label>
+                    <input type="url" id="github-profile" class="w-full px-3 py-2 bg-dark-200 border border-primary-dark rounded text-light focus:outline-none focus:ring-1 focus:ring-accent text-sm" placeholder="https://github.com/yourusername" required>
                 </div>
                 
-                <button type="submit" class="w-full pixel-btn py-3 rounded-lg text-light font-semibold bg-primary">
+                <a href="https://forms.google.com" target="_blank" class="block w-full pixel-btn py-2 rounded text-light font-semibold text-sm bg-primary">
                     Submit Challenge
-                </button>
+                </a>
             </form>
             
-            <button id="close-challenge-modal" class="text-neutral hover:text-primary-light">
+            <button id="close-challenge-modal" class="text-neutral hover:text-primary-light text-sm">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <!-- Request Service Modal -->
+    <div class="pixel-modal bg-dark-300 p-6 rounded-xl pixel-border" id="service-modal">
+        <div class="text-center">
+            <div class="w-12 h-12 bg-primary-dark rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-concierge-bell text-light"></i>
+            </div>
+            <h3 class="text-lg font-semibold mb-2 text-light" id="service-modal-title">Request Service</h3>
+            <p class="text-neutral mb-4 text-sm" id="service-modal-desc">Tell us about your project needs</p>
+            
+            <a href="https://forms.google.com" target="_blank" class="block w-full pixel-btn py-2 rounded text-light font-semibold text-sm bg-primary mb-3">
+                Google Form
+            </a>
+            
+            <p class="text-neutral text-xs">You'll be redirected to Google Forms to submit your request</p>
+            
+            <button id="close-service-modal" class="text-neutral hover:text-primary-light text-sm mt-4">
                 Cancel
             </button>
         </div>
     </div>
 
     <!-- Success Modal -->
-    <div class="modal-overlay" id="success-modal-overlay"></div>
-    <div class="pixel-modal bg-dark-300 p-8 rounded-2xl pixel-border w-11/12 max-w-md" id="success-modal">
+    <div class="pixel-modal bg-dark-300 p-6 rounded-xl pixel-border" id="success-modal">
         <div class="text-center">
-            <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-check text-dark-100 text-2xl"></i>
+            <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check text-dark-100"></i>
             </div>
-            <h3 class="text-2xl font-semibold mb-2 text-light">Success!</h3>
-            <p class="text-neutral mb-6">Your submission has been received successfully.</p>
-            <button id="close-success-modal" class="pixel-btn px-6 py-2 rounded text-light font-semibold bg-primary">
+            <h3 class="text-lg font-semibold mb-2 text-light">Success!</h3>
+            <p class="text-neutral mb-4 text-sm" id="success-message">Your message has been received successfully.</p>
+            <button id="close-success-modal" class="pixel-btn px-4 py-2 rounded text-light font-semibold text-sm bg-primary">
                 OK
             </button>
         </div>
     </div>
 
     <script>
-        // Create pixel grid backgrounds
-        function createPixelGrid(containerId, rows, cols) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            
-            for (let i = 0; i < rows * cols; i++) {
-                const pixel = document.createElement('div');
-                pixel.classList.add('pixel');
-                // Randomly make some pixels more visible
-                if (Math.random() > 0.7) {
-                    pixel.style.backgroundColor = 'rgba(140, 197, 109, 0.1)';
-                }
-                container.appendChild(pixel);
-            }
-        }
-        
-        // Initialize pixel grids
         document.addEventListener('DOMContentLoaded', function() {
-            createPixelGrid('pixel-grid', 25, 20);
-            createPixelGrid('pixel-grid-2', 20, 15);
-            createPixelGrid('pixel-grid-3', 25, 20);
-            createPixelGrid('pixel-grid-4', 20, 15);
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
             
-            // Mobile menu toggle
-            document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-                const menu = document.getElementById('mobile-menu');
-                menu.classList.toggle('hidden');
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('open');
+            });
+            
+            closeMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.remove('open');
+            });
+            
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('open');
+                });
             });
             
             // Smooth scrolling for navigation links
@@ -864,103 +673,81 @@
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        // Close mobile menu if open
-                        document.getElementById('mobile-menu').classList.add('hidden');
-                        
                         window.scrollTo({
-                            top: targetElement.offsetTop - 80,
+                            top: targetElement.offsetTop - 70,
                             behavior: 'smooth'
                         });
                     }
                 });
             });
             
+            // Modal functionality
+            const modals = {
+                journal: document.getElementById('journal-modal'),
+                challenge: document.getElementById('challenge-modal'),
+                service: document.getElementById('service-modal'),
+                success: document.getElementById('success-modal')
+            };
+            
+            const overlay = document.getElementById('modal-overlay');
+            
+            function openModal(modal) {
+                overlay.classList.add('active');
+                modal.classList.add('active');
+            }
+            
+            function closeModals() {
+                overlay.classList.remove('active');
+                Object.values(modals).forEach(modal => {
+                    modal.classList.remove('active');
+                });
+            }
+            
             // Journal purchase modal
             document.getElementById('buy-now-btn').addEventListener('click', function() {
-                document.getElementById('journal-modal-overlay').classList.add('active');
-                document.getElementById('journal-modal').classList.add('active');
+                openModal(modals.journal);
             });
             
-            document.getElementById('close-journal-modal').addEventListener('click', function() {
-                document.getElementById('journal-modal-overlay').classList.remove('active');
-                document.getElementById('journal-modal').classList.remove('active');
-            });
-            
-            document.getElementById('journal-modal-overlay').addEventListener('click', function() {
-                document.getElementById('journal-modal-overlay').classList.remove('active');
-                document.getElementById('journal-modal').classList.remove('active');
-            });
+            document.getElementById('close-journal-modal').addEventListener('click', closeModals);
             
             // Challenge modal
             document.getElementById('start-challenge-btn').addEventListener('click', function() {
-                document.getElementById('challenge-modal-overlay').classList.add('active');
-                document.getElementById('challenge-modal').classList.add('active');
+                openModal(modals.challenge);
             });
             
-            document.getElementById('close-challenge-modal').addEventListener('click', function() {
-                document.getElementById('challenge-modal-overlay').classList.remove('active');
-                document.getElementById('challenge-modal').classList.remove('active');
+            document.getElementById('close-challenge-modal').addEventListener('click', closeModals);
+            
+            // Service modals
+            document.getElementById('request-website-btn').addEventListener('click', function() {
+                document.getElementById('service-modal-title').textContent = 'Web Development Request';
+                document.getElementById('service-modal-desc').textContent = 'Tell us about your website needs';
+                openModal(modals.service);
             });
             
-            document.getElementById('challenge-modal-overlay').addEventListener('click', function() {
-                document.getElementById('challenge-modal-overlay').classList.remove('active');
-                document.getElementById('challenge-modal').classList.remove('active');
+            document.getElementById('request-support-btn').addEventListener('click', function() {
+                document.getElementById('service-modal-title').textContent = 'IT Support Request';
+                document.getElementById('service-modal-desc').textContent = 'Tell us about your technical issues';
+                openModal(modals.service);
             });
             
-            // Form submission handling
+            document.getElementById('close-service-modal').addEventListener('click', closeModals);
+            
+            // Success modal
+            document.getElementById('close-success-modal').addEventListener('click', closeModals);
+            
+            // Contact form submission
             document.getElementById('contact-form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 // Show success modal
-                document.getElementById('success-modal-overlay').classList.add('active');
-                document.getElementById('success-modal').classList.add('active');
+                document.getElementById('success-message').textContent = 'Your message has been received successfully. We will get back to you soon.';
+                openModal(modals.success);
                 
                 this.reset();
             });
             
-            document.querySelector('#challenge-modal form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Show success modal
-                document.getElementById('challenge-modal-overlay').classList.remove('active');
-                document.getElementById('challenge-modal').classList.remove('active');
-                document.getElementById('success-modal-overlay').classList.add('active');
-                document.getElementById('success-modal').classList.add('active');
-                
-                this.reset();
-            });
-            
-            // Close success modal
-            document.getElementById('close-success-modal').addEventListener('click', function() {
-                document.getElementById('success-modal-overlay').classList.remove('active');
-                document.getElementById('success-modal').classList.remove('active');
-            });
-            
-            document.getElementById('success-modal-overlay').addEventListener('click', function() {
-                document.getElementById('success-modal-overlay').classList.remove('active');
-                document.getElementById('success-modal').classList.remove('active');
-            });
-            
-            // Add pixel animation to elements on scroll
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'pixelate 4s infinite';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe all pixel-cards
-            document.querySelectorAll('.pixel-card').forEach(card => {
-                observer.observe(card);
-            });
+            // Close modal when clicking on overlay
+            overlay.addEventListener('click', closeModals);
         });
     </script>
 </body>
