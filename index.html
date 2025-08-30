@@ -176,6 +176,21 @@
         .mobile-menu {
             transition: all 0.3s ease;
         }
+        .bg-green-100 {
+    background-color: #d1fae5;
+}
+
+.text-green-700 {
+    color: #047857;
+}
+
+.bg-red-100 {
+    background-color: #fee2e2;
+}
+
+.text-red-700 {
+    color: #b91c1c;
+}
     </style>
 </head>
 <body class="bg-blue-50">
@@ -577,23 +592,28 @@
             <div class="flex flex-col lg:flex-row gap-12">
                 <div class="lg:w-1/2">
                     <form id="contact-form" class="bg-white p-8 rounded-lg pixel-border">
-                        <div class="mb-6">
-                            <label for="name" class="block text-blue-800 font-bold mb-2">Your Name</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded pixel-input focus:outline-none">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="email" class="block text-blue-800 font-bold mb-2">Email Address</label>
-                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded pixel-input focus:outline-none">
-                        </div>
-                        
-                        <div class="mb-6">
-                            <label for="message" class="block text-blue-800 font-bold mb-2">Your Message</label>
-                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 rounded pixel-input focus:outline-none"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded pixel-button pixel-border">Send Message</button>
-                    </form>
+    <div class="mb-6">
+        <label for="name" class="block text-blue-800 font-bold mb-2">Your Name</label>
+        <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded pixel-input focus:outline-none">
+    </div>
+    
+    <div class="mb-6">
+        <label for="email" class="block text-blue-800 font-bold mb-2">Email Address</label>
+        <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded pixel-input focus:outline-none">
+    </div>
+    
+    <div class="mb-6">
+        <label for="message" class="block text-blue-800 font-bold mb-2">Your Message</label>
+        <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 rounded pixel-input focus:outline-none"></textarea>
+    </div>
+    
+    <div id="form-status" class="hidden mb-4 p-3 rounded text-center"></div>
+    
+    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded pixel-button pixel-border flex items-center justify-center">
+        <span id="submit-text">Send Message</span>
+        <div id="submit-spinner" class="hidden ml-2 pixel-loader"></div>
+    </button>
+</form>
                 </div>
                 
                 <div class="lg:w-1/2">
@@ -638,9 +658,6 @@
                                 </a>
                                 <a href="https://www.instagram.com/glyen_official" class="text-blue-600 hover:text-orange-500 transition text-xl">
                                     <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" class="text-blue-600 hover:text-orange-500 transition text-xl">
-                                    <i class="fab fa-linkedin-in"></i>
                                 </a>
                                 <a href="https://youtube.com/@glyen" class="text-blue-600 hover:text-orange-500 transition text-xl">
                                     <i class="fab fa-youtube"></i>
@@ -692,16 +709,13 @@
                 <div>
                     <h4 class="text-lg font-bold mb-4">Connect</h4>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-blue-200 hover:text-orange-400 transition text-xl">
+                        <a href="https://x.com/glyen_official" class="text-blue-200 hover:text-orange-400 transition text-xl">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="text-blue-200 hover:text-orange-400 transition text-xl">
+                        <a href="https://www.instagram.com/glyen_official" class="text-blue-200 hover:text-orange-400 transition text-xl">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="text-blue-200 hover:text-orange-400 transition text-xl">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="text-blue-200 hover:text-orange-400 transition text-xl">
+                        <a href="https://youtube.com/@glyen" class="text-blue-200 hover:text-orange-400 transition text-xl">
                             <i class="fab fa-youtube"></i>
                         </a>
                     </div>
@@ -765,24 +779,66 @@
         }
         
         // Form submission handling
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // In a real implementation, you would send this data to Google Sheets
-            // using Google Apps Script or a similar service
-            console.log('Form submitted:', { name, email, message });
-            
-            // Show success message (in a real implementation)
-            alert('Thanks for your message! We\'ll get back to you soon.');
-            
-            // Reset form
-            this.reset();
-        });
+       // Form submission handling
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form elements
+    const form = this;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const submitText = document.getElementById('submit-text');
+    const submitSpinner = document.getElementById('submit-spinner');
+    const statusDiv = document.getElementById('form-status');
+    
+    // Show loading state
+    submitText.textContent = 'Sending...';
+    submitSpinner.classList.remove('hidden');
+    submitButton.disabled = true;
+    statusDiv.classList.add('hidden');
+    
+    // Get form data
+    const formData = new FormData(form);
+    const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message')
+    };
+    
+    // Replace with your Google Apps Script Web App URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwOuejymxkbO1MjRKP8vMS4XY7vsISJIwjx3f2tprxAGduYk51vo6c22X570CMCRkuK8Q/exec';
+    
+    // Send data to Google Sheets
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(() => {
+        // Show success message
+        statusDiv.textContent = 'Thanks for your message! We\'ll get back to you soon.';
+        statusDiv.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+        statusDiv.classList.add('bg-green-100', 'text-green-700');
+        
+        // Reset form
+        form.reset();
+    })
+    .catch(error => {
+        // Show error message
+        statusDiv.textContent = 'There was a problem sending your message. Please try again or contact us directly at glyen.official@gmail.com';
+        statusDiv.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+        statusDiv.classList.add('bg-red-100', 'text-red-700');
+        console.error('Error:', error);
+    })
+    .finally(() => {
+        // Reset button state
+        submitText.textContent = 'Send Message';
+        submitSpinner.classList.add('hidden');
+        submitButton.disabled = false;
+    });
+});
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
