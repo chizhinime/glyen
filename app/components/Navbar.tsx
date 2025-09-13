@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react'; // removed `use`
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -32,41 +32,16 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden md:flex space-x-6">
-          <Link 
-            href="/" 
-            className="relative group text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
-          >
-            Home
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link 
-            href="/services" 
-            className="relative group text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
-          >
-            Services
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link 
-            href="/shop" 
-            className="relative group text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
-          >
-            Shop
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link 
-            href="/about" 
-            className="relative group text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
-          >
-            About
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-          </Link>
-          <Link 
-            href="/contact" 
-            className="relative group text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
-          >
-            Contact
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-          </Link>
+          {['Home','Services','Shop','About','Contact'].map((item) => (
+            <Link 
+              key={item}
+              href={`/${item.toLowerCase() === 'home' ? '' : item.toLowerCase()}`} 
+              className="relative group text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
+            >
+              {item}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+          ))}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -84,41 +59,16 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div className={`md:hidden bg-white shadow-lg overflow-hidden transition-all duration-500 ease-in-out ${menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="px-6 py-4 flex flex-col space-y-4">
-          <Link 
-            href="/" 
-            onClick={() => setMenuOpen(false)}
-            className="text-gray-700 hover:text-blue-600 transition-colors duration-300 py-2 font-medium border-l-2 border-transparent hover:border-orange-500 hover:pl-2"
-          >
-            Home
-          </Link>
-          <Link 
-            href="/services" 
-            onClick={() => setMenuOpen(false)}
-            className="text-gray-700 hover:text-blue-600 transition-colors duration-300 py-2 font-medium border-l-2 border-transparent hover:border-orange-500 hover:pl-2"
-          >
-            Services
-          </Link>
-          <Link 
-            href="/shop" 
-            onClick={() => setMenuOpen(false)}
-            className="text-gray-700 hover:text-blue-600 transition-colors duration-300 py-2 font-medium border-l-2 border-transparent hover:border-orange-500 hover:pl-2"
-          >
-            Shop
-          </Link>
-          <Link 
-            href="/about" 
-            onClick={() => setMenuOpen(false)}
-            className="text-gray-700 hover:text-blue-600 transition-colors duration-300 py-2 font-medium border-l-2 border-transparent hover:border-orange-500 hover:pl-2"
-          >
-            About
-          </Link>
-          <Link 
-            href="/contact" 
-            onClick={() => setMenuOpen(false)}
-            className="text-gray-700 hover:text-blue-600 transition-colors duration-300 py-2 font-medium border-l-2 border-transparent hover:border-orange-500 hover:pl-2"
-          >
-            Contact
-          </Link>
+          {['Home','Services','Shop','About','Contact'].map((item) => (
+            <Link 
+              key={item}
+              href={`/${item.toLowerCase() === 'home' ? '' : item.toLowerCase()}`} 
+              onClick={() => setMenuOpen(false)}
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-300 py-2 font-medium border-l-2 border-transparent hover:border-orange-500 hover:pl-2"
+            >
+              {item}
+            </Link>
+          ))}
         </div>
       </div>
     </header>
