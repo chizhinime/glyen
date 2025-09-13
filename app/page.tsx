@@ -213,7 +213,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <style jsx global>{`
+       <style jsx global>{`
         @keyframes blob {
           0% { transform: translate(0px, 0px) scale(1); }
           33% { transform: translate(30px, -50px) scale(1.1); }
@@ -226,4 +226,4 @@ export default function HomePage() {
       `}</style>
     </div>
   );
-      }
+}
