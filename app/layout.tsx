@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import Navbar from '../app/components/Navbar';
 import Footer from '../app/components/Footer';
 import Head from 'next/head';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'Glyen - Tech Services & Products',
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Navbar />
         <main className="min-h-[80vh]">{children}</main>
         <Footer />
+ <Analytics />
       </body>
     </html>
   );
