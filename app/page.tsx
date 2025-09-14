@@ -157,12 +157,7 @@ export default function HomePage() {
           {projects.map((project, index) => (
             <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
               <div className="h-48 relative overflow-hidden">
-                <Image 
-                  src={project.image} 
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
+              
                 <div className="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity duration-300"></div>
               </div>
               <div className="p-6">
@@ -221,7 +216,7 @@ export default function HomePage() {
                 className="w-12 h-12 bg-white text-blue-600 rounded-full hover:bg-gray-200 transition-colors duration-300 flex items-center justify-center"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5极速赛车公众号平台l7 7-7 7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} />
                 </svg>
               </button>
             </div>
